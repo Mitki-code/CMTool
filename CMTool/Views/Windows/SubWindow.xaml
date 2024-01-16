@@ -47,6 +47,10 @@
                         Appearance="Secondary"
                         Text="{Binding ViewModel.EventText}"
                         TextWrapping="WrapWithOverflow"/>
+                    <ui:TextBlock
+                        Appearance="Secondary"
+                        Text="{Binding ViewModel.EventDateTime}"
+                        TextWrapping="WrapWithOverflow"/>
                 </StackPanel>
             </Grid>
         </ui:Card>
