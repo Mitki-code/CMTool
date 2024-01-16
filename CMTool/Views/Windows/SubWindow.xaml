@@ -45,7 +45,7 @@
                     VerticalAlignment="Center">
                     <ui:TextBlock
                         Appearance="Secondary"
-                        Text="Contextual notifications."
+                        Text="{Binding ViewModel.EventText}"
                         TextWrapping="WrapWithOverflow"/>
                 </StackPanel>
             </Grid>
