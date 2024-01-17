@@ -5,6 +5,7 @@
 
 using CMTool.Services;
 using CMTool.ViewModels.Pages;
+using CMTool.ViewModels.Settings;
 using CMTool.ViewModels.Windows;
 using CMTool.Views.Pages;
 using CMTool.Views.Settings;
@@ -54,6 +55,7 @@ namespace CMTool
 
                 services.AddSingleton<ClassSettings>();
                 services.AddSingleton<About>();
+                services.AddSingleton<AboutViewModel>();
             }).Build();
 
         /// <summary>

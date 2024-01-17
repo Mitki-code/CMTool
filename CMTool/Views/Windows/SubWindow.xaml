@@ -14,8 +14,7 @@
     MinHeight="400"
     MaxHeight="400"
     d:DesignHeight="400"
-    d:DataContext="{d:DesignInstance local:SubWindow,
-                                 IsDesignTimeCreatable=False}"
+    d:DataContext="{d:DesignInstance local:SubWindow, IsDesignTimeCreatable=False}"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ExtendsContentIntoTitleBar="True"

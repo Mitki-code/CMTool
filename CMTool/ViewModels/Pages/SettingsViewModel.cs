@@ -3,6 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using CMTool.Views.Pages;
+using CMTool.Views.Settings;
+using System.Collections.ObjectModel;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
@@ -12,8 +15,6 @@ namespace CMTool.ViewModels.Pages
     {
         private bool _isInitialized = false;
 
-        [ObservableProperty]
-        private string _appVersion = String.Empty;
 
         [ObservableProperty]
         private Wpf.Ui.Appearance.ApplicationTheme _currentTheme = Wpf.Ui.Appearance.ApplicationTheme.Unknown;
@@ -29,16 +30,10 @@ namespace CMTool.ViewModels.Pages
         private void InitializeViewModel()
         {
             CurrentTheme = ApplicationThemeManager.GetAppTheme();
-            AppVersion = $"CMTool - {GetAssemblyVersion()}";
 
             _isInitialized = true;
         }
 
-        private string GetAssemblyVersion()
-        {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-                ?? String.Empty;
-        }
 
         [RelayCommand]
         private void OnChangeTheme(string parameter)
@@ -64,5 +59,11 @@ namespace CMTool.ViewModels.Pages
                     break;
             }
         }
+
+        [ObservableProperty]
+        private ICollection<object> _menuItems = new ObservableCollection<object>
+    {
+        new NavigationViewItem("", SymbolRegular.Home24, typeof(About))
+    };
     }
 }

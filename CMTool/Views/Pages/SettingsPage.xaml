@@ -23,29 +23,14 @@
 
     <StackPanel>
         <ui:NavigationView
+            x:Name="RootNavigation"
             MinHeight="300"
             Margin="0"
             IsBackButtonVisible="Auto"
             IsPaneToggleVisible="False"
-            PaneDisplayMode="Top" Cursor="">
-            <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem
-                    Content="课表设置"
-                    Icon="{ui:SymbolIcon BoardSplit16}"
-                    TargetPageType="{x:Type s:ClassSettings}" />
-                <ui:NavigationViewItem
-                    Content="值日设置"
-                    Icon="{ui:SymbolIcon People16}"
-                    />
-                <ui:NavigationViewItem
-                    Content="其他设置"
-                    Icon="{ui:SymbolIcon MoreCircle16}"
-                    />
-                <ui:NavigationViewItem
-                    Content="关于"
-                    Icon="{ui:SymbolIcon Info16}"
-                    TargetPageType="{x:Type s:About}" />
-            </ui:NavigationView.MenuItems>
+            PaneDisplayMode="Top" Cursor=""
+            MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}">
+            
         </ui:NavigationView>
         <TextBlock
             FontSize="20"
@@ -66,8 +51,5 @@
             Content="Dark"
             GroupName="themeSelect"
             IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
-
-        
-        <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
     </StackPanel>
 </Page>
