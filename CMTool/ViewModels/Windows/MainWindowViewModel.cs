@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 
 namespace CMTool.ViewModels.Windows
@@ -12,23 +11,17 @@ namespace CMTool.ViewModels.Windows
     public partial class MainWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "WPF UI - CMTool";
+        private string _applicationTitle = "CMTool - 主页";
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
         {
             new NavigationViewItem()
             {
-                Content = "Home",
+                Content = "主页",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
-            new NavigationViewItem()
-            {
-                Content = "Data",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
-                TargetPageType = typeof(Views.Pages.DataPage)
-            }
         };
 
         [ObservableProperty]
@@ -36,7 +29,7 @@ namespace CMTool.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Settings",
+                Content = "设置",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(Views.Pages.SettingsPage)
             }
@@ -45,7 +38,7 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private ObservableCollection<MenuItem> _trayMenuItems = new()
         {
-            new MenuItem { Header = "Home", Tag = "tray_home" }
+            new MenuItem { Header = "设置", Tag = "tray_home" }
         };
     }
 }

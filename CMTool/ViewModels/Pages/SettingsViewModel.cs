@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
 namespace CMTool.ViewModels.Pages
@@ -15,7 +16,7 @@ namespace CMTool.ViewModels.Pages
         private string _appVersion = String.Empty;
 
         [ObservableProperty]
-        private Wpf.Ui.Appearance.ThemeType _currentTheme = Wpf.Ui.Appearance.ThemeType.Unknown;
+        private Wpf.Ui.Appearance.ApplicationTheme _currentTheme = Wpf.Ui.Appearance.ApplicationTheme.Unknown;
 
         public void OnNavigatedTo()
         {
@@ -27,7 +28,7 @@ namespace CMTool.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
+            CurrentTheme = ApplicationThemeManager.GetAppTheme();
             AppVersion = $"CMTool - {GetAssemblyVersion()}";
 
             _isInitialized = true;
@@ -45,20 +46,20 @@ namespace CMTool.ViewModels.Pages
             switch (parameter)
             {
                 case "theme_light":
-                    if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Light)
+                    if (CurrentTheme == Wpf.Ui.Appearance.ApplicationTheme.Light)
                         break;
 
-                    Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Light);
-                    CurrentTheme = Wpf.Ui.Appearance.ThemeType.Light;
+                    ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
+                    CurrentTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
 
                     break;
 
                 default:
-                    if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Dark)
+                    if (CurrentTheme == Wpf.Ui.Appearance.ApplicationTheme.Dark)
                         break;
 
-                    Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Dark);
-                    CurrentTheme = Wpf.Ui.Appearance.ThemeType.Dark;
+                    ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
+                    CurrentTheme = Wpf.Ui.Appearance.ApplicationTheme.Dark;
 
                     break;
             }

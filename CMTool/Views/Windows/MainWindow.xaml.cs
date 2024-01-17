@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using CMTool.ViewModels.Windows;
+using System.ComponentModel;
+using Wpf.Ui;
 using Wpf.Ui.Controls;
 
 namespace CMTool.Views.Windows
@@ -11,6 +13,12 @@ namespace CMTool.Views.Windows
     public partial class MainWindow
     {
         public MainWindowViewModel ViewModel { get; }
+
+        protected override void OnClosing(CancelEventArgs a)
+        {
+            a.Cancel = true;
+            this.Hide();
+        }
 
         public MainWindow(
             MainWindowViewModel viewModel,
@@ -20,7 +28,7 @@ namespace CMTool.Views.Windows
             IContentDialogService contentDialogService
         )
         {
-            Wpf.Ui.Appearance.Watcher.Watch(this);
+            ///Wpf.Ui.Appearance.Watcher.Watch(this);
 
             ViewModel = viewModel;
             DataContext = this;

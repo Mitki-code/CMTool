@@ -15,7 +15,7 @@ namespace CMTool.Services
     /// </summary>
     public class ApplicationHostService : IHostedService
     {
-        private readonly IServiceProvider _serviceProvider;
+        public readonly IServiceProvider _serviceProvider;
 
         public ApplicationHostService(IServiceProvider serviceProvider)
         {
@@ -70,7 +70,7 @@ namespace CMTool.Services
             }
         }
 
-        private void OnNavigationWindowLoaded(object sender, RoutedEventArgs e)
+        public void OnNavigationWindowLoaded(object sender, RoutedEventArgs e)
         {
             if (sender is not MainWindow navigationWindow)
             {

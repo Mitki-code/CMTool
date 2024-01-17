@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CMTool.Views.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CMTool.Services
 {
@@ -19,6 +21,7 @@ namespace CMTool.Services
         public void Show<T>()
         where T : class
         {
+
             if (!typeof(Window).IsAssignableFrom(typeof(T)))
                 throw new InvalidOperationException($"The window class should be derived from {typeof(Window)}.");
 
@@ -27,6 +30,7 @@ namespace CMTool.Services
             if (windowInstance == null)
                 throw new InvalidOperationException("Window is not registered as service.");
 
+            
             windowInstance.Owner = Application.Current.MainWindow;
             windowInstance.Show();
         }

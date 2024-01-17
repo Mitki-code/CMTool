@@ -7,6 +7,7 @@ using CMTool.Services;
 using CMTool.ViewModels.Pages;
 using CMTool.ViewModels.Windows;
 using CMTool.Views.Pages;
+using CMTool.Views.Settings;
 using CMTool.Views.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
+using Wpf.Ui;
 
 namespace CMTool
 {
@@ -49,6 +51,9 @@ namespace CMTool
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+
+                services.AddSingleton<ClassSettings>();
+                services.AddSingleton<About>();
             }).Build();
 
         /// <summary>
