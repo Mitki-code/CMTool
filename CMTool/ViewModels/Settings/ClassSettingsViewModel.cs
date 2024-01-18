@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CMTool.ViewModels.Settings
 {
@@ -17,7 +18,6 @@ namespace CMTool.ViewModels.Settings
     {
         private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
         private readonly ISnackbarService _snackbarService;
-        private ControlAppearance _snackbarAppearance = ControlAppearance.Success;
 
         [ObservableProperty]
         private ObservableCollection<ClassList> _ClassTable;
@@ -50,12 +50,20 @@ namespace CMTool.ViewModels.Settings
             }
             return classList;
         }
-
+        [RelayCommand]
+        private void OnReread()
+        {
+            ClassTable = GenerateClassList(jObject);
+        }
         [RelayCommand]
         private void OnSave()
         {
-            foreach (ClassList classList in ClassTable)
-            {
+            try{
+                if (ClassTable.Count > 9) { throw Error(); }
+
+                foreach (ClassList classList in ClassTable)
+                {
+
                 jObject["ClassTable"]["Monday"][classList.ClassNum - 1] = classList.Monday;
                 jObject["ClassTable"]["Tuesday"][classList.ClassNum - 1] = classList.Tuesday;
                 jObject["ClassTable"]["Wednesday"][classList.ClassNum - 1] = classList.Wednesday;
@@ -63,18 +71,34 @@ namespace CMTool.ViewModels.Settings
                 jObject["ClassTable"]["Friday"][classList.ClassNum - 1] = classList.Friday;
                 jObject["ClassTable"]["Saturday"][classList.ClassNum - 1] = classList.Saturday;
                 jObject["ClassTable"]["Sunday"][classList.ClassNum - 1] = classList.Sunday;
+                }
+
+                JsonRW.Writejson("Assets/MianData.json", jObject);
+
+                _snackbarService.Show(
+                    "保存成功",
+                    "重启后生效",
+                    ControlAppearance.Success,
+                    new SymbolIcon(SymbolRegular.CheckmarkCircle16),
+                    TimeSpan.FromSeconds(2)
+                );
+            }
+            catch{
+                _snackbarService.Show(
+                    "保存失败",
+                    "课程数大于9节",
+                    ControlAppearance.Danger,
+                    new SymbolIcon(SymbolRegular.ErrorCircle16),
+                    TimeSpan.FromSeconds(2)
+                );
             }
 
-            JsonRW.Writejson("Assets/MianData.json", jObject);
-
-            _snackbarService.Show(
-                "保存成功",
-                "重启后生效",
-                _snackbarAppearance,
-                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
-                TimeSpan.FromSeconds(2)
-            );
+            
         }
 
+        private Exception Error()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

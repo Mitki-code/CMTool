@@ -14,7 +14,7 @@
       Title="About">
 
     <StackPanel Margin="12">
-        <ui:CardExpander Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui-icon-256.png', Width=38, Height=35}">
+        <ui:CardExpander Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui-icon-256.png', Width=38, Height=35}" ContentPadding="0">
             <ui:CardExpander.Header>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -46,7 +46,7 @@
                 </Grid>
             </ui:CardExpander.Header>
             <StackPanel>
-                <Grid Margin="8">
+                <Grid Margin="16">
                     <TextBlock Text="基于 .Net/Mvvm/WPF/WPF-UI 构建" />
                 </Grid>
             </StackPanel>

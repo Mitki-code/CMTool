@@ -11,8 +11,8 @@
       Title="MoreSettings">
 
     <StackPanel Margin="12">
-        <ui:CardControl Icon="{ui:SymbolIcon Dismiss16}"
-                        Header="关闭程序"
+        <ui:CardControl Icon="{ui:SymbolIcon ArrowReset20}"
+                        Header="重置应用数据"
                         Margin="0,4,0,0">
             <Grid>
                 <Grid.RowDefinitions>
@@ -22,8 +22,23 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <ui:Button Content="确定" 
-                           Command="{Binding ViewModel.CloseCommand}"
+                           Command="{Binding ViewModel.ReSettingsCommand}"
                            />
+            </Grid>
+        </ui:CardControl>
+        <ui:CardControl Icon="{ui:SymbolIcon Dismiss16}"
+                Header="关闭应用"
+                Margin="0,4,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button Content="确定" 
+                   Command="{Binding ViewModel.CloseCommand}"
+                   />
             </Grid>
         </ui:CardControl>
     </StackPanel>

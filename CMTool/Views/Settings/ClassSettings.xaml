@@ -15,6 +15,7 @@
 
     <StackPanel Margin="12">
         <ui:InfoBar Title="提示" Message="使用 | 来划分单双周课程。如[单周课程]|[双周课程]" IsOpen="True"/>
+        <ui:InfoBar Title="注意" Message="最高仅支持9节课" IsOpen="True"/>
         <ui:CardExpander Icon="{ui:SymbolIcon Table16}" Margin="0,4,0,0">
             <ui:CardExpander.Header>
                 <Grid VerticalAlignment="Center">
@@ -22,16 +23,24 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <ui:TextBlock
-                        Grid.Row="0"
                         Grid.Column="0"
-                        Text="课表编辑" />
+                        Text="课表编辑" VerticalAlignment="Center" />
+                    <ui:Button Content="重置此次修改"
+                               Grid.Column="1"
+                        Icon="{ui:SymbolIcon ArrowRepeatAll16}" 
+                        Command="{Binding ViewModel.RereadCommand}"
+                        Margin="0,0,16,0"/>
                 </Grid>
             </ui:CardExpander.Header>
-            <DataGrid Height="400" ItemsSource="{Binding ViewModel.ClassTable}" AutoGeneratingColumn="Date_AutoGeneratingColumn"/>
+            <DataGrid Height="400" 
+                      ItemsSource="{Binding ViewModel.ClassTable}" 
+                      AutoGeneratingColumn="Date_AutoGeneratingColumn"
+                      VerticalContentAlignment="Center"/>
         </ui:CardExpander>
         <ui:Button Content="保存" 
                    Icon="{ui:SymbolIcon Save16}" 
