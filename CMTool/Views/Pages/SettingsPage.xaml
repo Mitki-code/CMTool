@@ -32,7 +32,7 @@
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}">
             
         </ui:NavigationView>
-        <TextBlock
+        <!--<TextBlock
             FontSize="20"
             FontWeight="Medium"
             Text="Personalization" />
@@ -50,6 +50,6 @@
             CommandParameter="theme_dark"
             Content="Dark"
             GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
+            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />-->
     </StackPanel>
 </Page>

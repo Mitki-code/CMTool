@@ -33,8 +33,12 @@ namespace CMTool.ViewModels.Windows
         [RelayCommand]
         private void OnOpenWindow()
         {
-            ///ApplicationHostService.HandleActivationAsyncMain();
             _windowsProviderService.Show<MainWindow>();
+        }
+        [RelayCommand]
+        private void OnClash()
+        {
+            System.Diagnostics.Process.Start("D:\\Program Files\\clash\\clash.exe");
         }
 
         private static string ReadClassTable(JObject jObject)
