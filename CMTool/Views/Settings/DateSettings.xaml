@@ -41,24 +41,11 @@
                             SelectedDate="{Binding ViewModel.EventTime,UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </ui:CardControl>
-        <Grid Margin="0,16,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ui:Button Content="保存" 
-                       Icon="{ui:SymbolIcon Save16}" 
-                       Command="{Binding ViewModel.SaveCommand}"
-                       Appearance="Primary"
-                       Grid.Column="0"/>
-            <TextBlock Text="{Binding ViewModel.Tips}"
-                       Foreground="Yellow"
-                       Grid.Column="1" VerticalAlignment="Center" Margin="8,0,0,0"/>
-        </Grid>
-        
 
+        <ui:Button Content="保存" 
+                   Icon="{ui:SymbolIcon Save16}" 
+                   Command="{Binding ViewModel.SaveCommand}"
+                   Appearance="Primary"
+                   Margin="0,16,0,0"/>
     </StackPanel>
 </Page>

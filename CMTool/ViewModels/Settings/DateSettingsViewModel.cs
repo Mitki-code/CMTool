@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wpf.Ui;
+using Wpf.Ui.Controls;
 
 namespace CMTool.ViewModels.Settings
 {
@@ -21,6 +23,14 @@ namespace CMTool.ViewModels.Settings
         [ObservableProperty]
         private string _Tips = "";
 
+        private readonly ISnackbarService _snackbarService;
+        private ControlAppearance _snackbarAppearance = ControlAppearance.Success;
+
+        public DateSettingsViewModel(ISnackbarService snackbarService)
+        {
+            _snackbarService = snackbarService;
+        }
+
         [RelayCommand]
         private void OnSave()
         {
@@ -28,7 +38,14 @@ namespace CMTool.ViewModels.Settings
             jObject["Time"] = EventTime.ToString();
 
             JsonRW.Writejson("Assets/MianData.json", jObject);
-            Tips = "需要重启";
+
+            _snackbarService.Show(
+                "保存成功",
+                "重启后生效",
+                _snackbarAppearance,
+                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
+                TimeSpan.FromSeconds(2)
+            );
         }
     }
 }
