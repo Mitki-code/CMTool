@@ -6,13 +6,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:local="clr-namespace:CMTool.Views.Windows" 
+    WindowStartupLocation="Manual"
     Width="300" 
     MinWidth="300" 
     MaxWidth="300"
     d:DesignWidth="300"
-    Height="400" 
-    MinHeight="400"
-    MaxHeight="400"
+    Height="475" 
+    MinHeight="475"
+    MaxHeight="475"
     d:DesignHeight="400"
     d:DataContext="{d:DesignInstance local:SubWindow, IsDesignTimeCreatable=False}"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -20,7 +21,6 @@
     ExtendsContentIntoTitleBar="True"
     WindowBackdropType="Mica"
     WindowCornerPreference="Default"
-    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <StackPanel>
         <ui:TitleBar
@@ -45,11 +45,11 @@
                     <ui:TextBlock
                         Appearance="Secondary"
                         Text="{Binding ViewModel.EventText}"
-                        TextWrapping="WrapWithOverflow"/>
+                        TextWrapping="WrapWithOverflow" FontSize="24" HorizontalAlignment="Center"/>
                     <ui:TextBlock
                         Appearance="Secondary"
                         Text="{Binding ViewModel.EventDateTime}"
-                        TextWrapping="WrapWithOverflow"/>
+                        TextWrapping="WrapWithOverflow" FontSize="40" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </ui:Card>
@@ -60,7 +60,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="250" />
+                <RowDefinition Height="270" />
             </Grid.RowDefinitions>
 
             <ui:Card
@@ -73,11 +73,17 @@
                     <StackPanel
                         Grid.Column="0"
                         Margin="12"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Top">
                         <ui:TextBlock
                             Appearance="Secondary"
-                            Text="Contextual notifications."
-                            TextWrapping="WrapWithOverflow"/>
+                            Text="今日课表"
+                            Margin="2"
+                            TextWrapping="WrapWithOverflow" FontSize="22"/>
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Text="{Binding ViewModel.ClassTable}"
+                            Margin="2"
+                            TextWrapping="WrapWithOverflow" FontSize="18"/>
                     </StackPanel>
                 </Grid>
             </ui:Card>
@@ -88,15 +94,21 @@
                 Margin="4,0,4,0"
                 Padding="0"
                 VerticalAlignment="Stretch">
-                <Grid Height="64">
+                <Grid>
                     <StackPanel
                         Grid.Column="1"
                         Margin="12"
-                         VerticalAlignment="Center">
+                         VerticalAlignment="Top">
                         <ui:TextBlock
                             Appearance="Secondary"
-                            Text="Contextual notifications."
-                            TextWrapping="WrapWithOverflow"/>
+                            Text="今日值日"
+                            Margin="2"
+                            TextWrapping="WrapWithOverflow" FontSize="22"/>
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Text="{Binding ViewModel.WorkTable}"
+                            Margin="2"
+                            TextWrapping="WrapWithOverflow" FontSize="18"/>
                     </StackPanel>
                 </Grid>
             </ui:Card>
