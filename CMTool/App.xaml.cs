@@ -56,6 +56,8 @@ namespace CMTool
                 services.AddSingleton<ClassSettings>();
                 services.AddSingleton<About>();
                 services.AddSingleton<AboutViewModel>();
+                services.AddSingleton<DateSettings>();
+                services.AddSingleton<DateSettingsViewModel>();
             }).Build();
 
         /// <summary>

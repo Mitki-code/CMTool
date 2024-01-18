@@ -23,7 +23,7 @@ namespace CMTool.Services
         }
         public static void Writejson(string jsonfile, JObject jObject)
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(jsonfile))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@jsonfile))
             {
                 file.Write(jObject.ToString());
             }

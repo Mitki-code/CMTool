@@ -13,7 +13,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="About">
 
-    <StackPanel Margin="24,24,24,24">
+    <StackPanel Margin="12">
         <ui:CardExpander Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui-icon-256.png', Width=38, Height=35}">
             <ui:CardExpander.Header>
                 <Grid>
