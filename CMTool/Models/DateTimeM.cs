@@ -15,11 +15,11 @@ namespace CMTool.Models
             string time = "";
             if (Mode == "Days")
             {
-                time = Math.Round(ts.TotalDays).ToString();	//将时间差转换为秒
+                time = Math.Floor(ts.TotalDays).ToString();	
             }
             else if (Mode =="Weeks")
             {
-                time = Math.Round(ts.TotalDays).ToString();	//将时间差转换为秒
+                time = Math.Ceiling(ts.TotalDays).ToString();	
             }
             
             return time;

@@ -46,13 +46,77 @@
                 </Grid>
             </ui:CardExpander.Header>
             <StackPanel>
-                <Grid Margin="16">
+                <Grid Margin="16,16,0,0">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="CMTool基于以下框架或服务构建" VerticalAlignment="Center" Margin="0,0,0,4"/>
+                </Grid>
+                <Grid Margin="16,0,0,16">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="基于 .Net/Mvvm/WPF/WPF-UI 构建" />
+                    <ui:HyperlinkButton Grid.Column="0" Content=".Net" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://dotnet.microsoft.com/zh-cn/" />
+                    <ui:HyperlinkButton Grid.Column="1" Content="Mvvm" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://www.nuget.org/packages/CommunityToolkit.Mvvm" />
+                    <ui:HyperlinkButton Grid.Column="3" Content="WPF-UI" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://github.com/lepoco/wpfui" />
+                    <ui:HyperlinkButton Grid.Column="4" Content="AppCenter" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://appcenter.ms/apps" />
                 </Grid>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <ui:CardExpander Icon="{ui:SymbolIcon ArrowClockwise24}" ContentPadding="0" Margin="0,4,0,0">
+            <ui:CardExpander.Header>
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBlock
+                        Grid.Column="0"
+                        FontTypography="Body"
+                        Text="检查更新" />
+                </Grid>
+            </ui:CardExpander.Header>
+            <StackPanel>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://install.appcenter.ms/users/nekomiti/apps/cmtool/distribution_groups/everyone">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="完整包下载" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Open24" />
+                    </Grid>
+                </ui:Anchor>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://install.appcenter.ms/users/nekomiti/apps/cmtool/distribution_groups/everyone">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="更新包下载" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Open24" />
+                    </Grid>
+                </ui:Anchor>
+
+
             </StackPanel>
         </ui:CardExpander>
     </StackPanel>

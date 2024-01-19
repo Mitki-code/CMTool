@@ -18,8 +18,42 @@
 
     <Grid VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Border
+            Grid.Row="0"
+            Height="200"
+            CornerRadius="8">
+            <Border.Background>
+                <ImageBrush
+                ImageSource="pack://application:,,,/Assets/Border.jpg"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Stretch="UniformToFill" />
+            </Border.Background>
+            <Border CornerRadius="8">
+                <Border.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="0" Color="#1F000000" />
+                        <GradientStop Offset="1" Color="#4F000000" />
+                    </RadialGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel
+                        Margin="48,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="Transparent">
+                        <ui:TextBlock
+                        FontTypography="Title"
+                        Foreground="#FFFFFF"
+                        Text="欢迎使用CMTool" />
+                        <ui:TextBlock
+                        FontTypography="Subtitle"
+                        Foreground="#B7FFFFFF"
+                        Text="" />
+                    </StackPanel>
+                </Grid>
+        </Border>
+    </Border>
     </Grid>
 </Page>
