@@ -47,7 +47,11 @@
             </ui:CardExpander.Header>
             <StackPanel>
                 <Grid Margin="16">
-                    <TextBlock Text="基于 .Net/Mvvm/WPF/WPF-UI 构建" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="基于 .Net/Mvvm/WPF/WPF-UI 构建" />
                 </Grid>
             </StackPanel>
         </ui:CardExpander>

@@ -8,9 +8,40 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       d:DataContext="{d:DesignInstance local:MoreSettings,IsDesignTimeCreatable=False}"
+      ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
       Title="MoreSettings">
 
     <StackPanel Margin="12">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="BodyStrong"
+            Text="单双周计算开始日期" />
+        <ui:CardControl Icon="{ui:SymbolIcon CalendarLtr16}"
+                        Header="日期"
+                        Margin="0,4,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <DatePicker x:Name="SettingEventTime"
+                            SelectedDate="{Binding ViewModel.WeekStart,UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </ui:CardControl>
+        <ui:Button Content="保存" 
+                   Icon="{ui:SymbolIcon Save16}" 
+                   Command="{Binding ViewModel.SaveCommand}"
+                   Appearance="Primary"
+                   Margin="0,8,0,0"/>
+
+
+        <ui:TextBlock
+            Margin="0,16,0,8"
+            FontTypography="BodyStrong"
+            Text="高级" />
         <ui:CardControl Icon="{ui:SymbolIcon ArrowReset20}"
                         Header="重置应用数据"
                         Margin="0,4,0,0">
@@ -22,8 +53,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <ui:Button Content="确定" 
-                           Command="{Binding ViewModel.ReSettingsCommand}"
-                           />
+                           Command="{Binding ViewModel.ReSettingsCommand}"/>
             </Grid>
         </ui:CardControl>
         <ui:CardControl Icon="{ui:SymbolIcon Dismiss16}"
@@ -37,8 +67,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <ui:Button Content="确定" 
-                   Command="{Binding ViewModel.CloseCommand}"
-                   />
+                   Command="{Binding ViewModel.CloseCommand}"/>
             </Grid>
         </ui:CardControl>
     </StackPanel>

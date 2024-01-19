@@ -14,12 +14,12 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class DateSettingsViewModel : ObservableObject
     {
-        private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
+        public static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
 
         [ObservableProperty]
-        private string _EventName = jObject["Event"].ToString();
+        public static string _EventName = jObject["Event"].ToString();
         [ObservableProperty]
-        private DateTime _EventTime = Convert.ToDateTime(jObject["Time"].ToString());
+        public static DateTime _EventTime = Convert.ToDateTime(jObject["Time"].ToString());
         [ObservableProperty]
         private string _Tips = "";
 
