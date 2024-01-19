@@ -13,6 +13,9 @@ using CMTool.Views.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
@@ -80,6 +83,7 @@ namespace CMTool
         /// </summary>
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            AppCenter.Start("21c9a860-b944-4f36-875f-f7650fc3fa50", typeof(Analytics), typeof(Crashes));
             _host.Start();
         }
 
