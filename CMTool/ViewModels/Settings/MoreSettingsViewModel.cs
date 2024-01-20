@@ -13,6 +13,7 @@ namespace CMTool.ViewModels.Settings
     public partial class MoreSettingsViewModel : ObservableObject
     {
         private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
+        //private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
         private readonly ISnackbarService _snackbarService;
         private ControlAppearance _snackbarAppearance = ControlAppearance.Success;
 
@@ -32,7 +33,15 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnReSettings()
         {
-            Application.Current.Shutdown();
+            JsonRW.Writejson("Assets/MianData.json", JsonRW.Readjson("Assets/ReData.json"));
+
+            _snackbarService.Show(
+                "重置成功",
+                "重启后生效",
+                _snackbarAppearance,
+                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
+                TimeSpan.FromSeconds(2)
+            );
         }
 
         [RelayCommand]

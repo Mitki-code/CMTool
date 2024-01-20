@@ -11,7 +11,7 @@ namespace CMTool.Views.Windows
             DataContext = this;
             InitializeComponent();
 
-            //ShowInTaskbar = false;
+            ShowInTaskbar = false;
             Left = System.Windows.SystemParameters.WorkArea.Width - Width;
             Top = 0;
         }
