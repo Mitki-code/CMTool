@@ -8,19 +8,18 @@ namespace CMTool.Models
 {
     internal class DateTimeM
     {
-        public static string GetTime(DateTime timeA,string Mode)
+        public static string GetTime(DateTime timeA,string Mode,bool Abs)
         {
             DateTime timeB = DateTime.Now;	//获取当前时间
             TimeSpan ts = timeA - timeB;	//计算时间差
-            string time = "";
-            if (Mode == "Days")
-            {
-                time = Math.Floor(ts.TotalDays).ToString();	
-            }
-            else if (Mode =="Weeks")
-            {
-                time = Math.Ceiling(ts.TotalDays).ToString();	
-            }
+            double timenum = 0;
+            if (Mode == "Days") { timenum = ts.TotalDays; }
+            else if (Mode =="Weeks") { timenum = ts.TotalDays / 7; }
+
+            string time;
+            if (Abs == true && Mode == "Weeks") { time = Math.Ceiling(Math.Abs(timenum)).ToString(); }
+            else if (Abs == true) { time = Math.Floor(Math.Abs(timenum)).ToString(); }
+            else { time = Math.Floor(timenum).ToString(); }
             
             return time;
         }

@@ -18,7 +18,7 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventText = "距离" + jObject["Event"].ToString() + "还有";
         [ObservableProperty]
-        private string _EventDateTime = DateTimeM.GetTime(ETime,"Days") + "天";
+        private string _EventDateTime = DateTimeM.GetTime(ETime,"Days",false) + "天";
         [ObservableProperty]
         private string _ClassTable = ReadClassTable(jObject);
         [ObservableProperty]
@@ -45,8 +45,8 @@ namespace CMTool.ViewModels.Windows
         {
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(jObject["WeekStart"].ToString()), "Weeks");
-            int OTWeek = int.Parse(OTWeekString);
+            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(jObject["WeekStart"].ToString()), "Weeks", true);
+            int OTWeek = Math.Abs(int.Parse(OTWeekString));
 
             foreach (JValue property in jObject["ClassTable"][Week])
             {
