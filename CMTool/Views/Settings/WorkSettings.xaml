@@ -4,12 +4,52 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CMTool.Views.Settings"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+      d:DataContext="{d:DesignInstance local:WorkSettings, IsDesignTimeCreatable=False}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WorkSettings">
 
     <StackPanel Margin="12">
         <ui:InfoBar Title="提示" Message="正在施工" IsOpen="True"/>
+        <ui:CardControl Icon="{ui:SymbolIcon TableSimpleCheckmark20}"
+                Header="模式选择"
+                Margin="0,4,0,0">
+            <ComboBox
+                MinWidth="160"
+                HorizontalAlignment="Left"
+                SelectedIndex="0" />
+        </ui:CardControl>
+        <ui:CardExpander Icon="{ui:SymbolIcon Table16}" Margin="0,4,0,0">
+            <ui:CardExpander.Header>
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <ui:TextBlock
+                Grid.Column="0"
+                Text="值日编辑" VerticalAlignment="Center" />
+                    <ui:Button Content="重置此次修改"
+                       Grid.Column="1"
+                Icon="{ui:SymbolIcon ArrowRepeatAll16}" 
+                Command="{Binding ViewModel.RereadCommand}"
+                Margin="0,0,16,0"/>
+                </Grid>
+            </ui:CardExpander.Header>
+            <DataGrid Height="400" 
+              ItemsSource="{Binding ViewModel.WorkTable}" 
+              AutoGeneratingColumn="Date_AutoGeneratingColumn"
+              VerticalContentAlignment="Center"/>
+        </ui:CardExpander>
+        <ui:Button Content="保存" 
+           Icon="{ui:SymbolIcon Save16}" 
+           Command="{Binding ViewModel.SaveCommand}"
+           Appearance="Primary"
+           Margin="0,16,0,0"/>
     </StackPanel>
 </Page>

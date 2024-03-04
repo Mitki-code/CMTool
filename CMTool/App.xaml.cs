@@ -65,6 +65,7 @@ namespace CMTool
                 services.AddSingleton<MoreSettings>();
                 services.AddSingleton<MoreSettingsViewModel>();
                 services.AddSingleton<WorkSettings>();
+                services.AddSingleton<WorkSettingsViewModel>();
             }).Build();
 
         /// <summary>

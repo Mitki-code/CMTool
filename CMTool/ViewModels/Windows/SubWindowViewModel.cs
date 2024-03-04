@@ -46,7 +46,7 @@ namespace CMTool.ViewModels.Windows
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
             string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(jObject["WeekStart"].ToString()), "Weeks", true);
-            int OTWeek = Math.Abs(int.Parse(OTWeekString));
+            int OTWeek = Math.Abs(int.Parse(OTWeekString)+1);
 
             foreach (JValue property in jObject["ClassTable"][Week])
             {

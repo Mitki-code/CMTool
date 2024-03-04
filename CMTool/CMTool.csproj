@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>wpfui-icon.ico</ApplicationIcon>
+    <ApplicationIcon>ape7k-e5723-001.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wpfui-icon.ico" />
+    <Content Include="ape7k-e5723-001.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -30,6 +30,7 @@ namespace CMTool.ViewModels.Settings
         {
             Application.Current.Shutdown();
         }
+
         [RelayCommand]
         private void OnReSettings()
         {
