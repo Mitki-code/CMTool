@@ -12,11 +12,14 @@ namespace CMTool.Views.Settings
     public partial class WorkSettings : Page
     {
         public WorkSettingsViewModel ViewModel { get; }
+        //private ComboBox SettingWorkMode { get; }
         public WorkSettings(WorkSettingsViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
+            
             InitializeComponent();
+            //SettingWorkMode.SelectedIndex = 1;
         }
 
         private void Date_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

@@ -12,13 +12,15 @@
 
     <StackPanel Margin="12">
         <ui:InfoBar Title="提示" Message="正在施工" IsOpen="True"/>
+        <ui:InfoBar Title="提示" Message="#占位符" IsOpen="True"/>
         <ui:CardControl Icon="{ui:SymbolIcon TableSimpleCheckmark20}"
                 Header="模式选择"
                 Margin="0,4,0,0">
-            <ComboBox
-                MinWidth="160"
-                HorizontalAlignment="Left"
-                SelectedIndex="0" />
+            <ComboBox x:Name="SettingWorkMode"
+                      MinWidth="160"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding ViewModel.WorkMode, Mode=OneWay}"
+                      SelectedIndex="0" />
         </ui:CardControl>
         <ui:CardExpander Icon="{ui:SymbolIcon Table16}" Margin="0,4,0,0">
             <ui:CardExpander.Header>

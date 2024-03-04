@@ -1,5 +1,6 @@
 ﻿using CMTool.Models;
 using CMTool.Services;
+using CMTool.Views.Settings;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,16 @@ namespace CMTool.ViewModels.Settings
         {
             _WorkTable = GenerateWorkList(jObject);
             _snackbarService = snackbarService;
+
         }
+
+        [ObservableProperty]
+        private IList<string> _WorkMode = new ObservableCollection<string>
+        {
+            "基础",
+            "高级"
+        };
+
         private ObservableCollection<WorkList> GenerateWorkList(JObject jObject)
         {
             var worklist = new ObservableCollection<WorkList> { };
@@ -34,7 +44,7 @@ namespace CMTool.ViewModels.Settings
                 worklist.Add(
                     new WorkList
                     {
-                        WorkNum = i,
+                        Work = jObject["WorkTable"]["Work"][i - 1].ToString(),
                         Monday = jObject["WorkTable"]["Monday"][i - 1].ToString(),
                         Tuesday = jObject["WorkTable"]["Tuesday"][i - 1].ToString(),
                         Wednesday = jObject["WorkTable"]["Wednesday"][i - 1].ToString(),
@@ -50,7 +60,7 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnReread()
         {
-            //ClassTable = GenerateClassList(jObject);
+            WorkTable = GenerateWorkList(jObject);
         }
         [RelayCommand]
         private void OnSave()
