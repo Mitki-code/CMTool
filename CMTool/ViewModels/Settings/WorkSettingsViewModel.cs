@@ -31,8 +31,9 @@ namespace CMTool.ViewModels.Settings
         [ObservableProperty]
         private IList<string> _WorkMode = new ObservableCollection<string>
         {
-            "基础",
-            "高级"
+            "分组",
+            "随机(WIP)",
+            "轮流(WIP)"
         };
 
         private ObservableCollection<WorkList> GenerateWorkList(JObject jObject)
@@ -65,7 +66,49 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnSave()
         {
+            try
+            {
+                if (WorkTable.Count > 9) { throw Error(); }
+                int i = 0;
+                foreach (WorkList workList in WorkTable)
+                {
+                    jObject["WorkTable"]["Work"][i] = workList.Work;
+                    jObject["WorkTable"]["Monday"][i] = workList.Monday;
+                    jObject["WorkTable"]["Tuesday"][i] = workList.Tuesday;
+                    jObject["WorkTable"]["Wednesday"][i] = workList.Wednesday;
+                    jObject["WorkTable"]["Thursday"][i] = workList.Thursday;
+                    jObject["WorkTable"]["Friday"][i] = workList.Friday;
+                    jObject["WorkTable"]["Saturday"][i] = workList.Saturday;
+                    jObject["WorkTable"]["Sunday"][i] = workList.Sunday;
 
+                    i++;
+                }
+
+                JsonRW.Writejson("Assets/MianData.json", jObject);
+
+                _snackbarService.Show(
+                    "保存成功",
+                    "重启后生效",
+                    ControlAppearance.Success,
+                    new SymbolIcon(SymbolRegular.CheckmarkCircle16),
+                    TimeSpan.FromSeconds(2)
+                );
+            }
+            catch
+            {
+                _snackbarService.Show(
+                    "保存失败",
+                    "单天值日人数大于9人",
+                    ControlAppearance.Danger,
+                    new SymbolIcon(SymbolRegular.ErrorCircle16),
+                    TimeSpan.FromSeconds(2)
+                );
+            }
+        }
+
+        private Exception Error()
+        {
+            throw new NotImplementedException();
         }
     }
 }

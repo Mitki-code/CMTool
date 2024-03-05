@@ -60,17 +60,18 @@ namespace CMTool.ViewModels.Settings
         {
             try{
                 if (ClassTable.Count > 9) { throw Error(); }
-
+                int i = 0;
                 foreach (ClassList classList in ClassTable)
                 {
+                    jObject["ClassTable"]["Monday"][i] = classList.Monday;
+                    jObject["ClassTable"]["Tuesday"][i] = classList.Tuesday;
+                    jObject["ClassTable"]["Wednesday"][i] = classList.Wednesday;
+                    jObject["ClassTable"]["Thursday"][i] = classList.Thursday;
+                    jObject["ClassTable"]["Friday"][i] = classList.Friday;
+                    jObject["ClassTable"]["Saturday"][i] = classList.Saturday;
+                    jObject["ClassTable"]["Sunday"][i] = classList.Sunday;
 
-                jObject["ClassTable"]["Monday"][classList.ClassNum - 1] = classList.Monday;
-                jObject["ClassTable"]["Tuesday"][classList.ClassNum - 1] = classList.Tuesday;
-                jObject["ClassTable"]["Wednesday"][classList.ClassNum - 1] = classList.Wednesday;
-                jObject["ClassTable"]["Thursday"][classList.ClassNum - 1] = classList.Thursday;
-                jObject["ClassTable"]["Friday"][classList.ClassNum - 1] = classList.Friday;
-                jObject["ClassTable"]["Saturday"][classList.ClassNum - 1] = classList.Saturday;
-                jObject["ClassTable"]["Sunday"][classList.ClassNum - 1] = classList.Sunday;
+                    i++;
                 }
 
                 JsonRW.Writejson("Assets/MianData.json", jObject);
@@ -92,8 +93,6 @@ namespace CMTool.ViewModels.Settings
                     TimeSpan.FromSeconds(2)
                 );
             }
-
-            
         }
 
         private Exception Error()

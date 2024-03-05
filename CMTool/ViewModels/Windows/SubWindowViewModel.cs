@@ -22,7 +22,7 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _ClassTable = ReadClassTable(jObject);
         [ObservableProperty]
-        private string _WorkTable = "\n\n\n\n\n\n\n\n\n";
+        private string _WorkTable = ReadWorkTable(jObject);
 
         private readonly WindowsProviderService _windowsProviderService;
         public SubWindowViewModel(WindowsProviderService windowsProviderService)
@@ -54,8 +54,7 @@ namespace CMTool.ViewModels.Windows
                 {
                     string[] ClassTableWeek = property.ToString().Split('|');
                     if (OTWeek % 2 == 0) { ClassTable = ClassTable + ClassTableWeek[1] + "\n"; }
-                    else {  ClassTable = ClassTable + ClassTableWeek[0] + "\n"; }
-                    ;
+                    else {  ClassTable = ClassTable + ClassTableWeek[0] + "\n"; };
                 }
                 else
                 {
@@ -63,6 +62,53 @@ namespace CMTool.ViewModels.Windows
                 }                                 
             }
             return ClassTable;
+        }
+
+        private static string ReadWorkTable(JObject jObject)
+        {
+            string WorkTable = "";
+            string Work = "0";
+            string Week = DateTime.Today.DayOfWeek.ToString();
+            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(jObject["WeekStart"].ToString()), "Weeks", true);
+            int OTWeek = Math.Abs(int.Parse(OTWeekString) + 1);
+            int start = 0;
+            int end = 0;
+
+
+            foreach (JValue property in jObject["WorkTable"]["Work"])
+            {
+                if (property.ToString() != Work && Work != "0") 
+                {
+                    WorkTable = WorkTable + Work + "\n";
+
+                    for (int i = start; i < end;i ++)
+                    {
+                        JValue WorkValue = (JValue)jObject["WorkTable"][Week][i];
+
+                        if (WorkValue.ToString().Contains("|"))
+                        {
+                            string[] WorkTableWeek = WorkValue.ToString().Split('|');
+                            if (OTWeek % 2 == 0) { WorkTable = WorkTable + WorkTableWeek[1] + "\n"; }
+                            else { WorkTable = WorkTable + WorkTableWeek[0] + "\n"; };
+                        }
+                        else
+                        {
+                            WorkTable = WorkTable + WorkValue.ToString() + "\n";
+                        }
+                    }
+
+                    start = end;
+                    Work = property.ToString();
+                }
+                else
+                {
+                    end++;
+                    Work = property.ToString();
+                }
+            }
+
+            while (WorkTable.Split("\n").Length < 9) { WorkTable += "\n"; }
+            return WorkTable;
         }
     }
 }
