@@ -82,25 +82,31 @@ namespace CMTool.ViewModels.Windows
             {
                 if (property.ToString() != Work && Work != "0") 
                 {
-                    WorkTable = WorkTable + Work + "\n";
-
-                    for (int i = start; i < end;i ++)
+                    for (int i = start; i < end;i++)
                     {
                         JValue WorkValue = (JValue)jObject["WorkTable"][Week][i];
+                        if (WorkValue.ToString() != "")
+                        {
+                            if (start - i == 0) { WorkTable = WorkTable + Work + "\n"; }
 
-                        if (WorkValue.ToString().Contains("|"))
-                        {
-                            string[] WorkTableWeek = WorkValue.ToString().Split('|');
-                            if (OTWeek % 2 == 0) { NameTable = NameTable + WorkTableWeek[1] + "\n"; }
-                            else { NameTable = NameTable + WorkTableWeek[0] + "\n"; };
-                        }
-                        else
-                        {
-                            NameTable = NameTable + WorkValue.ToString() + "\n";
-                        }
+                            if (WorkValue.ToString().Contains("|"))
+                            {
+                                string[] WorkTableWeek = WorkValue.ToString().Split('|');
+                                if (OTWeek % 2 == 0) { NameTable = NameTable + WorkTableWeek[1] + "\n"; }
+                                else { NameTable = NameTable + WorkTableWeek[0] + "\n"; };
+                            }
+                            else
+                            {
+                                NameTable = NameTable + WorkValue.ToString() + "\n";
+                            }
+
+                            if (i == end - 1)
+                            {
+                                while (WorkTable.Split("\n").Length < end + 1) { WorkTable += "\n"; }
+                                i++;
+                            }
+                        } 
                     }
-
-                    while (WorkTable.Split("\n").Length < end+1) { WorkTable += "\n"; }
                     start = end;
                 }
                 end++;
