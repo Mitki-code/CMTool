@@ -18,7 +18,7 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventText = "距离" + jObject["Event"].ToString() + "还有";
         [ObservableProperty]
-        private string _EventDateTime = DateTimeM.GetTime(ETime,"Days",false) + "天";
+        private string _EventDateTime = DateTimeM.GetTime(ETime, "Days", false) + "天";
         [ObservableProperty]
         private string _ClassTable = ReadClassTable(jObject);
         [ObservableProperty]
@@ -56,12 +56,12 @@ namespace CMTool.ViewModels.Windows
                 {
                     string[] ClassTableWeek = property.ToString().Split('|');
                     if (OTWeek % 2 == 0) { ClassTable = ClassTable + ClassTableWeek[1] + "\n"; }
-                    else {  ClassTable = ClassTable + ClassTableWeek[0] + "\n"; };
+                    else { ClassTable = ClassTable + ClassTableWeek[0] + "\n"; };
                 }
                 else
                 {
                     ClassTable = ClassTable + property.ToString() + "\n";
-                }                                 
+                }
             }
             return ClassTable;
         }
@@ -80,9 +80,9 @@ namespace CMTool.ViewModels.Windows
 
             foreach (JValue property in jObject["WorkTable"]["Work"])
             {
-                if (property.ToString() != Work && Work != "0") 
+                if (property.ToString() != Work && Work != "0")
                 {
-                    for (int i = start; i < end;i++)
+                    for (int i = start; i < end; i++)
                     {
                         JValue WorkValue = (JValue)jObject["WorkTable"][Week][i];
                         if (WorkValue.ToString() != "")
@@ -105,7 +105,7 @@ namespace CMTool.ViewModels.Windows
                                 while (WorkTable.Split("\n").Length < end + 1) { WorkTable += "\n"; }
                                 i++;
                             }
-                        } 
+                        }
                     }
                     start = end;
                 }
@@ -115,7 +115,7 @@ namespace CMTool.ViewModels.Windows
 
             while (WorkTable.Split("\n").Length < 9) { WorkTable += "\n"; }
             while (NameTable.Split("\n").Length < 9) { NameTable += "\n"; }
-            string[] WNList = {WorkTable,NameTable};
+            string[] WNList = { WorkTable, NameTable };
 
             return WNList;
         }
