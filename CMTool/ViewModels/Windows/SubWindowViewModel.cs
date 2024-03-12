@@ -1,10 +1,13 @@
 ﻿using CMTool.Models;
+using CMTool.Resources;
 using CMTool.Services;
 using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
+using PropertyChanged;
 
 namespace CMTool.ViewModels.Windows
 {
+    [AddINotifyPropertyChangedInterface]
     public partial class SubWindowViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -12,7 +15,7 @@ namespace CMTool.ViewModels.Windows
 
         /// private string JsonData = new JsonRW.Readjson("pack://application:,,,/Assets/wpfui-icon-256.png");
 
-        private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
+        private static JObject jObject = JsonData.jObject;
         private static DateTime ETime = Convert.ToDateTime(jObject["Time"].ToString());
 
         [ObservableProperty]
@@ -20,17 +23,18 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventDateTime = DateTimeM.GetTime(ETime, "Days", false) + "天";
         [ObservableProperty]
-        private string _ClassTable = ReadClassTable(jObject);
-        [ObservableProperty]
-        private string _WorkTable = ReadWorkTable(jObject)[0];
-        [ObservableProperty]
-        private string _NameTable = ReadWorkTable(jObject)[1];
+        private string _ClassTable = ReadClassTable(JsonData.jObject);
+
+        public string WorkTable { get=> ReadWorkTable(JsonData.jObject)[0]; }
+
+        public string NameTable { get => ReadWorkTable(JsonData.jObject)[1]; }
 
         private readonly WindowsProviderService _windowsProviderService;
         public SubWindowViewModel(WindowsProviderService windowsProviderService)
         {
             _windowsProviderService = windowsProviderService;
         }
+
 
         [RelayCommand]
         private void OnOpenWindow()
@@ -52,16 +56,7 @@ namespace CMTool.ViewModels.Windows
 
             foreach (JValue property in jObject["ClassTable"][Week])
             {
-                if (property.ToString().Contains("|"))
-                {
-                    string[] ClassTableWeek = property.ToString().Split('|');
-                    if (OTWeek % 2 == 0) { ClassTable = ClassTable + ClassTableWeek[1] + "\n"; }
-                    else { ClassTable = ClassTable + ClassTableWeek[0] + "\n"; };
-                }
-                else
-                {
-                    ClassTable = ClassTable + property.ToString() + "\n";
-                }
+                ClassTable = SearchList(ClassTable, OTWeek, property);
             }
             return ClassTable;
         }
@@ -89,16 +84,7 @@ namespace CMTool.ViewModels.Windows
                         {
                             if (start - i == 0) { WorkTable = WorkTable + Work + "\n"; }
 
-                            if (WorkValue.ToString().Contains("|"))
-                            {
-                                string[] WorkTableWeek = WorkValue.ToString().Split('|');
-                                if (OTWeek % 2 == 0) { NameTable = NameTable + WorkTableWeek[1] + "\n"; }
-                                else { NameTable = NameTable + WorkTableWeek[0] + "\n"; };
-                            }
-                            else
-                            {
-                                NameTable = NameTable + WorkValue.ToString() + "\n";
-                            }
+                            NameTable = SearchList(NameTable, OTWeek, WorkValue);
 
                             if (i == end - 1)
                             {
@@ -118,6 +104,22 @@ namespace CMTool.ViewModels.Windows
             string[] WNList = { WorkTable, NameTable };
 
             return WNList;
+        }
+
+        private static string SearchList(string Table, int OTWeek, JValue JsonValue)
+        {
+            if (JsonValue.ToString().Contains("|"))
+            {
+                string[] TableWeek = JsonValue.ToString().Split("|");
+                if (OTWeek % 2 == 0) { Table = Table + TableWeek[1] + "\n"; }
+                else { Table = Table + TableWeek[0] + "\n"; };
+            }
+            else
+            {
+                Table = Table + JsonValue.ToString() + "\n";
+            }
+
+            return Table;
         }
     }
 }

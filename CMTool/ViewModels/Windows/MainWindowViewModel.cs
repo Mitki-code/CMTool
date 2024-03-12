@@ -11,7 +11,7 @@ namespace CMTool.ViewModels.Windows
     public partial class MainWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "CMTool - 主页";
+        private string _applicationTitle = "CMTool - 主面板";
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
