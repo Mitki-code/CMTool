@@ -1,5 +1,6 @@
 ﻿using CMTool.Models;
 using CMTool.Resources;
+using CMTool.ViewModels.Windows;
 using CMTool.Views.Settings;
 using Newtonsoft.Json.Linq;
 using System;
@@ -15,7 +16,7 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class WorkSettingsViewModel : ObservableObject
     {
-        private static JObject jObject = JsonData.jObject;
+        private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
         private readonly ISnackbarService _snackbarService;
 
         [ObservableProperty]
@@ -86,6 +87,10 @@ namespace CMTool.ViewModels.Settings
 
                 JsonRW.Writejson("Assets/MianData.json", jObject);
                 JsonData.Refresh();
+                SubWindowViewModel.workTable = SubWindowViewModel.ReadWorkTable(JsonData.jObject)[0];
+                SubWindowViewModel.nameTable = SubWindowViewModel.ReadWorkTable(JsonData.jObject)[1];
+                
+
 
 
 

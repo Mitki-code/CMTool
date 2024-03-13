@@ -4,10 +4,11 @@ using CMTool.Services;
 using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
 using PropertyChanged;
+using System.ComponentModel;
 
 namespace CMTool.ViewModels.Windows
 {
-    [AddINotifyPropertyChangedInterface]
+    //[AddINotifyPropertyChangedInterface]
     public partial class SubWindowViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -15,7 +16,7 @@ namespace CMTool.ViewModels.Windows
 
         /// private string JsonData = new JsonRW.Readjson("pack://application:,,,/Assets/wpfui-icon-256.png");
 
-        private static JObject jObject = JsonData.jObject;
+        private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
         private static DateTime ETime = Convert.ToDateTime(jObject["Time"].ToString());
 
         [ObservableProperty]
@@ -24,10 +25,14 @@ namespace CMTool.ViewModels.Windows
         private string _EventDateTime = DateTimeM.GetTime(ETime, "Days", false) + "天";
         [ObservableProperty]
         private string _ClassTable = ReadClassTable(JsonData.jObject);
+        [ObservableProperty]
+        private static string _WorkTable = ReadWorkTable(JsonData.jObject)[0];
+        [ObservableProperty]
+        private static string _NameTable = ReadWorkTable(JsonData.jObject)[1];
 
-        public string WorkTable { get=> ReadWorkTable(JsonData.jObject)[0]; }
 
-        public string NameTable { get => ReadWorkTable(JsonData.jObject)[1]; }
+        public static string workTable { set => _WorkTable = value; }
+        public static string nameTable { set => _NameTable = value; }
 
         private readonly WindowsProviderService _windowsProviderService;
         public SubWindowViewModel(WindowsProviderService windowsProviderService)
@@ -47,7 +52,7 @@ namespace CMTool.ViewModels.Windows
             System.Diagnostics.Process.Start("D:\\Program Files\\clash\\clash.exe");
         }
 
-        private static string ReadClassTable(JObject jObject)
+        internal static string ReadClassTable(JObject jObject)
         {
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
@@ -61,7 +66,7 @@ namespace CMTool.ViewModels.Windows
             return ClassTable;
         }
 
-        private static string[] ReadWorkTable(JObject jObject)
+        internal static string[] ReadWorkTable(JObject jObject)
         {
             string WorkTable = "";
             string NameTable = "";

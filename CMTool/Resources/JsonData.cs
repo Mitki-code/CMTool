@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CMTool.Resources
 {
-    [AddINotifyPropertyChangedInterface]
+    //暂时停用
     internal class JsonData
     {
         public static JObject jObject = JsonRW.Readjson("Assets/MianData.json");

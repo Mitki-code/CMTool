@@ -120,10 +120,10 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <ui:TextBlock Appearance="Secondary" Margin="2" Grid.Column="0"
-                                              Text="{Binding ViewModel.WorkTable}"
+                                              Text="{Binding ViewModel.WorkTable, Mode=OneWay}"
                                               TextWrapping="WrapWithOverflow" FontSize="18"/>
                                 <ui:TextBlock Appearance="Secondary" Margin="2" Grid.Column="1"
-                                              Text="{Binding ViewModel.NameTable}"
+                                              Text="{Binding ViewModel.NameTable, Mode=OneWay}"
                                               TextWrapping="WrapWithOverflow" FontSize="18"/>
                             </Grid>
                         </Grid>
