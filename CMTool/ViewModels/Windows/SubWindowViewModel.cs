@@ -5,11 +5,11 @@ using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
 using PropertyChanged;
 using System.ComponentModel;
+using System.Xml;
 
 namespace CMTool.ViewModels.Windows
 {
-    [AddINotifyPropertyChangedInterface]
-    public partial class SubWindowViewModel : ObservableObject
+    public partial class SubWindowViewModel : ObservableObject, INotifyPropertyChanged
     {
         [ObservableProperty]
         private string _applicationTitle = "CMTool";
@@ -30,18 +30,21 @@ namespace CMTool.ViewModels.Windows
         //[ObservableProperty]
         //private static string _NameTable = ReadWorkTable(jObject)[1];
 
-        public string WorkTable { get; set; }
-        public string NameTable { get; set; }
-
-
-        //public static string workTable { set => _WorkTable = value; }
-        //public static string nameTable { set => _NameTable = value; }
-        //[RelayCommand]
-        public void RefreshTable()
+        public static event EventHandler<PropertyChangedEventArgs> StaticProgressChanged;
+        private static string _workTable = ReadWorkTable(jObject)[0];
+        private static string _nameTable = ReadWorkTable(jObject)[1];
+        public static string NameTable { get { return _nameTable; } set { _nameTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(NameTable))); } }
+        public static string WorkTable { get { return _workTable; } set { _workTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(WorkTable))); } }
+        public static void RefreshTable()
         {
             WorkTable = ReadWorkTable(jObject)[0];
             NameTable = ReadWorkTable(jObject)[1];
         }
+
+        //public static string workTable { set => _WorkTable = value; }
+        //public static string nameTable { set => _NameTable = value; }
+        //[RelayCommand]
+
 
         private readonly WindowsProviderService _windowsProviderService;
         public SubWindowViewModel(WindowsProviderService windowsProviderService)
@@ -133,7 +136,8 @@ namespace CMTool.ViewModels.Windows
                 Table = Table + JsonValue.ToString() + "\n";
             }
 
-            return Table;
+            
+            return Table;        
         }
     }
 }
