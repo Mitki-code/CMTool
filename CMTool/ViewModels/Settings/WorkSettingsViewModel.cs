@@ -87,9 +87,9 @@ namespace CMTool.ViewModels.Settings
 
                 JsonRW.Writejson("Assets/MianData.json", jObject);
                 JsonData.Refresh();
-                SubWindowViewModel.workTable = SubWindowViewModel.ReadWorkTable(JsonData.jObject)[0];
-                SubWindowViewModel.nameTable = SubWindowViewModel.ReadWorkTable(JsonData.jObject)[1];
-                
+                SubWindowViewModel.jObject = JsonRW.Readjson("Assets/MianData.json");
+                //SubWindowViewModel.RefreshTable();
+
 
 
 

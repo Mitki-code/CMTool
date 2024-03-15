@@ -9,11 +9,14 @@ namespace CMTool.Views.Windows
         {
             ViewModel = viewModel;
             DataContext = this;
+            //SubWindowViewModel.RefreshTable();
             InitializeComponent();
 
             ShowInTaskbar = false;
             Left = System.Windows.SystemParameters.WorkArea.Width - Width;
             Top = 0;
+
+            
         }
     }
 }

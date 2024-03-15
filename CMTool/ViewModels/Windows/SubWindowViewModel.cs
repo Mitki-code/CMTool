@@ -8,15 +8,15 @@ using System.ComponentModel;
 
 namespace CMTool.ViewModels.Windows
 {
-    //[AddINotifyPropertyChangedInterface]
+    [AddINotifyPropertyChangedInterface]
     public partial class SubWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "CMTool - Dev";
+        private string _applicationTitle = "CMTool";
 
         /// private string JsonData = new JsonRW.Readjson("pack://application:,,,/Assets/wpfui-icon-256.png");
 
-        private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
+        public static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
         private static DateTime ETime = Convert.ToDateTime(jObject["Time"].ToString());
 
         [ObservableProperty]
@@ -24,15 +24,24 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventDateTime = DateTimeM.GetTime(ETime, "Days", false) + "天";
         [ObservableProperty]
-        private string _ClassTable = ReadClassTable(JsonData.jObject);
-        [ObservableProperty]
-        private static string _WorkTable = ReadWorkTable(JsonData.jObject)[0];
-        [ObservableProperty]
-        private static string _NameTable = ReadWorkTable(JsonData.jObject)[1];
+        private string _ClassTable = ReadClassTable(jObject);
+        //[ObservableProperty]
+        //private static string _WorkTable = ReadWorkTable(jObject)[0];
+        //[ObservableProperty]
+        //private static string _NameTable = ReadWorkTable(jObject)[1];
+
+        public string WorkTable { get; set; }
+        public string NameTable { get; set; }
 
 
-        public static string workTable { set => _WorkTable = value; }
-        public static string nameTable { set => _NameTable = value; }
+        //public static string workTable { set => _WorkTable = value; }
+        //public static string nameTable { set => _NameTable = value; }
+        //[RelayCommand]
+        public void RefreshTable()
+        {
+            WorkTable = ReadWorkTable(jObject)[0];
+            NameTable = ReadWorkTable(jObject)[1];
+        }
 
         private readonly WindowsProviderService _windowsProviderService;
         public SubWindowViewModel(WindowsProviderService windowsProviderService)
