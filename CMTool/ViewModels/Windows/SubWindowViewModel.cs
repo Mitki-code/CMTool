@@ -29,17 +29,17 @@ namespace CMTool.ViewModels.Windows
         //private static string _WorkTable = ReadWorkTable(jObject)[0];
         //[ObservableProperty]
         //private static string _NameTable = ReadWorkTable(jObject)[1];
-
-        public static event EventHandler<PropertyChangedEventArgs> StaticProgressChanged;
-        private static string _workTable = ReadWorkTable(jObject)[0];
-        private static string _nameTable = ReadWorkTable(jObject)[1];
-        public static string NameTable { get { return _nameTable; } set { _nameTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(NameTable))); } }
-        public static string WorkTable { get { return _workTable; } set { _workTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(WorkTable))); } }
+        public static event PropertyChangedEventHandler StaticProgressChanged;
+        private static string workTable = ReadWorkTable(jObject)[0];
+        private static string nameTable = ReadWorkTable(jObject)[1];
+        public static string NameTable { get { return nameTable; } set { nameTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(NameTable))); } }
+        public static string WorkTable { get { return workTable; } set { workTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(WorkTable))); } }
         public static void RefreshTable()
         {
             WorkTable = ReadWorkTable(jObject)[0];
             NameTable = ReadWorkTable(jObject)[1];
         }
+
 
         //public static string workTable { set => _WorkTable = value; }
         //public static string nameTable { set => _NameTable = value; }
