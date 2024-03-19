@@ -27,6 +27,8 @@ namespace CMTool.Views.Settings
             ViewModel = viewModel;
             DataContext = this;
             InitializeComponent();
+
+            
         }
     }
 }

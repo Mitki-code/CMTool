@@ -120,7 +120,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <ui:TextBlock Appearance="Secondary" Margin="2" Grid.Column="0"
-                                              Text="{Binding Source={StaticResource ViewModel},Path=NameTable}"
+                                              Text="{Binding ViewModel.WorkTable}"
                                               TextWrapping="WrapWithOverflow" FontSize="18"/>
                                 <ui:TextBlock Appearance="Secondary" Margin="2" Grid.Column="1"
                                               Text="{Binding ViewModel.NameTable}"

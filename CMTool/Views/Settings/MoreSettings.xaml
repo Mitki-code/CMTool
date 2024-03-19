@@ -16,7 +16,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="BodyStrong"
-            Text="单双周计算开始日期" />
+            Text="周计算开始日期" />
         <ui:CardControl Icon="{ui:SymbolIcon CalendarLtr16}"
                         Header="日期"
                         Margin="0,4,0,0">
@@ -37,14 +37,8 @@
                    Appearance="Primary"
                    Margin="0,8,0,0"/>
 
-
-        <ui:TextBlock
-            Margin="0,16,0,8"
-            FontTypography="BodyStrong"
-            Text="高级" />
-        <ui:CardControl Icon="{ui:SymbolIcon ArrowReset20}"
-                        Header="重置应用数据"
-                        Margin="0,4,0,0">
+        <ui:TextBlock Margin="0,16,0,8" FontTypography="BodyStrong" Text="自启动" />
+        <ui:CardControl Icon="{ui:SymbolIcon Power20}" Header="开机自启动" Margin="0,4,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -52,13 +46,12 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ui:Button Content="确定" 
-                           Command="{Binding ViewModel.ReSettingsCommand}"/>
+                <ui:ToggleSwitch Command="{Binding ViewModel.SetPowerStartCommand}" CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0" OffContent="Off" OnContent="On"/>
             </Grid>
         </ui:CardControl>
-        <ui:CardControl Icon="{ui:SymbolIcon Dismiss16}"
-                Header="关闭应用"
-                Margin="0,4,0,0">
+        
+        <ui:TextBlock Margin="0,16,0,8" FontTypography="BodyStrong" Text="高级" />
+        <ui:CardControl Icon="{ui:SymbolIcon ArrowReset20}" Header="重置应用数据" Margin="0,4,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -66,8 +59,18 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ui:Button Content="确定" 
-                   Command="{Binding ViewModel.CloseCommand}"/>
+                <ui:Button Content="确定" Command="{Binding ViewModel.ReSettingsCommand}"/>
+            </Grid>
+        </ui:CardControl>
+        <ui:CardControl Icon="{ui:SymbolIcon Dismiss16}" Header="关闭应用" Margin="0,4,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button Content="确定" Command="{Binding ViewModel.CloseCommand}"/>
             </Grid>
         </ui:CardControl>
     </StackPanel>

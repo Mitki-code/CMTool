@@ -1,4 +1,5 @@
 ﻿using CMTool.Models;
+using CMTool.Views.Settings;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnReSettings()
         {
+            
             JsonRW.Writejson("Assets/MianData.json", JsonRW.Readjson("Assets/ReData.json"));
 
             _snackbarService.Show(
@@ -43,6 +45,31 @@ namespace CMTool.ViewModels.Settings
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
             );
+        }
+
+        [RelayCommand]
+        private void OnSetPowerStart(object state)
+        {
+            if ((bool)state)
+            {
+                _snackbarService.Show(
+                "操作成功",
+                "已设置开机自启动",
+                _snackbarAppearance,
+                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
+                TimeSpan.FromSeconds(2)
+            );
+            }
+            else
+            {
+                _snackbarService.Show(
+                "操作成功",
+                "已移除开机自启动",
+                _snackbarAppearance,
+                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
+                TimeSpan.FromSeconds(2)
+            );
+            }
         }
 
         [RelayCommand]
