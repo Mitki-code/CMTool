@@ -50,11 +50,26 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnSetPowerStart(object state)
         {
+            string textOK;
+            bool isOk;
             if ((bool)state)
+            {
+                isOk = PowerStartManger.SetAutoStart(true);
+                textOK = "设置开机自启动";
+            }
+            else
+            {
+                isOk = PowerStartManger.SetAutoStart(false);
+                textOK = "移除开机自启动";
+
+                
+            }
+
+            if ( isOk )
             {
                 _snackbarService.Show(
                 "操作成功",
-                "已设置开机自启动",
+                "已"+textOK,
                 _snackbarAppearance,
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
@@ -63,10 +78,10 @@ namespace CMTool.ViewModels.Settings
             else
             {
                 _snackbarService.Show(
-                "操作成功",
-                "已移除开机自启动",
-                _snackbarAppearance,
-                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
+                "操作失败",
+                "未能" + textOK,
+                ControlAppearance.Danger,
+                new SymbolIcon(SymbolRegular.DismissCircle16),
                 TimeSpan.FromSeconds(2)
             );
             }

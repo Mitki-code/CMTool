@@ -13,13 +13,8 @@
       Title="MoreSettings">
 
     <StackPanel Margin="12">
-        <ui:TextBlock
-            Margin="0,0,0,8"
-            FontTypography="BodyStrong"
-            Text="周计算开始日期" />
-        <ui:CardControl Icon="{ui:SymbolIcon CalendarLtr16}"
-                        Header="日期"
-                        Margin="0,4,0,0">
+        <ui:TextBlock Margin="0,0,0,8" FontTypography="BodyStrong" Text="周计算开始日期" />
+        <ui:CardControl Icon="{ui:SymbolIcon CalendarLtr16}" Header="日期" Margin="0,4,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -27,15 +22,10 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
-                <DatePicker x:Name="SettingEventTime"
-                            SelectedDate="{Binding ViewModel.WeekStart,UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker x:Name="SettingEventTime" SelectedDate="{Binding ViewModel.WeekStart,UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </ui:CardControl>
-        <ui:Button Content="保存" 
-                   Icon="{ui:SymbolIcon Save16}" 
-                   Command="{Binding ViewModel.SaveCommand}"
-                   Appearance="Primary"
-                   Margin="0,8,0,0"/>
+        <ui:Button Content="保存" Icon="{ui:SymbolIcon Save16}" Command="{Binding ViewModel.SaveCommand}" Appearance="Primary" Margin="0,8,0,0"/>
 
         <ui:TextBlock Margin="0,16,0,8" FontTypography="BodyStrong" Text="自启动" />
         <ui:CardControl Icon="{ui:SymbolIcon Power20}" Header="开机自启动" Margin="0,4,0,0">
@@ -46,7 +36,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ui:ToggleSwitch Command="{Binding ViewModel.SetPowerStartCommand}" CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0" OffContent="Off" OnContent="On"/>
+                <ui:ToggleSwitch x:Name="PowerStartButton" Command="{Binding ViewModel.SetPowerStartCommand}" CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0"/>
             </Grid>
         </ui:CardControl>
         

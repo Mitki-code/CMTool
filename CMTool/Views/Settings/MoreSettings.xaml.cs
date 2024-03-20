@@ -1,4 +1,5 @@
-﻿using CMTool.ViewModels.Settings;
+﻿using CMTool.Models;
+using CMTool.ViewModels.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,13 @@ namespace CMTool.Views.Settings
             ViewModel = viewModel;
             DataContext = this;
             InitializeComponent();
+            CheckAutoStart();
+        }
 
-            
+        private void CheckAutoStart()
+        {
+            if (PowerStartManger.IsAutoStart()) { PowerStartButton.IsChecked = true; }
+            else { PowerStartButton.IsChecked = false;}
         }
     }
 }
