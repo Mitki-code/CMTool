@@ -16,10 +16,11 @@ namespace CMTool.Views.Settings
         //private ComboBox SettingWorkMode { get; }
         public WorkSettings(WorkSettingsViewModel viewModel)
         {
+            InitializeComponent();
             ViewModel = viewModel;
             DataContext = this;
             
-            InitializeComponent();
+            
             //SettingWorkMode.SelectedIndex = 1;
         }
 

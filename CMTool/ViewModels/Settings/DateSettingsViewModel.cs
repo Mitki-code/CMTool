@@ -1,4 +1,4 @@
-﻿using CMTool.Models;
+﻿using CMTool.Module;
 using CMTool.Views.Settings;
 using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;

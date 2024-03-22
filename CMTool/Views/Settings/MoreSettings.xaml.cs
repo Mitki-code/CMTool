@@ -1,4 +1,4 @@
-﻿using CMTool.Models;
+﻿using CMTool.Module;
 using CMTool.ViewModels.Settings;
 using System;
 using System.Collections.Generic;

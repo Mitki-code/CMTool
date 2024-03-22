@@ -7,7 +7,7 @@ using IWshRuntimeLibrary;
 using System.Diagnostics;
 using Microsoft.Win32;
 
-namespace CMTool.Models
+namespace CMTool.Module
 {
     internal static class PowerStartManger
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CMTool.Models
+namespace CMTool.Module
 {
     internal static class JsonRW
     {
