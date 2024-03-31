@@ -1,5 +1,6 @@
 ﻿using CMTool.Module;
 using CMTool.Resources;
+using CMTool.Services;
 using CMTool.ViewModels.Windows;
 using CMTool.Views.Settings;
 using CMTool.Views.Windows;
@@ -19,6 +20,7 @@ namespace CMTool.ViewModels.Settings
     {
         private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
         private readonly ISnackbarService _snackbarService;
+        private readonly WindowsProviderService _windowsProviderService;
 
         //public SubWindowViewModel ViewModel { get; }
         [ObservableProperty]
@@ -89,9 +91,10 @@ namespace CMTool.ViewModels.Settings
 
                 JsonRW.Writejson("Assets/MianData.json", jObject);
                 JsonData.Refresh();
-                //SubWindow.RefreshTable(ViewModel);
-
                 SubWindowViewModel.jObject = JsonRW.Readjson("Assets/MianData.json");
+                App.GetService<SubWindow>().RefreshTable();
+
+                
 
 
                 _snackbarService.Show(

@@ -53,8 +53,8 @@ namespace CMTool.ViewModels.Windows
             PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null)
                 handler(this, new PropertyChangedEventArgs(propertyChanged));
-        }
 
+        }
 
         private readonly WindowsProviderService _windowsProviderService;
         public SubWindowViewModel(WindowsProviderService windowsProviderService)
