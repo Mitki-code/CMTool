@@ -39,7 +39,20 @@
                 <ui:ToggleSwitch x:Name="PowerStartButton" Command="{Binding ViewModel.SetPowerStartCommand}" CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0"/>
             </Grid>
         </ui:CardControl>
-        
+
+        <ui:TextBlock Margin="0,16,0,8" FontTypography="BodyStrong" Text="个性化" />
+        <ui:CardControl Icon="{ui:SymbolIcon Power20}" Header="主题模式" Margin="0,4,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:ToggleSwitch x:Name="ThemeButton" Command="{Binding ViewModel.ChangeThemeCommand}" Margin="0,0,4,0"/>
+            </Grid>
+        </ui:CardControl>
+
         <ui:TextBlock Margin="0,16,0,8" FontTypography="BodyStrong" Text="高级" />
         <ui:CardControl Icon="{ui:SymbolIcon ArrowReset20}" Header="重置应用数据" Margin="0,4,0,0">
             <Grid>

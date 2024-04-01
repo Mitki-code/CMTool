@@ -16,17 +16,17 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _applicationTitle = "CMTool";
 
-        /// private string JsonData = new JsonRW.Readjson("pack://application:,,,/Assets/wpfui-icon-256.png");
-
-        public static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
-        private static DateTime ETime = Convert.ToDateTime(jObject["Time"].ToString());
+        public static JObject TimeJson = JsonRW.Readjson("Assets/DataTime.json");
+        public static JObject ClassJson = JsonRW.Readjson("Assets/DataClass.json");
+        public static JObject WorkJson = JsonRW.Readjson("Assets/DataWork.json");
+        private static DateTime ETime = Convert.ToDateTime(TimeJson["Time"].ToString());
 
         [ObservableProperty]
-        private string _EventText = "距离" + jObject["Event"].ToString() + "还有";
+        private string _EventText = "距离" + TimeJson["Event"].ToString() + "还有";
         [ObservableProperty]
         private string _EventDateTime = DateTimeM.GetTime(ETime, "Days", false) + "天";
         [ObservableProperty]
-        private string _ClassTable = ReadClassTable(jObject);
+        private string _ClassTable = ReadClassTable(ClassJson,TimeJson["WeekStart"].ToString());
         //[ObservableProperty]
         //private static string _WorkTable = ReadWorkTable(jObject)[0];
         //[ObservableProperty]
@@ -42,8 +42,8 @@ namespace CMTool.ViewModels.Windows
 
         public void RefreshTable()
         {
-            subWindowModels.WorkTable = ReadWorkTable(jObject)[0];
-            subWindowModels.NameTable = ReadWorkTable(jObject)[1];
+            subWindowModels.WorkTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[0];
+            subWindowModels.NameTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[1];
             subWindowModels = subWindowModels;
         }
 
@@ -56,16 +56,10 @@ namespace CMTool.ViewModels.Windows
 
         }
 
-        private readonly WindowsProviderService _windowsProviderService;
-        public SubWindowViewModel(WindowsProviderService windowsProviderService)
-        {
-            _windowsProviderService = windowsProviderService;
-        }
-
-
         [RelayCommand]
         private void OnOpenWindow()
         {
+            WindowsProviderService _windowsProviderService = App.GetService<WindowsProviderService>();
             _windowsProviderService.Show<MainWindow>();
         }
         [RelayCommand]
@@ -74,39 +68,39 @@ namespace CMTool.ViewModels.Windows
             System.Diagnostics.Process.Start("D:\\Program Files\\clash\\clash.exe");
         }
 
-        internal static string ReadClassTable(JObject jObject)
+        internal static string ReadClassTable(JObject jObject,string WeekStart)
         {
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(jObject["WeekStart"].ToString()), "Weeks", true);
+            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(WeekStart), "Weeks", true);
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
 
-            foreach (JValue property in jObject["ClassTable"][Week])
+            foreach (JValue property in jObject[Week])
             {
                 ClassTable = SearchList(ClassTable, OTWeek, property);
             }
             return ClassTable;
         }
 
-        internal static string[] ReadWorkTable(JObject jObject)
+        internal static string[] ReadWorkTable(JObject jObject, string WeekStart)
         {
             string WorkTable = "";
             string NameTable = "";
             string Work = "0";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(jObject["WeekStart"].ToString()), "Weeks", true);
+            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(WeekStart), "Weeks", true);
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
             int start = 0;
             int end = 0;
 
 
-            foreach (JValue property in jObject["WorkTable"]["Work"])
+            foreach (JValue property in jObject["Work"])
             {
                 if (property.ToString() != Work && Work != "0")
                 {
                     for (int i = start; i < end; i++)
                     {
-                        JValue WorkValue = (JValue)jObject["WorkTable"][Week][i];
+                        JValue WorkValue = (JValue)jObject[Week][i];
                         if (WorkValue.ToString() != "")
                         {
                             if (start - i == 0) { WorkTable = WorkTable + Work + "\n"; }

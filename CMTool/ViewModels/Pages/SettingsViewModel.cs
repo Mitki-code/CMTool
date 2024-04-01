@@ -11,55 +11,8 @@ using Wpf.Ui.Controls;
 
 namespace CMTool.ViewModels.Pages
 {
-    public partial class SettingsViewModel : ObservableObject, INavigationAware
+    public partial class SettingsViewModel : ObservableObject
     {
-        private bool _isInitialized = false;
-
-
-        [ObservableProperty]
-        private Wpf.Ui.Appearance.ApplicationTheme _currentTheme = Wpf.Ui.Appearance.ApplicationTheme.Unknown;
-
-        public void OnNavigatedTo()
-        {
-            if (!_isInitialized)
-                InitializeViewModel();
-        }
-
-        public void OnNavigatedFrom() { }
-
-        private void InitializeViewModel()
-        {
-            CurrentTheme = ApplicationThemeManager.GetAppTheme();
-
-            _isInitialized = true;
-        }
-
-
-        [RelayCommand]
-        private void OnChangeTheme(string parameter)
-        {
-            switch (parameter)
-            {
-                case "theme_light":
-                    if (CurrentTheme == Wpf.Ui.Appearance.ApplicationTheme.Light)
-                        break;
-
-                    ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
-                    CurrentTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
-
-                    break;
-
-                default:
-                    if (CurrentTheme == Wpf.Ui.Appearance.ApplicationTheme.Dark)
-                        break;
-
-                    ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
-                    CurrentTheme = Wpf.Ui.Appearance.ApplicationTheme.Dark;
-
-                    break;
-            }
-        }
-
         [ObservableProperty]
         private ICollection<object> _menuItems = new ObservableCollection<object>
         {

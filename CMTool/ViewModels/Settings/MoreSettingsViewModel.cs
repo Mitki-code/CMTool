@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wpf.Ui;
+using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
 namespace CMTool.ViewModels.Settings
 {
-    public partial class MoreSettingsViewModel : ObservableObject
+    public partial class MoreSettingsViewModel : ObservableObject, INavigationAware
     {
         private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
         //private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
@@ -23,8 +24,28 @@ namespace CMTool.ViewModels.Settings
             _snackbarService = snackbarService;
         }
 
+        private bool _isInitialized = false;
+
+        public void OnNavigatedTo()
+        {
+            if (!_isInitialized)
+                InitializeViewModel();
+        }
+
+        public void OnNavigatedFrom() { }
+
+        private void InitializeViewModel()
+        {
+            CurrentTheme = ApplicationThemeManager.GetAppTheme();
+
+            _isInitialized = true;
+        }
+
         [ObservableProperty]
         private DateTime _WeekStart = Convert.ToDateTime(jObject["WeekStart"].ToString());
+        [ObservableProperty]
+        private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
+
 
         [RelayCommand]
         private void OnClose()
@@ -61,8 +82,6 @@ namespace CMTool.ViewModels.Settings
             {
                 isOk = PowerStartManger.SetAutoStart(false);
                 textOK = "移除开机自启动";
-
-                
             }
 
             if ( isOk )
@@ -101,6 +120,30 @@ namespace CMTool.ViewModels.Settings
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
             );
+        }
+
+        [RelayCommand]
+        private void OnChangeTheme(string parameter)
+        {
+            switch (parameter)
+            {
+                case "theme_light":
+                    if (CurrentTheme == ApplicationTheme.Light)
+                        break;
+
+                    ApplicationThemeManager.Apply(ApplicationTheme.Light);
+                    CurrentTheme = ApplicationTheme.Light;
+
+                    break;
+
+                default:
+                    if (CurrentTheme == ApplicationTheme.Dark)
+                        break;
+
+                    ApplicationThemeManager.Apply(ApplicationTheme.Dark);
+                    CurrentTheme = ApplicationTheme.Dark;
+                    break;
+            }
         }
     }
 }

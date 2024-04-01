@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using IWshRuntimeLibrary;
 using System.Diagnostics;
 using Microsoft.Win32;
 
