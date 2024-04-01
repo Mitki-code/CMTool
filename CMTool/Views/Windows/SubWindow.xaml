@@ -45,11 +45,9 @@
                     Margin="12"
                     VerticalAlignment="Center">
                     <ui:TextBlock
-                        Appearance="Secondary"
                         Text="{Binding ViewModel.EventText}"
                         TextWrapping="WrapWithOverflow" FontSize="24" HorizontalAlignment="Center"/>
                     <ui:TextBlock
-                        Appearance="Secondary"
                         Text="{Binding ViewModel.EventDateTime}"
                         TextWrapping="WrapWithOverflow" FontSize="40" HorizontalAlignment="Center"/>
                 </StackPanel>
@@ -77,12 +75,10 @@
                         Margin="12"
                         VerticalAlignment="Top">
                         <ui:TextBlock
-                            Appearance="Secondary"
                             Text="今日课表"
                             Margin="2"
                             TextWrapping="WrapWithOverflow" FontSize="22"/>
                         <ui:TextBlock
-                            Appearance="Secondary"
                             Text="{Binding ViewModel.ClassTable}"
                             Margin="2"
                             TextWrapping="WrapWithOverflow" FontSize="18"/>
@@ -107,7 +103,6 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <ui:TextBlock Grid.Row="0"
-                                          Appearance="Secondary"
                                           Text="今日值日"
                                           Margin="2"
                                           TextWrapping="WrapWithOverflow" FontSize="22"/>
@@ -119,10 +114,10 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <ui:TextBlock Appearance="Secondary" Margin="2" Grid.Column="0"
+                                <ui:TextBlock Margin="2" Grid.Column="0"
                                               Text="{Binding ViewModel.subWindowModels.WorkTable, UpdateSourceTrigger=PropertyChanged}"
                                               TextWrapping="WrapWithOverflow" FontSize="18"/>
-                                <ui:TextBlock Appearance="Secondary" Margin="2" Grid.Column="1"
+                                <ui:TextBlock Margin="2" Grid.Column="1"
                                               Text="{Binding ViewModel.subWindowModels.NameTable, UpdateSourceTrigger=PropertyChanged}"
                                               TextWrapping="WrapWithOverflow" FontSize="18"/>
                             </Grid>
