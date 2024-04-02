@@ -31,7 +31,7 @@ namespace CMTool.ViewModels.Settings
             jObject["Event"] = EventName;
             jObject["Time"] = EventTime.ToString();
 
-            JsonRW.Writejson("Assets/MianData.json", jObject);
+            JsonRW.Writejson("Assets/DataTime.json", jObject);
 
             _snackbarService.Show(
                 "保存成功",

@@ -125,7 +125,7 @@ namespace CMTool.ViewModels.Settings
 
                     ApplicationThemeManager.Apply(ApplicationTheme.Light);
                     CurrentTheme = ApplicationTheme.Light;
-
+                    _snackbarService.Show("切换成功","已切换到日间模式",ControlAppearance.Success,new SymbolIcon(SymbolRegular.CheckmarkCircle16),TimeSpan.FromSeconds(2));
                     break;
 
                 default:
@@ -134,6 +134,7 @@ namespace CMTool.ViewModels.Settings
 
                     ApplicationThemeManager.Apply(ApplicationTheme.Dark);
                     CurrentTheme = ApplicationTheme.Dark;
+                    _snackbarService.Show("切换成功", "已切换到夜间模式", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
                     break;
             }
         }

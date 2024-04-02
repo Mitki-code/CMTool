@@ -24,7 +24,7 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventText = "距离" + TimeJson["Event"].ToString() + "还有";
         [ObservableProperty]
-        private string _EventDateTime = DateTimeM.GetTime(ETime, "Days", false) + "天";
+        private string _EventDateTime = DateTimeM.GetTime(ETime, "Days", true) + "天";
         [ObservableProperty]
         private string _ClassTable = ReadClassTable(ClassJson,TimeJson["WeekStart"].ToString());
         //[ObservableProperty]
