@@ -14,7 +14,8 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class DateSettingsViewModel : ObservableObject
     {
-        public static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
+        public static JObject jObject = JsonRW.Readjson("Assets/DataTime.json");
+        private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         [ObservableProperty]
         public static string _EventName = jObject["Event"].ToString();
@@ -23,13 +24,6 @@ namespace CMTool.ViewModels.Settings
         [ObservableProperty]
         private string _Tips = "";
 
-        private readonly ISnackbarService _snackbarService;
-        private ControlAppearance _snackbarAppearance = ControlAppearance.Success;
-
-        public DateSettingsViewModel(ISnackbarService snackbarService)
-        {
-            _snackbarService = snackbarService;
-        }
 
         [RelayCommand]
         private void OnSave()
@@ -42,7 +36,7 @@ namespace CMTool.ViewModels.Settings
             _snackbarService.Show(
                 "保存成功",
                 "重启后生效",
-                _snackbarAppearance,
+                ControlAppearance.Success,
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
             );

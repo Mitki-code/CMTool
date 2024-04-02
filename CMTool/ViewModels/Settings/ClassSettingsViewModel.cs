@@ -15,19 +15,13 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class ClassSettingsViewModel : ObservableObject
     {
-        private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
-        private readonly ISnackbarService _snackbarService;
+        private static JObject jObject = JsonRW.Readjson("Assets/DataClass.json");
+        private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         [ObservableProperty]
-        private ObservableCollection<ClassList> _ClassTable;
+        private ObservableCollection<ClassList> _ClassTable = GenerateClassList(jObject);
 
-        public ClassSettingsViewModel(ISnackbarService snackbarService)
-        {
-            _ClassTable = GenerateClassList(jObject);
-            _snackbarService = snackbarService;
-        }
-
-        private ObservableCollection<ClassList> GenerateClassList(JObject jObject)
+        private static ObservableCollection<ClassList> GenerateClassList(JObject jObject)
         {
             var classList = new ObservableCollection<ClassList> { };
 
@@ -37,13 +31,13 @@ namespace CMTool.ViewModels.Settings
                     new ClassList
                     {
                         ClassNum = i,
-                        Monday = jObject["ClassTable"]["Monday"][i-1].ToString(),
-                        Tuesday = jObject["ClassTable"]["Tuesday"][i-1].ToString(),
-                        Wednesday = jObject["ClassTable"]["Wednesday"][i - 1].ToString(),
-                        Thursday = jObject["ClassTable"]["Thursday"][i - 1].ToString(),
-                        Friday = jObject["ClassTable"]["Friday"][i - 1].ToString(),
-                        Saturday = jObject["ClassTable"]["Saturday"][i - 1].ToString(),
-                        Sunday = jObject["ClassTable"]["Sunday"][i - 1].ToString(),
+                        Monday = jObject["Monday"][i-1].ToString(),
+                        Tuesday = jObject["Tuesday"][i-1].ToString(),
+                        Wednesday = jObject["Wednesday"][i - 1].ToString(),
+                        Thursday = jObject["Thursday"][i - 1].ToString(),
+                        Friday = jObject["Friday"][i - 1].ToString(),
+                        Saturday = jObject["Saturday"][i - 1].ToString(),
+                        Sunday = jObject["Sunday"][i - 1].ToString(),
                     }
                 );
             }
@@ -62,18 +56,18 @@ namespace CMTool.ViewModels.Settings
                 int i = 0;
                 foreach (ClassList classList in ClassTable)
                 {
-                    jObject["ClassTable"]["Monday"][i] = classList.Monday;
-                    jObject["ClassTable"]["Tuesday"][i] = classList.Tuesday;
-                    jObject["ClassTable"]["Wednesday"][i] = classList.Wednesday;
-                    jObject["ClassTable"]["Thursday"][i] = classList.Thursday;
-                    jObject["ClassTable"]["Friday"][i] = classList.Friday;
-                    jObject["ClassTable"]["Saturday"][i] = classList.Saturday;
-                    jObject["ClassTable"]["Sunday"][i] = classList.Sunday;
+                    jObject["Monday"][i] = classList.Monday;
+                    jObject["Tuesday"][i] = classList.Tuesday;
+                    jObject["Wednesday"][i] = classList.Wednesday;
+                    jObject["Thursday"][i] = classList.Thursday;
+                    jObject["Friday"][i] = classList.Friday;
+                    jObject["Saturday"][i] = classList.Saturday;
+                    jObject["Sunday"][i] = classList.Sunday;
 
                     i++;
                 }
 
-                JsonRW.Writejson("Assets/MianData.json", jObject);
+                JsonRW.Writejson("Assets/DataClass.json", jObject);
 
                 _snackbarService.Show(
                     "保存成功",

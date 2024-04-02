@@ -18,20 +18,12 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class WorkSettingsViewModel : ObservableObject
     {
-        private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
-        private readonly ISnackbarService _snackbarService;
-        private readonly WindowsProviderService _windowsProviderService;
+        private static JObject jObject = JsonRW.Readjson("Assets/DataWork.json");
+        private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         //public SubWindowViewModel ViewModel { get; }
         [ObservableProperty]
-        private ObservableCollection<WorkList> _WorkTable;
-
-        public WorkSettingsViewModel(ISnackbarService snackbarService)
-        {
-            _WorkTable = GenerateWorkList(jObject);
-            _snackbarService = snackbarService;
-
-        }
+        private ObservableCollection<WorkList> _WorkTable = GenerateWorkList(jObject);
 
         [ObservableProperty]
         private IList<string> _WorkMode = new ObservableCollection<string>
@@ -41,7 +33,7 @@ namespace CMTool.ViewModels.Settings
             "轮流(WIP)"
         };
 
-        private ObservableCollection<WorkList> GenerateWorkList(JObject jObject)
+        private static ObservableCollection<WorkList> GenerateWorkList(JObject jObject)
         {
             var worklist = new ObservableCollection<WorkList> { };
 
@@ -50,14 +42,14 @@ namespace CMTool.ViewModels.Settings
                 worklist.Add(
                     new WorkList
                     {
-                        Work = jObject["WorkTable"]["Work"][i - 1].ToString(),
-                        Monday = jObject["WorkTable"]["Monday"][i - 1].ToString(),
-                        Tuesday = jObject["WorkTable"]["Tuesday"][i - 1].ToString(),
-                        Wednesday = jObject["WorkTable"]["Wednesday"][i - 1].ToString(),
-                        Thursday = jObject["WorkTable"]["Thursday"][i - 1].ToString(),
-                        Friday = jObject["WorkTable"]["Friday"][i - 1].ToString(),
-                        Saturday = jObject["WorkTable"]["Saturday"][i - 1].ToString(),
-                        Sunday = jObject["WorkTable"]["Sunday"][i - 1].ToString(),
+                        Work = jObject["Work"][i - 1].ToString(),
+                        Monday = jObject["Monday"][i - 1].ToString(),
+                        Tuesday = jObject["Tuesday"][i - 1].ToString(),
+                        Wednesday = jObject["Wednesday"][i - 1].ToString(),
+                        Thursday = jObject["Thursday"][i - 1].ToString(),
+                        Friday = jObject["Friday"][i - 1].ToString(),
+                        Saturday = jObject["Saturday"][i - 1].ToString(),
+                        Sunday = jObject["Sunday"][i - 1].ToString(),
                     }
                 );
             }
@@ -77,19 +69,19 @@ namespace CMTool.ViewModels.Settings
                 int i = 0;
                 foreach (WorkList workList in WorkTable)
                 {
-                    jObject["WorkTable"]["Work"][i] = workList.Work;
-                    jObject["WorkTable"]["Monday"][i] = workList.Monday;
-                    jObject["WorkTable"]["Tuesday"][i] = workList.Tuesday;
-                    jObject["WorkTable"]["Wednesday"][i] = workList.Wednesday;
-                    jObject["WorkTable"]["Thursday"][i] = workList.Thursday;
-                    jObject["WorkTable"]["Friday"][i] = workList.Friday;
-                    jObject["WorkTable"]["Saturday"][i] = workList.Saturday;
-                    jObject["WorkTable"]["Sunday"][i] = workList.Sunday;
+                    jObject["Work"][i] = workList.Work;
+                    jObject["Monday"][i] = workList.Monday;
+                    jObject["Tuesday"][i] = workList.Tuesday;
+                    jObject["Wednesday"][i] = workList.Wednesday;
+                    jObject["Thursday"][i] = workList.Thursday;
+                    jObject["Friday"][i] = workList.Friday;
+                    jObject["Saturday"][i] = workList.Saturday;
+                    jObject["Sunday"][i] = workList.Sunday;
 
                     i++;
                 }
 
-                JsonRW.Writejson("Assets/MianData.json", jObject);
+                JsonRW.Writejson("Assets/DataWork.json", jObject);
                 JsonData.Refresh();
                 //SubWindowViewModel.jObject = JsonRW.Readjson("Assets/MianData.json");
                 //App.GetService<SubWindow>().RefreshTable();

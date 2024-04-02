@@ -15,14 +15,7 @@ namespace CMTool.ViewModels.Settings
     public partial class MoreSettingsViewModel : ObservableObject, INavigationAware
     {
         private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
-        //private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
-        private readonly ISnackbarService _snackbarService;
-        private ControlAppearance _snackbarAppearance = ControlAppearance.Success;
-
-        public MoreSettingsViewModel(ISnackbarService snackbarService)
-        {
-            _snackbarService = snackbarService;
-        }
+        private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         private bool _isInitialized = false;
 
@@ -56,13 +49,12 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnReSettings()
         {
-            
             JsonRW.Writejson("Assets/MianData.json", JsonRW.Readjson("Assets/ReData.json"));
 
             _snackbarService.Show(
                 "重置成功",
                 "重启后生效",
-                _snackbarAppearance,
+                ControlAppearance.Success,
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
             );
@@ -89,7 +81,7 @@ namespace CMTool.ViewModels.Settings
                 _snackbarService.Show(
                 "操作成功",
                 "已"+textOK,
-                _snackbarAppearance,
+                ControlAppearance.Success,
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
             );
@@ -116,18 +108,18 @@ namespace CMTool.ViewModels.Settings
             _snackbarService.Show(
                 "保存成功",
                 "重启后生效",
-                _snackbarAppearance,
+                ControlAppearance.Success,
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
             );
         }
 
         [RelayCommand]
-        private void OnChangeTheme(string parameter)
+        public void OnChangeTheme(object state)
         {
-            switch (parameter)
+            switch (state)
             {
-                case "theme_light":
+                case true:
                     if (CurrentTheme == ApplicationTheme.Light)
                         break;
 
