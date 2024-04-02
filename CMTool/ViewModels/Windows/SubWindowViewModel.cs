@@ -65,7 +65,12 @@ namespace CMTool.ViewModels.Windows
         [RelayCommand]
         private void OnClash()
         {
-            System.Diagnostics.Process.Start("D:\\Program Files\\clash\\clash.exe");
+            //System.Diagnostics.Process.Start("https://www.baidu.com/");
+        }
+        [RelayCommand]
+        private void OnGenshin()
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://ys.mihoyo.com/cloud/?autobegin=1#/") { UseShellExecute = true });
         }
 
         internal static string ReadClassTable(JObject jObject,string WeekStart)

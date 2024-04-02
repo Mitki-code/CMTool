@@ -14,7 +14,7 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class MoreSettingsViewModel : ObservableObject, INavigationAware
     {
-        private static JObject jObject = JsonRW.Readjson("Assets/MianData.json");
+        private static JObject jObject = JsonRW.Readjson("Assets/DataTime.json");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         private bool _isInitialized = false;
@@ -103,7 +103,7 @@ namespace CMTool.ViewModels.Settings
         {
             jObject["WeekStart"] = WeekStart.ToString();
 
-            JsonRW.Writejson("Assets/MianData.json", jObject);
+            JsonRW.Writejson("Assets/DataTime.json", jObject);
 
             _snackbarService.Show(
                 "保存成功",

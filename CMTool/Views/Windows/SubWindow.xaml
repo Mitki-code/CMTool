@@ -139,6 +139,7 @@
                     <ContextMenu>
                         <MenuItem Header="打开Clash" Command="{Binding ViewModel.ClashCommand}"/>
                         <MenuItem Header="打开VSCode" Command="{Binding ViewModel.ClashCommand}"/>
+                        <MenuItem Header="原神启动！" Command="{Binding ViewModel.ClashCommand}"/>
                     </ContextMenu>
                 </ui:DropDownButton.Flyout>
             </ui:DropDownButton>
