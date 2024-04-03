@@ -8,6 +8,7 @@ using PropertyChanged;
 using System.ComponentModel;
 using System.Xml;
 
+
 namespace CMTool.ViewModels.Windows
 {
     //[AddINotifyPropertyChangedInterface]
@@ -24,7 +25,7 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventText = "距离" + TimeJson["Event"].ToString() + "还有";
         [ObservableProperty]
-        private string _EventDateTime = DateTimeM.GetTime(ETime, "Days", true) + "天";
+        private string _EventDateTime = Time.GetTimeDifference("D", ETime) + "天";
         [ObservableProperty]
         private string _ClassTable = ReadClassTable(ClassJson,TimeJson["WeekStart"].ToString());
         //[ObservableProperty]
@@ -70,6 +71,8 @@ namespace CMTool.ViewModels.Windows
         [RelayCommand]
         private void OnGenshin()
         {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/OPGo.wav");
+            player.Play();
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://ys.mihoyo.com/cloud/?autobegin=1#/") { UseShellExecute = true });
         }
 
@@ -77,7 +80,7 @@ namespace CMTool.ViewModels.Windows
         {
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(WeekStart), "Weeks", true);
+            string OTWeekString = Time.GetTime(Convert.ToDateTime(WeekStart), "Weeks", true);
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
 
             foreach (JValue property in jObject[Week])
@@ -93,7 +96,7 @@ namespace CMTool.ViewModels.Windows
             string NameTable = "";
             string Work = "0";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = DateTimeM.GetTime(Convert.ToDateTime(WeekStart), "Weeks", true);
+            string OTWeekString = Time.GetTime(Convert.ToDateTime(WeekStart), "Weeks", true);
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
             int start = 0;
             int end = 0;

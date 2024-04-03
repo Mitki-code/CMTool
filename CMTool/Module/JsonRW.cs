@@ -12,7 +12,7 @@ namespace CMTool.Module
     {
         public static JObject Readjson(string jsonfile)
         {
-            using (System.IO.StreamReader file = System.IO.File.OpenText(@jsonfile))
+            using (System.IO.StreamReader file = System.IO.File.OpenText(AppDomain.CurrentDomain.BaseDirectory + @jsonfile))
             {
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {
