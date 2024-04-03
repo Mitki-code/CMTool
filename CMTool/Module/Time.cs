@@ -24,7 +24,14 @@ namespace CMTool.Module
             return time;
         }
 
-        internal static double GetTimeDifference(string mode,DateTime startTime,DateTime endTime)
+        /// <summary>
+        /// 计算时间差
+        /// </summary>
+        /// <param name="mode">模式 D:日计算 W:周计算</param>
+        /// <param name="startTime">开始时间</param>
+        /// <param name="endTime">结束时间</param>
+        /// <returns></returns>
+        internal static double GetTimeDifference(string mode,DateTime endTime,DateTime startTime)
         {
             TimeSpan timeSpan = endTime - startTime;
             double timeDifference = 0;
@@ -39,15 +46,22 @@ namespace CMTool.Module
                     break ;
             }
 
-            if (timeDifference <= 0) { timeDifference = Math.Ceiling(timeDifference); }
-            else { timeDifference = Math.Floor(timeDifference); }
+            //if (timeDifference <= 1) { timeDifference = Math.Ceiling(timeDifference); }
+            //else { timeDifference = Math.Floor(timeDifference); }
+            timeDifference = Math.Ceiling(timeDifference);
             return timeDifference;
         }
 
+        /// <summary>
+        /// 计算时间差
+        /// </summary>
+        /// <param name="mode">模式 D:日计算 W:周计算</param>
+        /// <param name="endTime">结束时间</param>
+        /// <returns></returns>
         internal static double GetTimeDifference(string mode, DateTime endTime)
         {
             DateTime startTime = DateTime.Now;
-            double timeDifference = GetTimeDifference(mode, startTime, endTime);
+            double timeDifference = GetTimeDifference(mode, endTime , startTime);
             return timeDifference;
         }
 

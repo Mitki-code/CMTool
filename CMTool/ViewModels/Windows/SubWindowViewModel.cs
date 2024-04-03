@@ -80,7 +80,7 @@ namespace CMTool.ViewModels.Windows
         {
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = Time.GetTime(Convert.ToDateTime(WeekStart), "Weeks", true);
+            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart))-1).ToString();
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
 
             foreach (JValue property in jObject[Week])
@@ -96,7 +96,7 @@ namespace CMTool.ViewModels.Windows
             string NameTable = "";
             string Work = "0";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = Time.GetTime(Convert.ToDateTime(WeekStart), "Weeks", true);
+            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart))-1).ToString();
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
             int start = 0;
             int end = 0;
