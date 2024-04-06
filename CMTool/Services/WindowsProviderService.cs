@@ -1,11 +1,4 @@
-﻿using CMTool.Views.Windows;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace CMTool.Services
 {
@@ -30,7 +23,7 @@ namespace CMTool.Services
             if (windowInstance == null)
                 throw new InvalidOperationException("Window is not registered as service.");
 
-            
+
             windowInstance.Owner = Application.Current.MainWindow;
             windowInstance.Show();
         }

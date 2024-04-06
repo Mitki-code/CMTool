@@ -1,15 +1,9 @@
-﻿using CMTool.Module;
-using Microsoft.VisualBasic;
+﻿using CMTool.Models;
+using CMTool.Module;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CMTool.ViewModels.Settings
 {
@@ -31,8 +25,8 @@ namespace CMTool.ViewModels.Settings
                     new ClassList
                     {
                         ClassNum = i,
-                        Monday = jObject["Monday"][i-1].ToString(),
-                        Tuesday = jObject["Tuesday"][i-1].ToString(),
+                        Monday = jObject["Monday"][i - 1].ToString(),
+                        Tuesday = jObject["Tuesday"][i - 1].ToString(),
                         Wednesday = jObject["Wednesday"][i - 1].ToString(),
                         Thursday = jObject["Thursday"][i - 1].ToString(),
                         Friday = jObject["Friday"][i - 1].ToString(),
@@ -51,7 +45,8 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnSave()
         {
-            try{
+            try
+            {
                 if (ClassTable.Count > 9) { throw Error(); }
                 int i = 0;
                 foreach (ClassList classList in ClassTable)
@@ -77,7 +72,8 @@ namespace CMTool.ViewModels.Settings
                     TimeSpan.FromSeconds(2)
                 );
             }
-            catch{
+            catch
+            {
                 _snackbarService.Show(
                     "保存失败",
                     "课程数大于9节",

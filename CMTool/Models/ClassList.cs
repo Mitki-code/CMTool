@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace CMTool.Module
+namespace CMTool.Models
 {
-    public class WorkList
+    public class ClassList
     {
-        [Display(Name = "项目")]
-        public string Work { get; set; }
+        [Display(Name = "节数")]
+        public int ClassNum { get; set; }
+
         [Display(Name = "星期一")]
         public string Monday { get; set; }
         [Display(Name = "星期二")]

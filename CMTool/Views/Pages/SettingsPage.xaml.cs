@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using CMTool.ViewModels.Pages;
-using Microsoft.Extensions.DependencyInjection;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 

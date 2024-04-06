@@ -11,8 +11,8 @@
       Title="WorkSettings">
 
     <StackPanel Margin="12">
-        <ui:InfoBar Title="提示" Message="正在施工" IsOpen="True"/>
-        <ui:InfoBar Title="提示" Message="#占位符" IsOpen="True"/>
+        <ui:InfoBar Title="提示" Message="使用 | 来划分单双周课程。如[单周课程]|[双周课程]" IsOpen="True"/>
+        <!--<ui:InfoBar Title="提示" Message="#占位符" IsOpen="True"/>-->
         <ui:CardControl Icon="{ui:SymbolIcon TableSimpleCheckmark20}"
                 Header="模式选择"
                 Margin="0,4,0,0">

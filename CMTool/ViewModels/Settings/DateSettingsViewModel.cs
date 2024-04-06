@@ -1,12 +1,5 @@
 ﻿using CMTool.Module;
-using CMTool.Views.Settings;
-using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 

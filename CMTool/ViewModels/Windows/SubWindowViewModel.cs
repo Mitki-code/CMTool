@@ -1,18 +1,15 @@
 ﻿using CMTool.Models.SubWindow;
 using CMTool.Module;
-using CMTool.Resources;
 using CMTool.Services;
 using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
 using PropertyChanged;
-using System.ComponentModel;
-using System.Xml;
 
 
 namespace CMTool.ViewModels.Windows
 {
-    //[AddINotifyPropertyChangedInterface]
-    public partial class SubWindowViewModel : ObservableObject, INotifyPropertyChanged
+    [AddINotifyPropertyChangedInterface]
+    public partial class SubWindowViewModel : ObservableObject
     {
         [ObservableProperty]
         private string _applicationTitle = "CMTool";
@@ -27,19 +24,10 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventDateTime = Time.GetTimeDifference("D", ETime) + "天";
         [ObservableProperty]
-        private string _ClassTable = ReadClassTable(ClassJson,TimeJson["WeekStart"].ToString());
-        //[ObservableProperty]
-        //private static string _WorkTable = ReadWorkTable(jObject)[0];
-        //[ObservableProperty]
-        //private static string _NameTable = ReadWorkTable(jObject)[1];
-        //public static event PropertyChangedEventHandler StaticProgressChanged;
-        //private static string workTable;
-        //private static string nameTable;
-        //public static string NameTable { get { return nameTable; } set { nameTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(NameTable))); } }
-        //public static string WorkTable { get { return workTable; } set { workTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(WorkTable))); } }
+        private string _ClassTable = ReadClassTable(ClassJson, TimeJson["WeekStart"].ToString());
 
         private SubWindowModels _subWindowModels;
-        public SubWindowModels subWindowModels{ get { _subWindowModels ??= new SubWindowModels(); return _subWindowModels; } set{ _subWindowModels = value; RaisePropertyChanged("subWindowModels"); } }
+        public SubWindowModels subWindowModels { get { _subWindowModels ??= new SubWindowModels(); return _subWindowModels; } set { _subWindowModels = value; } }
 
         public void RefreshTable()
         {
@@ -48,14 +36,6 @@ namespace CMTool.ViewModels.Windows
             subWindowModels = subWindowModels;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string propertyChanged)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyChanged));
-
-        }
 
         [RelayCommand]
         private void OnOpenWindow()
@@ -63,24 +43,12 @@ namespace CMTool.ViewModels.Windows
             WindowsProviderService _windowsProviderService = App.GetService<WindowsProviderService>();
             _windowsProviderService.Show<MainWindow>();
         }
-        [RelayCommand]
-        private void OnClash()
-        {
-            //System.Diagnostics.Process.Start("https://www.baidu.com/");
-        }
-        [RelayCommand]
-        private void OnGenshin()
-        {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/OPGo.wav");
-            player.Play();
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://ys.mihoyo.com/cloud/?autobegin=1#/") { UseShellExecute = true });
-        }
 
-        internal static string ReadClassTable(JObject jObject,string WeekStart)
+        internal static string ReadClassTable(JObject jObject, string WeekStart)
         {
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart))-1).ToString();
+            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1).ToString();
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
 
             foreach (JValue property in jObject[Week])
@@ -96,7 +64,7 @@ namespace CMTool.ViewModels.Windows
             string NameTable = "";
             string Work = "0";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart))-1).ToString();
+            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1).ToString();
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
             int start = 0;
             int end = 0;
@@ -148,8 +116,8 @@ namespace CMTool.ViewModels.Windows
                 Table = Table + JsonValue.ToString() + "\n";
             }
 
-            
-            return Table;        
+
+            return Table;
         }
     }
 }

@@ -1,11 +1,5 @@
 ﻿using CMTool.Module;
-using CMTool.Views.Settings;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -49,7 +43,9 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnReSettings()
         {
-            JsonRW.Writejson("Assets/MianData.json", JsonRW.Readjson("Assets/ReData.json"));
+            JsonRW.Writejson("Assets/DataClass.json", JsonRW.Readjson("Assets/Re/DataClass.json"));
+            JsonRW.Writejson("Assets/DataTime.json", JsonRW.Readjson("Assets/Re/DataTime.json"));
+            JsonRW.Writejson("Assets/DataWork.json", JsonRW.Readjson("Assets/Re/DataWork.json"));
 
             _snackbarService.Show(
                 "重置成功",
@@ -76,11 +72,11 @@ namespace CMTool.ViewModels.Settings
                 textOK = "移除开机自启动";
             }
 
-            if ( isOk )
+            if (isOk)
             {
                 _snackbarService.Show(
                 "操作成功",
-                "已"+textOK,
+                "已" + textOK,
                 ControlAppearance.Success,
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
@@ -125,7 +121,7 @@ namespace CMTool.ViewModels.Settings
 
                     ApplicationThemeManager.Apply(ApplicationTheme.Light);
                     CurrentTheme = ApplicationTheme.Light;
-                    _snackbarService.Show("切换成功","已切换到日间模式",ControlAppearance.Success,new SymbolIcon(SymbolRegular.CheckmarkCircle16),TimeSpan.FromSeconds(2));
+                    _snackbarService.Show("切换成功", "已切换到日间模式", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
                     break;
 
                 default:

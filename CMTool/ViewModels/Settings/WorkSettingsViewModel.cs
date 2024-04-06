@@ -1,16 +1,7 @@
-﻿using CMTool.Module;
-using CMTool.Resources;
-using CMTool.Services;
-using CMTool.ViewModels.Windows;
-using CMTool.Views.Settings;
-using CMTool.Views.Windows;
+﻿using CMTool.Models;
+using CMTool.Module;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
@@ -21,7 +12,6 @@ namespace CMTool.ViewModels.Settings
         private static JObject jObject = JsonRW.Readjson("Assets/DataWork.json");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
-        //public SubWindowViewModel ViewModel { get; }
         [ObservableProperty]
         private ObservableCollection<WorkList> _WorkTable = GenerateWorkList(jObject);
 
@@ -29,8 +19,6 @@ namespace CMTool.ViewModels.Settings
         private IList<string> _WorkMode = new ObservableCollection<string>
         {
             "分组",
-            "随机(WIP)",
-            "轮流(WIP)"
         };
 
         private static ObservableCollection<WorkList> GenerateWorkList(JObject jObject)
@@ -82,12 +70,6 @@ namespace CMTool.ViewModels.Settings
                 }
 
                 JsonRW.Writejson("Assets/DataWork.json", jObject);
-                //JsonData.Refresh();
-                //SubWindowViewModel.jObject = JsonRW.Readjson("Assets/MianData.json");
-                //App.GetService<SubWindow>().RefreshTable();
-
-                
-
 
                 _snackbarService.Show(
                     "保存成功",

@@ -1,17 +1,16 @@
-﻿using CMTool.Models.SubWindow;
-using CMTool.ViewModels.Windows;
+﻿using CMTool.ViewModels.Windows;
 
 namespace CMTool.Views.Windows
 {
     public partial class SubWindow
     {
-        public SubWindowViewModel ViewModel { get;set; }
+        public SubWindowViewModel ViewModel { get; set; }
         public SubWindow(SubWindowViewModel viewModel)
         {
             InitializeComponent();
             DataContext = this;
             ViewModel = viewModel;
-            
+
             ViewModel.RefreshTable();
 
             ShowInTaskbar = false;

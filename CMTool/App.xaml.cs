@@ -1,21 +1,16 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
-
-using CMTool.Services;
+﻿using CMTool.Services;
 using CMTool.ViewModels.Pages;
 using CMTool.ViewModels.Settings;
 using CMTool.ViewModels.Windows;
 using CMTool.Views.Pages;
 using CMTool.Views.Settings;
 using CMTool.Views.Windows;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
