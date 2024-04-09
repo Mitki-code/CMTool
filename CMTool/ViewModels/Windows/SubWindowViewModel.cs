@@ -64,16 +64,18 @@ namespace CMTool.ViewModels.Windows
             _windowsProviderService.Show<MainWindow>();
         }
         [RelayCommand]
-        private void OnClash()
-        {
-            //System.Diagnostics.Process.Start("https://www.baidu.com/");
-        }
-        [RelayCommand]
         private void OnGenshin()
         {
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/OPGo.wav");
             player.Play();
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://ys.mihoyo.com/cloud/?autobegin=1#/") { UseShellExecute = true });
+        }
+        [RelayCommand]
+        private void OnStarRail()
+        {
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/OPGo.wav");
+            //player.Play();
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://sr.mihoyo.com/cloud/?from_channel=adbdsem#/") { UseShellExecute = true });
         }
 
         internal static string ReadClassTable(JObject jObject,string WeekStart)
