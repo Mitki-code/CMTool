@@ -1,4 +1,5 @@
-﻿using CMTool.Module;
+﻿using CMTool.Models;
+using CMTool.Module;
 using CMTool.Resources;
 using CMTool.Services;
 using CMTool.ViewModels.Windows;

@@ -54,7 +54,7 @@
         </ui:CardControl>
 
         <ui:TextBlock Margin="0,16,0,8" FontTypography="BodyStrong" Text="高级" />
-        <ui:CardControl Icon="{ui:SymbolIcon DarkTheme20}" Header="安全保护" Margin="0,4,0,0">
+        <ui:CardControl Icon="{ui:SymbolIcon Shield20}" Header="安全保护" Margin="0,4,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

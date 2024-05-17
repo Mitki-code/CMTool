@@ -141,47 +141,18 @@ namespace CMTool.ViewModels.Settings
         }
 
         [RelayCommand]
-        public async Task OnChangeProtectAsync(object state)
+        public void OnChangeProtect(object state)
         {
             switch (state)
             {
                 case true:
-                    try
-                    {
-                        Process[] processes = Process.GetProcesses();
-                        int coreid = 0;
-                        int abilityid = 0;
-                        int whilenum = 0;
-                        bool pstate = true;
-                        bool corestate = false;
-                        bool ability = false;
-                        foreach (Process p in processes)
-                        {
-                            if (p.ProcessName == "SeewoAbility") { abilityid = p.Id; p.Kill(); }
-                            if (p.ProcessName == "SeewoCore") { coreid = p.Id; p.Kill(); }
-                        }
-
-                        while (pstate) 
-                        {
-                            processes = Process.GetProcesses();
-                            foreach (Process p in processes) 
-                            { 
-                                if (p.ProcessName == "SeewoAbility" && p.Id != abilityid) { ProcessMgr.SuspendProcess(p.Id); ability = true; }
-                                if (p.ProcessName == "SeewoCore" && p.Id != coreid) { ProcessMgr.SuspendProcess(p.Id); corestate = true; }
-                            }
-                            if ((ability && corestate)|| whilenum>200) { pstate = false; }
-                            whilenum++;
-                            await Task.Delay(2000);
-                        }
-                        _snackbarService.Show("操作成功", "", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
-                    }
-                    catch (Exception)
-                    {
-                        _snackbarService.Show("操作失败", "发生错误", ControlAppearance.Danger, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
-                    }
+                    ProtectionControl.Start();
+                    _snackbarService.Show("启用成功", "安全保护已启用，将拦截不友好的恶意程序", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
                     break;
 
                 default:
+                    ProtectionControl.Stop();
+                    _snackbarService.Show("禁用成功", "安全保护已关闭，将不会再拦截不友好的恶意程序", ControlAppearance.Danger, new SymbolIcon(SymbolRegular.DismissCircle16), TimeSpan.FromSeconds(2));
                     break;
             }
         }

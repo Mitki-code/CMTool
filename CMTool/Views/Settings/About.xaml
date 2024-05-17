@@ -14,7 +14,7 @@
       Title="About">
 
     <StackPanel Margin="12">
-        <ui:CardExpander Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui-icon-256.png', Width=38, Height=35}" ContentPadding="0">
+        <ui:CardExpander Icon="{ui:ImageIcon 'pack://application:,,,/Assets/GFX/wpfui-icon-256.png', Width=38, Height=35}" ContentPadding="0">
             <ui:CardExpander.Header>
                 <Grid>
                     <Grid.RowDefinitions>

@@ -66,14 +66,14 @@ namespace CMTool.ViewModels.Windows
         [RelayCommand]
         private void OnGenshin()
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/OPGo.wav");
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/GFX/OPGo.wav");
             player.Play();
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://ys.mihoyo.com/cloud/?autobegin=1#/") { UseShellExecute = true });
         }
         [RelayCommand]
         private void OnStarRail()
         {
-            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/OPGo.wav");
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/GFX/OPGo.wav");
             //player.Play();
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://sr.mihoyo.com/cloud/?from_channel=adbdsem#/") { UseShellExecute = true });
         }
