@@ -23,5 +23,6 @@ namespace CMTool.Views.Windows
         {
             ViewModel.RefreshTable();
         }
+
     }
 }
