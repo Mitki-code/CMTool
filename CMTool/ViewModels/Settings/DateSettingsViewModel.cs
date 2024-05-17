@@ -14,7 +14,7 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class DateSettingsViewModel : ObservableObject
     {
-        public static JObject jObject = JsonRW.Readjson("Assets/DataTime.json");
+        public static JObject jObject = FileIO.GetData("Time");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         [ObservableProperty]
@@ -31,7 +31,7 @@ namespace CMTool.ViewModels.Settings
             jObject["Event"] = EventName;
             jObject["Time"] = EventTime.ToString();
 
-            JsonRW.Writejson("Assets/DataTime.json", jObject);
+            FileIO.WriteJsonFile("Assets/Data/DataTime.json", jObject);
 
             _snackbarService.Show(
                 "保存成功",

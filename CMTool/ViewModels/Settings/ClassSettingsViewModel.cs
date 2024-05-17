@@ -16,7 +16,7 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class ClassSettingsViewModel : ObservableObject
     {
-        private static JObject jObject = JsonRW.Readjson("Assets/DataClass.json");
+        private static JObject jObject = FileIO.GetData("Class");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         [ObservableProperty]
@@ -68,7 +68,7 @@ namespace CMTool.ViewModels.Settings
                     i++;
                 }
 
-                JsonRW.Writejson("Assets/DataClass.json", jObject);
+                FileIO.WriteJsonFile("Assets/Data/DataClass.json", jObject);
 
                 _snackbarService.Show(
                     "保存成功",

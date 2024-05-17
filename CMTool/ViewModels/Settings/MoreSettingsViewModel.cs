@@ -15,7 +15,7 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class MoreSettingsViewModel : ObservableObject, INavigationAware
     {
-        private static JObject jObject = JsonRW.Readjson("Assets/DataTime.json");
+        private static JObject jObject = FileIO.GetData("Time");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         private bool _isInitialized = false;
@@ -50,15 +50,27 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnReSettings()
         {
-            JsonRW.Writejson("Assets/MianData.json", JsonRW.Readjson("Assets/ReData.json"));
-
-            _snackbarService.Show(
+            if (FileIO.ReData("Time") && FileIO.ReData("Class") && FileIO.ReData("Work") && FileIO.ReData("Settings")){
+                _snackbarService.Show(
                 "重置成功",
                 "重启后生效",
                 ControlAppearance.Success,
                 new SymbolIcon(SymbolRegular.CheckmarkCircle16),
                 TimeSpan.FromSeconds(2)
-            );
+                );
+            }
+            else
+            {
+                _snackbarService.Show(
+                "重置失败",
+                "发生错误",
+                ControlAppearance.Danger,
+                new SymbolIcon(SymbolRegular.DismissCircle16),
+                TimeSpan.FromSeconds(2)
+                );
+            }
+
+            
         }
 
         [RelayCommand]
@@ -104,7 +116,7 @@ namespace CMTool.ViewModels.Settings
         {
             jObject["WeekStart"] = WeekStart.ToString();
 
-            JsonRW.Writejson("Assets/DataTime.json", jObject);
+            FileIO.WriteJsonFile("Assets/Data/DataTime.json", jObject);
 
             _snackbarService.Show(
                 "保存成功",

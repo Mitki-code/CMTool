@@ -19,7 +19,7 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class WorkSettingsViewModel : ObservableObject
     {
-        private static JObject jObject = JsonRW.Readjson("Assets/DataWork.json");
+        private static JObject jObject = FileIO.GetData("Work");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         //public SubWindowViewModel ViewModel { get; }
@@ -82,7 +82,7 @@ namespace CMTool.ViewModels.Settings
                     i++;
                 }
 
-                JsonRW.Writejson("Assets/DataWork.json", jObject);
+                FileIO.WriteJsonFile("Assets/Data/DataWork.json", jObject);
                 //JsonData.Refresh();
                 //SubWindowViewModel.jObject = JsonRW.Readjson("Assets/MianData.json");
                 //App.GetService<SubWindow>().RefreshTable();

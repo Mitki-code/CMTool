@@ -38,6 +38,7 @@ namespace CMTool.Module
             try { 
                 StreamWriter file = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @path);
                 file.Write(jobject.ToString());
+                file.Close();
             }
             catch
             {
@@ -46,33 +47,53 @@ namespace CMTool.Module
             return true;
         }
 
-        internal static JObject CheckDataVersion(string name,JObject jobject)
+        private static JObject CheckDataVersion(string name,JObject jobject)
         {
             try {
-                switch (name)
+                if (jobject["Version"].ToString() != Version) 
                 {
-                    case "Time":
-                        if (jobject["Version"].ToString() == "2.3.0") { jobject["Version"] = "2.3.0"; }
-                        break;
-                    case "Class":
-                        if (jobject["Version"].ToString() == "2.3.0") { jobject["Version"] = "2.3.0"; }
-                        break;
-                    case "Work":
-                        if (jobject["Version"].ToString() == "2.3.0") { jobject["Version"] = "2.3.0"; }
-                        break;
-                    case "Settings":
-                        if (jobject["Version"].ToString() == "2.3.0") { jobject["Version"] = "2.3.0"; }
-                        break;
+                    switch (name)
+                    {
+                        case "Time":
+                            if (jobject["Version"].ToString() == "2.3.0") { jobject["Version"] = "2.3.0"; }
+                            break;
+                        case "Class":
+                            if (jobject["Version"].ToString() == "2.3.0") { jobject["Version"] = "2.3.0"; }
+                            break;
+                        case "Work":
+                            if (jobject["Version"].ToString() == "2.3.0") { jobject["Version"] = "2.3.0"; }
+                            break;
+                        case "Settings":
+                            if (jobject["Version"].ToString() == "2.3.0") { jobject["Version"] = "2.3.0"; }
+                            break;
+                    }
+                    WriteJsonFile("Assets/Data" + name + ".json", jobject);
                 }
             }
             catch
             {
-
+                ReData(name);
             }
-            WriteJsonFile("Assets/Data" + name + ".json", jobject);
             return jobject;
         }
 
+        /// <summary>
+        /// 重置各类数据
+        /// </summary>
+        /// <param name="name">数据名称(Time/Class/Work/Settings)</param>
+        /// <returns></returns>
+        internal static bool ReData(string name)
+        {
+            try
+            {
+                WriteJsonFile("Assets/Data/Data" + name + ".json", ReadJsonFile("Assets/ReData/Data" + name + ".json"));
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
 
         /// <summary>
         /// 获取各类数据
@@ -82,11 +103,19 @@ namespace CMTool.Module
         internal static JObject GetData(string name)
         {
             JObject jobject;
+            try
+            {
+                jobject = ReadJsonFile("Assets/Data/Data" + name + ".json");
+                jobject = CheckDataVersion(name, jobject);
 
-            jobject = ReadJsonFile("Assets/Data"+ name + ".json");
-            jobject = CheckDataVersion(name, jobject);
-
-            return jobject;
+                return jobject;
+            }
+            catch
+            {
+                ReData(name);
+                jobject = ReadJsonFile("Assets/Data/Data" + name + ".json");
+                return jobject;
+            }
         }
     }
 }
