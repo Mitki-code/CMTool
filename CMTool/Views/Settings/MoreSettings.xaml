@@ -54,6 +54,17 @@
         </ui:CardControl>
 
         <ui:TextBlock Margin="0,16,0,8" FontTypography="BodyStrong" Text="高级" />
+        <ui:CardControl Icon="{ui:SymbolIcon DarkTheme20}" Header="安全保护" Margin="0,4,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:ToggleSwitch x:Name="ProtectButton" Command="{Binding ViewModel.ChangeProtectCommand}"  CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0"/>
+            </Grid>
+        </ui:CardControl>
         <ui:CardControl Icon="{ui:SymbolIcon ArrowReset20}" Header="重置应用数据" Margin="0,4,0,0">
             <Grid>
                 <Grid.RowDefinitions>
