@@ -3,6 +3,7 @@ using CMTool.Views.Settings;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -135,6 +136,52 @@ namespace CMTool.ViewModels.Settings
                     ApplicationThemeManager.Apply(ApplicationTheme.Dark);
                     CurrentTheme = ApplicationTheme.Dark;
                     _snackbarService.Show("切换成功", "已切换到夜间模式", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
+                    break;
+            }
+        }
+
+        [RelayCommand]
+        public async Task OnChangeProtectAsync(object state)
+        {
+            switch (state)
+            {
+                case true:
+                    try
+                    {
+                        Process[] processes = Process.GetProcesses();
+                        int coreid = 0;
+                        int abilityid = 0;
+                        int whilenum = 0;
+                        bool pstate = true;
+                        bool corestate = false;
+                        bool ability = false;
+                        foreach (Process p in processes)
+                        {
+                            if (p.ProcessName == "SeewoAbility") { abilityid = p.Id; p.Kill(); }
+                            if (p.ProcessName == "SeewoCore") { coreid = p.Id; p.Kill(); }
+                        }
+
+                        while (pstate) 
+                        {
+                            processes = Process.GetProcesses();
+                            foreach (Process p in processes) 
+                            { 
+                                if (p.ProcessName == "SeewoAbility" && p.Id != abilityid) { ProcessMgr.SuspendProcess(p.Id); ability = true; }
+                                if (p.ProcessName == "SeewoCore" && p.Id != coreid) { ProcessMgr.SuspendProcess(p.Id); corestate = true; }
+                            }
+                            if ((ability && corestate)|| whilenum>200) { pstate = false; }
+                            whilenum++;
+                            await Task.Delay(2000);
+                        }
+                        _snackbarService.Show("操作成功", "", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
+                    }
+                    catch (Exception)
+                    {
+                        _snackbarService.Show("操作失败", "发生错误", ControlAppearance.Danger, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
+                    }
+                    break;
+
+                default:
                     break;
             }
         }
