@@ -115,10 +115,10 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <ui:TextBlock Margin="2" Grid.Column="0"
-                                              Text="{Binding ViewModel.subWindowModels.WorkTable, UpdateSourceTrigger=PropertyChanged}"
+                                              Text="{Binding ViewModel.WorkTable}"
                                               TextWrapping="WrapWithOverflow" FontSize="18"/>
                                 <ui:TextBlock Margin="2" Grid.Column="1"
-                                              Text="{Binding ViewModel.subWindowModels.NameTable, UpdateSourceTrigger=PropertyChanged}"
+                                              Text="{Binding ViewModel.NameTable}"
                                               TextWrapping="WrapWithOverflow" FontSize="18"/>
                             </Grid>
                         </Grid>

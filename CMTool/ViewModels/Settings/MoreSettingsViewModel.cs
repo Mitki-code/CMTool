@@ -1,4 +1,5 @@
 ﻿using CMTool.Module;
+using CMTool.ViewModels.Windows;
 using CMTool.Views.Settings;
 using Newtonsoft.Json.Linq;
 using System;
@@ -40,7 +41,6 @@ namespace CMTool.ViewModels.Settings
         [ObservableProperty]
         private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
 
-
         [RelayCommand]
         private void OnClose()
         {
@@ -50,27 +50,14 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnReSettings()
         {
-            if (FileIO.ReData("Time") && FileIO.ReData("Class") && FileIO.ReData("Work") && FileIO.ReData("Settings")){
-                _snackbarService.Show(
-                "重置成功",
-                "重启后生效",
-                ControlAppearance.Success,
-                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
-                TimeSpan.FromSeconds(2)
-                );
+            if (FileIO.ReData("Time") && FileIO.ReData("Class") && FileIO.ReData("Work") && FileIO.ReData("Settings"))
+            {
+                _snackbarService.Show("重置成功", "建议立刻重启以完全生效", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
             }
             else
             {
-                _snackbarService.Show(
-                "重置失败",
-                "发生错误",
-                ControlAppearance.Danger,
-                new SymbolIcon(SymbolRegular.DismissCircle16),
-                TimeSpan.FromSeconds(2)
-                );
+                _snackbarService.Show("重置失败", "发生错误", ControlAppearance.Danger, new SymbolIcon(SymbolRegular.DismissCircle16), TimeSpan.FromSeconds(2));
             }
-
-            
         }
 
         [RelayCommand]
@@ -89,26 +76,8 @@ namespace CMTool.ViewModels.Settings
                 textOK = "移除开机自启动";
             }
 
-            if ( isOk )
-            {
-                _snackbarService.Show(
-                "操作成功",
-                "已"+textOK,
-                ControlAppearance.Success,
-                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
-                TimeSpan.FromSeconds(2)
-            );
-            }
-            else
-            {
-                _snackbarService.Show(
-                "操作失败",
-                "未能" + textOK,
-                ControlAppearance.Danger,
-                new SymbolIcon(SymbolRegular.DismissCircle16),
-                TimeSpan.FromSeconds(2)
-            );
-            }
+            if (isOk) { _snackbarService.Show("操作成功", "已" + textOK, ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2)); }
+            else { _snackbarService.Show("操作失败", "未能" + textOK, ControlAppearance.Danger, new SymbolIcon(SymbolRegular.DismissCircle16), TimeSpan.FromSeconds(2)); }
         }
 
         [RelayCommand]
@@ -117,14 +86,10 @@ namespace CMTool.ViewModels.Settings
             jObject["WeekStart"] = WeekStart.ToString();
 
             FileIO.WriteJsonFile("Assets/Data/DataTime.json", jObject);
+            SubWindowViewModel.TimeJson = jObject;
+            App.GetService<SubWindowViewModel>().Refresh("Time");
 
-            _snackbarService.Show(
-                "保存成功",
-                "重启后生效",
-                ControlAppearance.Success,
-                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
-                TimeSpan.FromSeconds(2)
-            );
+            _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
         }
 
         [RelayCommand]
@@ -138,7 +103,7 @@ namespace CMTool.ViewModels.Settings
 
                     ApplicationThemeManager.Apply(ApplicationTheme.Light);
                     CurrentTheme = ApplicationTheme.Light;
-                    _snackbarService.Show("切换成功","已切换到日间模式",ControlAppearance.Success,new SymbolIcon(SymbolRegular.CheckmarkCircle16),TimeSpan.FromSeconds(2));
+                    _snackbarService.Show("切换成功", "已切换到日间模式", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
                     break;
 
                 default:

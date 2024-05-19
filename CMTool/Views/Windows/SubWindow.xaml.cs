@@ -9,11 +9,13 @@ namespace CMTool.Views.Windows
         public SubWindowViewModel ViewModel { get;set; }
         public SubWindow(SubWindowViewModel viewModel)
         {
-            InitializeComponent();
             DataContext = this;
             ViewModel = viewModel;
+
+
+            InitializeComponent();
+
             
-            ViewModel.RefreshTable();
             RunProtect();
 
             ShowInTaskbar = false;
@@ -27,10 +29,5 @@ namespace CMTool.Views.Windows
                 ProtectionControl.Start();
 
         }
-        public void RefreshTable()
-        {
-            ViewModel.RefreshTable();
-        }
-
     }
 }

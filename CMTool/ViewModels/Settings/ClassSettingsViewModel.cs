@@ -1,5 +1,6 @@
 ﻿using CMTool.Models;
 using CMTool.Module;
+using CMTool.ViewModels.Windows;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using System;
@@ -32,8 +33,8 @@ namespace CMTool.ViewModels.Settings
                     new ClassList
                     {
                         ClassNum = i,
-                        Monday = jObject["Monday"][i-1].ToString(),
-                        Tuesday = jObject["Tuesday"][i-1].ToString(),
+                        Monday = jObject["Monday"][i - 1].ToString(),
+                        Tuesday = jObject["Tuesday"][i - 1].ToString(),
                         Wednesday = jObject["Wednesday"][i - 1].ToString(),
                         Thursday = jObject["Thursday"][i - 1].ToString(),
                         Friday = jObject["Friday"][i - 1].ToString(),
@@ -52,7 +53,8 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnSave()
         {
-            try{
+            try
+            {
                 if (ClassTable.Count > 9) { throw Error(); }
                 int i = 0;
                 foreach (ClassList classList in ClassTable)
@@ -69,23 +71,14 @@ namespace CMTool.ViewModels.Settings
                 }
 
                 FileIO.WriteJsonFile("Assets/Data/DataClass.json", jObject);
+                SubWindowViewModel.ClassJson = jObject;
+                App.GetService<SubWindowViewModel>().Refresh("Class");
 
-                _snackbarService.Show(
-                    "保存成功",
-                    "重启后生效",
-                    ControlAppearance.Success,
-                    new SymbolIcon(SymbolRegular.CheckmarkCircle16),
-                    TimeSpan.FromSeconds(2)
-                );
+                _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
             }
-            catch{
-                _snackbarService.Show(
-                    "保存失败",
-                    "课程数大于9节",
-                    ControlAppearance.Danger,
-                    new SymbolIcon(SymbolRegular.ErrorCircle16),
-                    TimeSpan.FromSeconds(2)
-                );
+            catch
+            {
+                _snackbarService.Show("保存失败", "课程数大于9节", ControlAppearance.Danger, new SymbolIcon(SymbolRegular.ErrorCircle16), TimeSpan.FromSeconds(2));
             }
         }
 

@@ -27,35 +27,11 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventDateTime = Time.GetTimeDifference("D", ETime) + "天";
         [ObservableProperty]
-        private string _ClassTable = ReadClassTable(ClassJson,TimeJson["WeekStart"].ToString());
-        //[ObservableProperty]
-        //private static string _WorkTable = ReadWorkTable(jObject)[0];
-        //[ObservableProperty]
-        //private static string _NameTable = ReadWorkTable(jObject)[1];
-        //public static event PropertyChangedEventHandler StaticProgressChanged;
-        //private static string workTable;
-        //private static string nameTable;
-        //public static string NameTable { get { return nameTable; } set { nameTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(NameTable))); } }
-        //public static string WorkTable { get { return workTable; } set { workTable = value; StaticProgressChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(WorkTable))); } }
-
-        private SubWindowModels _subWindowModels;
-        public SubWindowModels subWindowModels{ get { _subWindowModels ??= new SubWindowModels(); return _subWindowModels; } set{ _subWindowModels = value; RaisePropertyChanged("subWindowModels"); } }
-
-        public void RefreshTable()
-        {
-            subWindowModels.WorkTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[0];
-            subWindowModels.NameTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[1];
-            subWindowModels = subWindowModels;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string propertyChanged)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyChanged));
-
-        }
+        private string _ClassTable = ReadClassTable(ClassJson, TimeJson["WeekStart"].ToString());
+        [ObservableProperty]
+        private string _WorkTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[0];
+        [ObservableProperty]
+        private string _NameTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[1];
 
         [RelayCommand]
         private void OnOpenWindow()
@@ -78,7 +54,7 @@ namespace CMTool.ViewModels.Windows
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://sr.mihoyo.com/cloud/?from_channel=adbdsem#/") { UseShellExecute = true });
         }
 
-        internal static string ReadClassTable(JObject jObject,string WeekStart)
+        private static string ReadClassTable(JObject jObject,string WeekStart)
         {
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
@@ -92,7 +68,7 @@ namespace CMTool.ViewModels.Windows
             return ClassTable;
         }
 
-        internal static string[] ReadWorkTable(JObject jObject, string WeekStart)
+        private static string[] ReadWorkTable(JObject jObject, string WeekStart)
         {
             string WorkTable = "";
             string NameTable = "";
@@ -152,6 +128,25 @@ namespace CMTool.ViewModels.Windows
 
             
             return Table;        
+        }
+
+        internal void Refresh(string category)
+        {
+            switch (category)
+            {
+                case "Time":
+                    ETime = Convert.ToDateTime(TimeJson["Time"].ToString());
+                    EventText = "距离" + TimeJson["Event"].ToString() + "还有";
+                    EventDateTime = Time.GetTimeDifference("D", ETime) + "天";
+                    break;
+                case "Class":
+                    ClassTable = ReadClassTable(ClassJson, TimeJson["WeekStart"].ToString());
+                    break;
+                case "Work":
+                    WorkTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[0];
+                    NameTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[1];
+                    break;
+            }
         }
     }
 }

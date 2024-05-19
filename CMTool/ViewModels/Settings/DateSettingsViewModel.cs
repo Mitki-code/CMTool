@@ -1,4 +1,5 @@
 ﻿using CMTool.Module;
+using CMTool.ViewModels.Windows;
 using CMTool.Views.Settings;
 using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
@@ -32,14 +33,10 @@ namespace CMTool.ViewModels.Settings
             jObject["Time"] = EventTime.ToString();
 
             FileIO.WriteJsonFile("Assets/Data/DataTime.json", jObject);
+            SubWindowViewModel.TimeJson = jObject;
+            App.GetService<SubWindowViewModel>().Refresh("Time");
 
-            _snackbarService.Show(
-                "保存成功",
-                "重启后生效",
-                ControlAppearance.Success,
-                new SymbolIcon(SymbolRegular.CheckmarkCircle16),
-                TimeSpan.FromSeconds(2)
-            );
+            _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
         }
     }
 }

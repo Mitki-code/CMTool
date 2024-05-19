@@ -83,30 +83,14 @@ namespace CMTool.ViewModels.Settings
                 }
 
                 FileIO.WriteJsonFile("Assets/Data/DataWork.json", jObject);
-                //JsonData.Refresh();
-                //SubWindowViewModel.jObject = JsonRW.Readjson("Assets/MianData.json");
-                //App.GetService<SubWindow>().RefreshTable();
+                SubWindowViewModel.WorkJson = jObject;
+                App.GetService<SubWindowViewModel>().Refresh("Work");
 
-                
-
-
-                _snackbarService.Show(
-                    "保存成功",
-                    "重启后生效",
-                    ControlAppearance.Success,
-                    new SymbolIcon(SymbolRegular.CheckmarkCircle16),
-                    TimeSpan.FromSeconds(2)
-                );
+                _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2)););
             }
             catch
             {
-                _snackbarService.Show(
-                    "保存失败",
-                    "单天值日人数大于9人",
-                    ControlAppearance.Danger,
-                    new SymbolIcon(SymbolRegular.ErrorCircle16),
-                    TimeSpan.FromSeconds(2)
-                );
+                _snackbarService.Show("保存失败", "单天值日人数大于9人", ControlAppearance.Danger, new SymbolIcon(SymbolRegular.ErrorCircle16), TimeSpan.FromSeconds(2));
             }
         }
 

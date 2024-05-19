@@ -15,6 +15,4 @@ namespace CMTool.ViewModels.Settings
         private string _appVersion = appVersionO.Remove(appVersionO.LastIndexOf(".0"), 2);
 
     }
-
-
 }
