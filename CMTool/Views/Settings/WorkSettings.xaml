@@ -33,14 +33,8 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <ui:TextBlock
-                Grid.Column="0"
-                Text="值日编辑" VerticalAlignment="Center" />
-                    <ui:Button Content="重置此次修改"
-                       Grid.Column="1"
-                Icon="{ui:SymbolIcon ArrowRepeatAll16}" 
-                Command="{Binding ViewModel.RereadCommand}"
-                Margin="0,0,16,0"/>
+                    <ui:TextBlock Grid.Column="0" Text="值日编辑" VerticalAlignment="Center" />
+                    <ui:Button Content="重置此次修改" Grid.Column="1" Icon="{ui:SymbolIcon ArrowRepeatAll16}"  Command="{Binding ViewModel.RereadCommand}" Margin="0,0,16,0"/>
                 </Grid>
             </ui:CardExpander.Header>
             <DataGrid Height="400" 

@@ -3,9 +3,9 @@ using CMTool.Resources;
 using CMTool.Services;
 using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
-using PropertyChanged;
+using Octokit;
 using System.ComponentModel;
-using System.Xml;
+using System.Net.Http.Headers;
 
 
 namespace CMTool.ViewModels.Windows

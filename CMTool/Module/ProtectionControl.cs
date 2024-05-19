@@ -12,15 +12,15 @@ namespace CMTool.Module
 {
     internal class ProtectionControl
     {
-        private static bool controlState = true;
-        private static bool runState = true;
+        private static bool runState = false;
+        private static bool controlState = false;
         private static System.Timers.Timer timer = new System.Timers.Timer();
 
         //internal static string state = "";
         internal static void Start()
         {
             timer.Enabled = true;
-            timer.Interval = 60000;
+            timer.Interval = 6000;
             timer.Start();
             timer.Elapsed += new ElapsedEventHandler(TimeManger);
         }
@@ -37,15 +37,17 @@ namespace CMTool.Module
         }
         private static void TimeManger(object sender, ElapsedEventArgs e)
         {
-            if (controlState)
+            if (!runState)
             {
-                controlState = false;
-                if (DateTime.Now.Hour == 12 && DateTime.Now.Minute == 20)
+                runState = true;
+                if (!controlState&& Time.IsTimeQuantum("12:20","14:10"))
                     Control();
-                else if (DateTime.Now.Hour == 22 && DateTime.Now.Minute == 00)
+                else if (!controlState&&Time.IsTimeQuantum("20:00", "23:59"))
                     Control();
-                else if (DateTime.Now.Hour == 14 && DateTime.Now.Minute == 10)
+                else if (controlState&&Time.IsTimeQuantum("14:10", "14:20"))
                     UnControl();
+                else
+                    runState = false;
                 //Control();
             }
         }
@@ -88,6 +90,7 @@ namespace CMTool.Module
 
             }
             controlState = true;
+            runState = false;
         }
 
         private static void UnControl()
@@ -106,6 +109,8 @@ namespace CMTool.Module
             {
 
             }
+            controlState = false;
+            runState = false;
         }
     }
 }

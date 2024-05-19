@@ -8,20 +8,27 @@ namespace CMTool.Module
 {
     internal class Time
     {
-        public static string GetTime(DateTime timeA, string Mode, bool Abs)
+        internal static bool IsTimeQuantum(DateTime startTime,DateTime endTime,DateTime time)
         {
-            DateTime timeB = DateTime.Now;	//获取当前时间
-            TimeSpan ts = timeA - timeB;	//计算时间差
-            double timenum = 0;
-            if (Mode == "Days") { timenum = ts.TotalDays; }
-            else if (Mode == "Weeks") { timenum = ts.TotalDays / 7; }
-
-            string time;
-            if (Abs == true && Mode == "Weeks") { time = Math.Ceiling(Math.Abs(timenum)).ToString(); }
-            else if (Abs == true) { time = Math.Floor(Math.Abs(timenum)).ToString(); }
-            else { time = Math.Floor(timenum).ToString(); }
-
-            return time;
+            if (startTime < time && time < endTime)
+                return true;
+            return false;
+        }
+        internal static bool IsTimeQuantum(string startTime, string endTime, string time)
+        {
+            if (IsTimeQuantum(Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + startTime),
+                              Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + endTime),
+                              Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + time)))
+                return true;
+            return false;
+        }
+        internal static bool IsTimeQuantum(string startTime, string endTime)
+        {
+            if (IsTimeQuantum(Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + startTime),
+                              Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + endTime),
+                              DateTime.Now))
+                return true;
+            return false;
         }
 
         /// <summary>
