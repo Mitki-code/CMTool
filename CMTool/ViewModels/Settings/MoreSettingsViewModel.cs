@@ -53,6 +53,8 @@ namespace CMTool.ViewModels.Settings
             if (FileIO.ReData("Time") && FileIO.ReData("Class") && FileIO.ReData("Work") && FileIO.ReData("Settings"))
             {
                 _snackbarService.Show("重置成功", "建议立刻重启以完全生效", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
+                Process.Start(Environment.ProcessPath);
+                Application.Current.Shutdown();
             }
             else
             {

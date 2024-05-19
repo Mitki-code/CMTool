@@ -86,7 +86,7 @@ namespace CMTool.ViewModels.Settings
                 SubWindowViewModel.WorkJson = jObject;
                 App.GetService<SubWindowViewModel>().Refresh("Work");
 
-                _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2)););
+                _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
             }
             catch
             {

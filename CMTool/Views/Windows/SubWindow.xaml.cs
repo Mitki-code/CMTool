@@ -12,10 +12,7 @@ namespace CMTool.Views.Windows
             DataContext = this;
             ViewModel = viewModel;
 
-
             InitializeComponent();
-
-            
             RunProtect();
 
             ShowInTaskbar = false;
