@@ -12,14 +12,15 @@ namespace CMTool.Module
 {
     internal class ProtectionControl
     {
-        private static bool controlstate = true;
+        private static bool controlState = true;
+        private static bool runState = true;
         private static System.Timers.Timer timer = new System.Timers.Timer();
 
         //internal static string state = "";
         internal static void Start()
         {
             timer.Enabled = true;
-            timer.Interval = 600;
+            timer.Interval = 60000;
             timer.Start();
             timer.Elapsed += new ElapsedEventHandler(TimeManger);
         }
@@ -36,15 +37,16 @@ namespace CMTool.Module
         }
         private static void TimeManger(object sender, ElapsedEventArgs e)
         {
-            if (controlstate)
+            if (controlState)
             {
-                controlstate = false;
+                controlState = false;
                 if (DateTime.Now.Hour == 12 && DateTime.Now.Minute == 20)
                     Control();
                 else if (DateTime.Now.Hour == 22 && DateTime.Now.Minute == 00)
                     Control();
                 else if (DateTime.Now.Hour == 14 && DateTime.Now.Minute == 10)
                     UnControl();
+                //Control();
             }
         }
 
@@ -75,17 +77,17 @@ namespace CMTool.Module
                         if (p.ProcessName == "SeewoCore" && p.Id != coreid) { ProcessMgr.SuspendProcess(p.Id); corestate = true; }
                         //if (p.ProcessName == "Notepad") { ProcessMgr.SuspendProcess(p.Id); }
                     }
-                    if ((ability && corestate) || whilenum > 200) { pstate = false; }
+                    if ((ability && corestate) || whilenum > 400) { pstate = false; }
                     Console.WriteLine("111");
                     whilenum++;
-                    await Task.Delay(2000);
+                    await Task.Delay(1000);
                 }
             }
             catch (Exception)
             {
 
             }
-            controlstate = true;
+            controlState = true;
         }
 
         private static void UnControl()

@@ -31,12 +31,18 @@ namespace CMTool.Views.Settings
             DataContext = this;
             InitializeComponent();
             CheckAutoStart();
+            CheckProtect();
         }
 
         private void CheckAutoStart()
         {
             if (PowerStartManger.IsAutoStart()) { PowerStartButton.IsChecked = true; }
             else { PowerStartButton.IsChecked = false;}
+        }
+        private void CheckProtect()
+        {
+            if (FileIO.GetData("Settings")["Safe"].ToString() == "true")
+                ProtectButton.IsChecked  = true ;
         }
     }
 }

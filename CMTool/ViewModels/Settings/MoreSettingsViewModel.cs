@@ -155,15 +155,20 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         public void OnChangeProtect(object state)
         {
+            JObject jobject = FileIO.GetData("Settings");
             switch (state)
             {
                 case true:
                     ProtectionControl.Start();
+                    jobject["Safe"] = "true";
+                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", jobject);
                     _snackbarService.Show("启用成功", "安全保护已启用，将拦截不友好的恶意程序", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
                     break;
 
                 default:
                     ProtectionControl.Stop();
+                    jobject["Safe"] = "false";
+                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", jobject);
                     _snackbarService.Show("禁用成功", "安全保护已关闭，将不会再拦截不友好的恶意程序", ControlAppearance.Danger, new SymbolIcon(SymbolRegular.DismissCircle16), TimeSpan.FromSeconds(2));
                     break;
             }

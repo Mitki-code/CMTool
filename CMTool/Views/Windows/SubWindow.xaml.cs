@@ -1,4 +1,5 @@
 ﻿using CMTool.Models.SubWindow;
+using CMTool.Module;
 using CMTool.ViewModels.Windows;
 
 namespace CMTool.Views.Windows
@@ -13,12 +14,19 @@ namespace CMTool.Views.Windows
             ViewModel = viewModel;
             
             ViewModel.RefreshTable();
+            RunProtect();
 
             ShowInTaskbar = false;
             Left = System.Windows.SystemParameters.WorkArea.Width - Width;
             Top = 0;
         }
 
+        private void RunProtect()
+        {
+            if (FileIO.GetData("Settings")["Safe"].ToString() == "true")
+                ProtectionControl.Start();
+
+        }
         public void RefreshTable()
         {
             ViewModel.RefreshTable();

@@ -24,6 +24,7 @@ namespace CMTool.Module
             JsonTextReader reader = new JsonTextReader(file);
 
             JObject jObject = (JObject)JToken.ReadFrom(reader);
+            reader.Close();
             return jObject;
         }
 
