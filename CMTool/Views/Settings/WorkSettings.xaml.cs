@@ -19,8 +19,8 @@ namespace CMTool.Views.Settings
             InitializeComponent();
             ViewModel = viewModel;
             DataContext = this;
-            
-            
+
+
             //SettingWorkMode.SelectedIndex = 1;
         }
 

@@ -37,12 +37,12 @@ namespace CMTool.Views.Settings
         private void CheckAutoStart()
         {
             if (PowerStartManger.IsAutoStart()) { PowerStartButton.IsChecked = true; }
-            else { PowerStartButton.IsChecked = false;}
+            else { PowerStartButton.IsChecked = false; }
         }
         private void CheckProtect()
         {
             if (FileIO.GetData("Settings")["Safe"].ToString() == "true")
-                ProtectButton.IsChecked  = true ;
+                ProtectButton.IsChecked = true;
         }
     }
 }

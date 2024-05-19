@@ -1,12 +1,11 @@
-﻿using CMTool.Models.SubWindow;
-using CMTool.Module;
+﻿using CMTool.Module;
 using CMTool.ViewModels.Windows;
 
 namespace CMTool.Views.Windows
 {
     public partial class SubWindow
     {
-        public SubWindowViewModel ViewModel { get;set; }
+        public SubWindowViewModel ViewModel { get; set; }
         public SubWindow(SubWindowViewModel viewModel)
         {
             DataContext = this;
@@ -16,7 +15,7 @@ namespace CMTool.Views.Windows
             RunProtect();
 
             ShowInTaskbar = false;
-            Left = System.Windows.SystemParameters.WorkArea.Width - Width;
+            Left = SystemParameters.WorkArea.Width - Width;
             Top = 0;
         }
 

@@ -1,5 +1,4 @@
-﻿using CMTool.Models.SubWindow;
-using CMTool.Module;
+﻿using CMTool.Module;
 using CMTool.Resources;
 using CMTool.Services;
 using CMTool.Views.Windows;
@@ -54,11 +53,11 @@ namespace CMTool.ViewModels.Windows
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://sr.mihoyo.com/cloud/?from_channel=adbdsem#/") { UseShellExecute = true });
         }
 
-        private static string ReadClassTable(JObject jObject,string WeekStart)
+        private static string ReadClassTable(JObject jObject, string WeekStart)
         {
             string ClassTable = "";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart))-1).ToString();
+            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1).ToString();
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
 
             foreach (JValue property in jObject[Week])
@@ -74,7 +73,7 @@ namespace CMTool.ViewModels.Windows
             string NameTable = "";
             string Work = "0";
             string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart))-1).ToString();
+            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1).ToString();
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
             int start = 0;
             int end = 0;
@@ -126,8 +125,8 @@ namespace CMTool.ViewModels.Windows
                 Table = Table + JsonValue.ToString() + "\n";
             }
 
-            
-            return Table;        
+
+            return Table;
         }
 
         internal void Refresh(string category)

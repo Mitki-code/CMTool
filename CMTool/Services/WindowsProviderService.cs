@@ -30,7 +30,7 @@ namespace CMTool.Services
             if (windowInstance == null)
                 throw new InvalidOperationException("Window is not registered as service.");
 
-            
+
             windowInstance.Owner = Application.Current.MainWindow;
             windowInstance.Show();
         }

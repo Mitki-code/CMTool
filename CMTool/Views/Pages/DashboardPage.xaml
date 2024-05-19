@@ -53,7 +53,7 @@
                         Text="" />
                     </StackPanel>
                 </Grid>
+            </Border>
         </Border>
-    </Border>
     </Grid>
 </Page>

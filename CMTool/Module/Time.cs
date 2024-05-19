@@ -31,7 +31,7 @@ namespace CMTool.Module
         /// <param name="startTime">开始时间</param>
         /// <param name="endTime">结束时间</param>
         /// <returns></returns>
-        internal static double GetTimeDifference(string mode,DateTime endTime,DateTime startTime)
+        internal static double GetTimeDifference(string mode, DateTime endTime, DateTime startTime)
         {
             TimeSpan timeSpan = endTime - startTime;
             double timeDifference = 0;
@@ -40,10 +40,10 @@ namespace CMTool.Module
             {
                 case "D":
                     timeDifference = timeSpan.TotalDays;
-                    break ;
+                    break;
                 case "W":
                     timeDifference = timeSpan.TotalDays / 7;
-                    break ;
+                    break;
             }
 
             //if (timeDifference <= 1) { timeDifference = Math.Ceiling(timeDifference); }
@@ -61,7 +61,7 @@ namespace CMTool.Module
         internal static double GetTimeDifference(string mode, DateTime endTime)
         {
             DateTime startTime = DateTime.Now;
-            double timeDifference = GetTimeDifference(mode, endTime , startTime);
+            double timeDifference = GetTimeDifference(mode, endTime, startTime);
             return timeDifference;
         }
 

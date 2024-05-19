@@ -12,7 +12,7 @@ namespace CMTool.Views.Windows
         protected override void OnClosing(CancelEventArgs a)
         {
             a.Cancel = true;
-            this.Hide();
+            Hide();
         }
 
         public MainWindow(

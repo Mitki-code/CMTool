@@ -34,9 +34,10 @@ namespace CMTool.Module
         /// <param name="path">Json文件路径</param>
         /// <param name="jobject">写入的对象</param>
         /// <returns></returns>
-        internal static bool WriteJsonFile(string path,JObject jobject)
+        internal static bool WriteJsonFile(string path, JObject jobject)
         {
-            try { 
+            try
+            {
                 StreamWriter file = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @path);
                 file.Write(jobject.ToString());
                 file.Close();
@@ -48,10 +49,11 @@ namespace CMTool.Module
             return true;
         }
 
-        private static JObject CheckDataVersion(string name,JObject jobject)
+        private static JObject CheckDataVersion(string name, JObject jobject)
         {
-            try {
-                if (jobject["Version"].ToString() != Version) 
+            try
+            {
+                if (jobject["Version"].ToString() != Version)
                 {
                     switch (name)
                     {

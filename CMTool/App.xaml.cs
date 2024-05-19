@@ -20,7 +20,6 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
 using Wpf.Ui;
-using Wpf.Ui.Gallery.Views.Windows;
 
 namespace CMTool
 {
