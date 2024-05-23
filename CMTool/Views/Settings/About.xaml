@@ -34,58 +34,21 @@
 
         <ui:InfoBar x:Name="UpdateStateBar" Title="{Binding ViewModel.UpdateState}" Message="{Binding ViewModel.UpdateVersion}" IsOpen="False"/>
 
-
-
-        <ui:CardExpander Icon="{ui:ImageIcon 'pack://application:,,,/Assets/GFX/wpfui-icon-256.png', Width=38, Height=35}" ContentPadding="0">
-            <ui:CardExpander.Header>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <ui:TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        FontTypography="Body"
-                        Text="CMTool" />
-                    <ui:TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="© 2023~2024 米缇" />
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.RowSpan="2"
-                        Grid.Column="1"
-                        Margin="0,0,16,0"
-                        VerticalAlignment="Center"
-                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="{Binding ViewModel.AppVersion}" />
-                </Grid>
-            </ui:CardExpander.Header>
-            <StackPanel>
-                <Grid Margin="16,16,0,0">
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="  CMTool基于以下框架或服务构建" VerticalAlignment="Center" Margin="0,0,0,4"/>
-                </Grid>
-                <Grid Margin="16,0,0,16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <ui:HyperlinkButton Grid.Column="0" Content=".Net" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://dotnet.microsoft.com/zh-cn/" />
-                    <ui:HyperlinkButton Grid.Column="1" Content="Mvvm" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://www.nuget.org/packages/CommunityToolkit.Mvvm" />
-                    <ui:HyperlinkButton Grid.Column="3" Content="WPF-UI" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://github.com/lepoco/wpfui" />
-                    <ui:HyperlinkButton Grid.Column="4" Content="AppCenter" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://appcenter.ms/apps" />
-                </Grid>
-            </StackPanel>
-        </ui:CardExpander>
-        
+        <Grid Margin="16,16,0,0">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="  CMTool基于以下框架或服务构建" VerticalAlignment="Center" Margin="0,0,0,4"/>
+        </Grid>
+        <Grid Margin="16,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ui:HyperlinkButton Grid.Column="0" Content=".Net" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://dotnet.microsoft.com/zh-cn/" />
+            <ui:HyperlinkButton Grid.Column="1" Content="Mvvm" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://www.nuget.org/packages/CommunityToolkit.Mvvm" />
+            <ui:HyperlinkButton Grid.Column="3" Content="WPF-UI" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://github.com/lepoco/wpfui" />
+            <ui:HyperlinkButton Grid.Column="4" Content="AppCenter" Icon="{ui:SymbolIcon Link24}" NavigateUri="https://appcenter.ms/apps" />
+        </Grid>
     </StackPanel>
 </Page>
