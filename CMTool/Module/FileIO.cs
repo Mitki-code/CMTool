@@ -11,7 +11,7 @@ namespace CMTool.Module
     internal class FileIO
     {
         private static readonly string OVersion = Application.ResourceAssembly.GetName().Version.ToString();
-        private static readonly string Version = OVersion.Remove(OVersion.LastIndexOf(".0"), 2);
+        public static readonly string Version = OVersion.Remove(OVersion.LastIndexOf(".0"), 2);
 
         /// <summary>
         /// 从Json文件中获取JObject

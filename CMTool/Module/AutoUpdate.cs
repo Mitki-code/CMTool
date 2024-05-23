@@ -51,10 +51,25 @@ namespace CMTool.Module
         {
             var postProject = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeProjectByName&action=DescribeProjectByName",
                 "application/json", "{\n  \"ProjectName\": \"CMTool\"\n}", ParameterType.RequestBody);
-            var response = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactRepositoryList&action=DescribeArtifactRepositoryList",
-                "application/json", "{\n  \"PageNumber\": 1,\n  \"PageSize\": 10,\n  \"ProjectId\": "+ postProject["Response"]["Project"]["Id"] + ",\n  \"Type\": 2\n}", ParameterType.RequestBody);
+            var postRepository = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactRepositoryList&action=DescribeArtifactRepositoryList",
+                "application/json", "{\n  \"PageNumber\": 1,\n  \"PageSize\": 10,\n  \"ProjectId\": "+ postProject["Response"]["Project"]["Id"] + ",\n  \"Type\": 1\n}", ParameterType.RequestBody);
+            
+            Version version = new Version(FileIO.Version);
+            var postFileList = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactRepositoryFileList&action=DescribeArtifactRepositoryFileList",
+                "application/json", "{\n  \"Project\": \"CMTool\",\n  \"Repository\": \"release\",\n  \"ContinuationToken\": \"\",\n  \"PageSize\": 1000\n}", ParameterType.RequestBody);
+            foreach (var postFile in postFileList["Response"]["Data"]["InstanceSet"])
+            {
+                Version postVersion = new Version(postFile["VersionName"].ToString());
+                if (postVersion > version)
+                {
+                    var postFileUrl = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactFileDownloadUrl&action=DescribeArtifactFileDownloadUrl",
+                    "application/json", "{\n  \"ProjectId\": \"13081751\",\n  \"Repository\": \"release\",\n  \"Package\": \"CMTool.rar\",\n  \"PackageVersion\": " + postFile["VersionName"] + ",\n  \"FileName\": \"CMTool.exe\",\n  \"Timeout\\\"\": \"600\"\n}", ParameterType.RequestBody);
 
-
+                    newVer = postVersion.ToString();
+                    newUrl = postFileUrl["Response"]["Url"].ToString();
+                    return true;
+                }
+            }
             return false;
 
         }
@@ -63,7 +78,7 @@ namespace CMTool.Module
         {
             var downloader = new DownloadService();
 
-            await downloader.DownloadFileTaskAsync(newVer, AppDomain.CurrentDomain.BaseDirectory + @"temp");
+            await downloader.DownloadFileTaskAsync(newUrl, AppDomain.CurrentDomain.BaseDirectory + @"temp.exe");
         }
     }
 }
