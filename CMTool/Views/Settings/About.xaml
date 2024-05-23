@@ -26,18 +26,29 @@
             </Grid.ColumnDefinitions>
             <Image  Grid.Column="0" Height="72" HorizontalAlignment="Center" Source="pack://application:,,,/Assets/GFX/wpfui-icon-256.png" Margin="16,16,16,16" />
             <ui:TextBlock Grid.Column="1" FontTypography="Body" Text="CMTool" FontSize="24" VerticalAlignment="Center" Margin="0,0,0,32" />
-            <TextBlock Grid.Column="1" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="{Binding ViewModel.AppVersionCopyright}" VerticalAlignment="Center" Margin="0,24,0,0"/>
-            <!--<TextBlock Grid.Row="0" Grid.Column="1" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="{Binding ViewModel.AppVersion}" VerticalAlignment="Center" Margin="0,80,0,0"/>-->
+            <ui:TextBlock Grid.Column="1" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="{Binding ViewModel.AppVersionCopyright}" VerticalAlignment="Center" Margin="0,24,0,0"/>
             <ui:ProgressRing x:Name="UpdateStateRing" Grid.Column="2" IsIndeterminate="True" Visibility="Hidden"  Width="20" Height="20" />
-            <ui:Button Grid.Column="3" Content="{Binding ViewModel.UpdateButtonState}" Command="{Binding ViewModel.CheckUpdateCommand}" Margin="8,0,16,0"/>
+            <ui:Button Grid.Column="3" Content="{Binding ViewModel.UpdateButtonState}" Appearance="Primary" Command="{Binding ViewModel.CheckUpdateCommand}" Margin="8,0,16,0"/>
         </Grid>
 
         <ui:InfoBar x:Name="UpdateStateBar" Title="{Binding ViewModel.UpdateState}" Message="{Binding ViewModel.UpdateVersion}" IsOpen="False"/>
+        
+        <ui:TextBlock Margin="0,16,0,8" FontTypography="BodyStrong" Text="更新设置" />
+        <ui:CardControl Icon="{ui:SymbolIcon ArrowSync20}" Header="自动更新" Margin="0,4,0,0">
+            <Grid>
+                <ui:ToggleSwitch Command="{Binding ViewModel.ChangeAutoUpdateStateCommand}"  CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0"/>
+            </Grid>
+        </ui:CardControl>
+        <ui:CardControl Icon="{ui:SymbolIcon Sparkle20}" Header="获取预览版本更新" Margin="0,4,0,0">
+            <Grid>
+                <ui:ToggleSwitch Command="{Binding ViewModel.ChangeUpdateRingCommand}"  CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0"/>
+            </Grid>
+        </ui:CardControl>
 
-        <Grid Margin="16,16,0,0">
+        <Grid Margin="0,16,0,0">
             <TextBlock Grid.Row="0" Grid.Column="0" Text="  CMTool基于以下框架或服务构建" VerticalAlignment="Center" Margin="0,0,0,4"/>
         </Grid>
-        <Grid Margin="16,0,0,16">
+        <Grid Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />

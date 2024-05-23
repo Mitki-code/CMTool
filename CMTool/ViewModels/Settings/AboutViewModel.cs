@@ -26,12 +26,15 @@ namespace CMTool.ViewModels.Settings
         private bool updateStateBool = false;
         [ObservableProperty]
         private string _updateButtonState = "检查更新";
+        //[ObservableProperty]
+        //private UIElement _updateButtonAState;
         [ObservableProperty]
         private string _updateVersion = "";
 
         [RelayCommand]
         private async void OnCheckUpdate() 
         {
+            UpdateButtonState = "正在检查更新";
             App.GetService<About>().UpdateStateRing.Visibility = Visibility.Visible;
 
             if (!updateStateBool)
@@ -44,12 +47,12 @@ namespace CMTool.ViewModels.Settings
                         UpdateVersion = AppVersion + " -> " + AutoUpdate.newVer;
                         updateStateBool = true;
                         UpdateButtonState = "获取更新";
-                        //await AutoUpdate.Down();
                     }
                     else
                     {
                         UpdateState = "当前已是最新版本";
                         UpdateVersion = "";
+                        UpdateButtonState = "检查更新";
                     }
                     App.GetService<About>().UpdateStateBar.Severity = InfoBarSeverity.Informational;
                 }
