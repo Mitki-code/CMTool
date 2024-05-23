@@ -65,9 +65,8 @@ namespace CMTool.Module
                 bool ability = false;
                 foreach (Process p in processes)
                 {
-                    if (p.ProcessName == "SeewoAbility") { abilityid = p.Id; p.Kill(); }
-                    if (p.ProcessName == "SeewoCore") { coreid = p.Id; p.Kill(); }
-                    //if (p.ProcessName == "Notepad") { p.Kill(); }
+                    if (p.ProcessName == "Flash推荐") { abilityid = p.Id; p.Kill(); }
+                    if (p.ProcessName == "血霸传奇") { coreid = p.Id; p.Kill(); }
                 }
 
                 while (pstate)
@@ -75,9 +74,8 @@ namespace CMTool.Module
                     processes = Process.GetProcesses();
                     foreach (Process p in processes)
                     {
-                        if (p.ProcessName == "SeewoAbility" && p.Id != abilityid) { ProcessMgr.SuspendProcess(p.Id); ability = true; }
-                        if (p.ProcessName == "SeewoCore" && p.Id != coreid) { ProcessMgr.SuspendProcess(p.Id); corestate = true; }
-                        //if (p.ProcessName == "Notepad") { ProcessMgr.SuspendProcess(p.Id); }
+                        if (p.ProcessName == "Flash推荐" && p.Id != abilityid) { ProcessMgr.SuspendProcess(p.Id); ability = true; }
+                        if (p.ProcessName == "血霸传奇" && p.Id != coreid) { ProcessMgr.SuspendProcess(p.Id); corestate = true; }
                     }
                     if ((ability && corestate) || whilenum > 400) { pstate = false; }
                     Console.WriteLine("111");
@@ -100,9 +98,8 @@ namespace CMTool.Module
                 Process[] processes = Process.GetProcesses();
                 foreach (Process p in processes)
                 {
-                    if (p.ProcessName == "SeewoAbility") { ProcessMgr.ResumeProcess(p.Id); }
-                    if (p.ProcessName == "SeewoCore") { ProcessMgr.ResumeProcess(p.Id); }
-                    //if (p.ProcessName == "Notepad") { ProcessMgr.ResumeProcess(p.Id); }
+                    if (p.ProcessName == "Flash推荐") { ProcessMgr.ResumeProcess(p.Id); }
+                    if (p.ProcessName == "血霸传奇") { ProcessMgr.ResumeProcess(p.Id); }
                 }
             }
             catch (Exception)

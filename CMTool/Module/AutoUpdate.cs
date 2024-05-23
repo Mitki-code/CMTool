@@ -49,11 +49,6 @@ namespace CMTool.Module
 
         internal static async Task<bool> Check(string appVersion)
         {
-            var postProject = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeProjectByName&action=DescribeProjectByName",
-                "application/json", "{\n  \"ProjectName\": \"CMTool\"\n}", ParameterType.RequestBody);
-            var postRepository = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactRepositoryList&action=DescribeArtifactRepositoryList",
-                "application/json", "{\n  \"PageNumber\": 1,\n  \"PageSize\": 10,\n  \"ProjectId\": "+ postProject["Response"]["Project"]["Id"] + ",\n  \"Type\": 1\n}", ParameterType.RequestBody);
-            
             Version version = new Version(FileIO.Version);
             var postFileList = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactRepositoryFileList&action=DescribeArtifactRepositoryFileList",
                 "application/json", "{\n  \"Project\": \"CMTool\",\n  \"Repository\": \"release\",\n  \"ContinuationToken\": \"\",\n  \"PageSize\": 1000\n}", ParameterType.RequestBody);
