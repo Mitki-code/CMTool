@@ -65,7 +65,7 @@ namespace CMTool.ViewModels.Settings
             }
             else
             {
-                await AutoUpdate.Down();
+                AutoUpdate.Down();
                 Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"temp.exe");
                 Application.Current.Shutdown();
             }
