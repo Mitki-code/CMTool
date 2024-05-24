@@ -5,13 +5,17 @@ using System.Text;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using CMTool.Models.Data;
+using System.Xml.Linq;
 
 namespace CMTool.Module
 {
     internal class FileIO
     {
         private static readonly string OVersion = Application.ResourceAssembly.GetName().Version.ToString();
-        public static readonly string Version = OVersion.Remove(OVersion.LastIndexOf(".0"), 2);
+        private static readonly string Version = OVersion.Remove(OVersion.LastIndexOf(".0"), 2);
+
+        internal static DataTime TimeData = GetDataTime();
 
         /// <summary>
         /// 从Json文件中获取JObject
@@ -36,10 +40,17 @@ namespace CMTool.Module
         /// <returns></returns>
         internal static bool WriteJsonFile(string path, JObject jobject)
         {
+            if (WriteJsonFile(path, jobject.ToString()))
+                return true;
+            return false;
+        }
+
+        internal static bool WriteJsonFile(string path, string json)
+        {
             try
             {
                 StreamWriter file = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @path);
-                file.Write(jobject.ToString());
+                file.Write(json);
                 file.Close();
             }
             catch
@@ -119,6 +130,35 @@ namespace CMTool.Module
                 jobject = ReadJsonFile("Assets/Data/Data" + name + ".json");
                 return jobject;
             }
+        }
+
+        internal static DataTime GetDataTime()
+        {
+            DataTime data = new DataTime();
+            JObject jobject = new();
+            try { jobject = ReadJsonFile("Assets/Data/DataTime.json"); }
+            catch { }
+            
+            data.Version = jobject.SelectToken("Version")?.ToString() ?? Version;
+            data.Time = jobject.SelectToken("Time")?.ToString() ?? data.Time;
+            data.Event = jobject.SelectToken("Event")?.ToString() ?? data.Event;
+            data.WeekStart = jobject.SelectToken("WeekStart")?.ToString() ?? data.WeekStart;
+            //jobject = CheckDataVersion(, jobject);
+
+            return data;
+        }
+
+        internal static DataClass GetDataClass()
+        {
+            DataClass data = new DataClass();
+            JObject jobject = new();
+            try { jobject = ReadJsonFile("Assets/Data/DataTime.json"); }
+            catch { }
+
+            data.Version = jobject.SelectToken("Version")?.ToString() ?? Version;
+
+
+            return data;
         }
     }
 }

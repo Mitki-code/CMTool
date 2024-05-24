@@ -15,21 +15,21 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _applicationTitle = "CMTool";
 
-        public static JObject TimeJson = FileIO.GetData("Time");
+        //public static JObject TimeJson = FileIO.GetData("Time");
         public static JObject ClassJson = FileIO.GetData("Class");
         public static JObject WorkJson = FileIO.GetData("Work");
-        private static DateTime ETime = Convert.ToDateTime(TimeJson["Time"].ToString());
+        private static DateTime ETime = Convert.ToDateTime(FileIO.TimeData.Time);
 
         [ObservableProperty]
-        private string _EventText = "距离" + TimeJson["Event"].ToString() + "还有";
+        private string _EventText = "距离" + FileIO.TimeData.Event + "还有";
         [ObservableProperty]
         private string _EventDateTime = Time.GetTimeDifference("D", ETime) + "天";
         [ObservableProperty]
-        private string _ClassTable = ReadClassTable(ClassJson, TimeJson["WeekStart"].ToString());
+        private string _ClassTable = ReadClassTable(ClassJson, FileIO.TimeData.WeekStart);
         [ObservableProperty]
-        private string _WorkTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[0];
+        private string _WorkTable = ReadWorkTable(WorkJson, FileIO.TimeData.WeekStart)[0];
         [ObservableProperty]
-        private string _NameTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[1];
+        private string _NameTable = ReadWorkTable(WorkJson, FileIO.TimeData.WeekStart)[1];
 
         [RelayCommand]
         private void OnOpenWindow()
@@ -113,7 +113,7 @@ namespace CMTool.ViewModels.Windows
 
         private static string SearchList(string Table, int OTWeek, JValue JsonValue)
         {
-            if (JsonValue.ToString().Contains("|"))
+            if (JsonValue.ToString().Contains('|'))
             {
                 string[] TableWeek = JsonValue.ToString().Split("|");
                 if (OTWeek % 2 == 0) { Table = Table + TableWeek[1] + "\n"; }
@@ -133,16 +133,16 @@ namespace CMTool.ViewModels.Windows
             switch (category)
             {
                 case "Time":
-                    ETime = Convert.ToDateTime(TimeJson["Time"].ToString());
-                    EventText = "距离" + TimeJson["Event"].ToString() + "还有";
+                    ETime = Convert.ToDateTime(FileIO.TimeData.Time);
+                    EventText = "距离" + FileIO.TimeData.Event + "还有";
                     EventDateTime = Time.GetTimeDifference("D", ETime) + "天";
                     break;
                 case "Class":
-                    ClassTable = ReadClassTable(ClassJson, TimeJson["WeekStart"].ToString());
+                    ClassTable = ReadClassTable(ClassJson, FileIO.TimeData.WeekStart);
                     break;
                 case "Work":
-                    WorkTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[0];
-                    NameTable = ReadWorkTable(WorkJson, TimeJson["WeekStart"].ToString())[1];
+                    WorkTable = ReadWorkTable(WorkJson, FileIO.TimeData.WeekStart)[0];
+                    NameTable = ReadWorkTable(WorkJson, FileIO.TimeData.WeekStart)[1];
                     break;
             }
         }

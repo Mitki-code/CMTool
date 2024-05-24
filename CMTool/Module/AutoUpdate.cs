@@ -35,12 +35,12 @@ namespace CMTool.Module
 
         internal static async Task<bool> Check(string appVersion)
         {
-            Version version = new Version(FileIO.Version);
+            Version version = new(appVersion);
             var postFileList = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactRepositoryFileList&action=DescribeArtifactRepositoryFileList",
                 "application/json", "{\n  \"Project\": \"CMTool\",\n  \"Repository\": \"release\",\n  \"ContinuationToken\": \"\",\n  \"PageSize\": 1000\n}", ParameterType.RequestBody);
             foreach (var postFile in postFileList["Response"]["Data"]["InstanceSet"])
             {
-                Version postVersion = new Version(postFile["VersionName"].ToString());
+                Version postVersion = new(postFile["VersionName"].ToString());
                 if (postVersion > version)
                 {
                     var postFileUrl = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactFileDownloadUrl&action=DescribeArtifactFileDownloadUrl",
