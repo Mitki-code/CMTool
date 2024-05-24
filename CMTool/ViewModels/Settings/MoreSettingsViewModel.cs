@@ -88,7 +88,7 @@ namespace CMTool.ViewModels.Settings
             jObject["WeekStart"] = WeekStart.ToString();
 
             FileIO.WriteJsonFile("Assets/Data/DataTime.json", jObject);
-            SubWindowViewModel.TimeJson = jObject;
+            //SubWindowViewModel.TimeJson = jObject;
             App.GetService<SubWindowViewModel>().Refresh("Time");
 
             _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));

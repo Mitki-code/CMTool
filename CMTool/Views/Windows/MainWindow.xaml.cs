@@ -32,7 +32,7 @@ namespace CMTool.Views.Windows
 
             navigationService.SetNavigationControl(NavigationView);
             snackbarService.SetSnackbarPresenter(SnackbarPresenter);
-            contentDialogService.SetContentPresenter(RootContentDialog);
+            contentDialogService.SetDialogHost(RootContentDialog);
 
             NavigationView.SetServiceProvider(serviceProvider);
         }

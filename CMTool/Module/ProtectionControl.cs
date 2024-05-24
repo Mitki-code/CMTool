@@ -14,7 +14,7 @@ namespace CMTool.Module
     {
         private static bool runState = false;
         private static bool controlState = false;
-        private static System.Timers.Timer timer = new System.Timers.Timer();
+        private static System.Timers.Timer timer = new();
 
         //internal static string state = "";
         internal static void Start()

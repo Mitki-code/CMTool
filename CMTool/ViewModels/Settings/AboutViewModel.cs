@@ -15,7 +15,6 @@ namespace CMTool.ViewModels.Settings
     public partial class AboutViewModel : ObservableObject
     {
         private static string appVersionO = Application.ResourceAssembly.GetName().Version.ToString();
-        private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         [ObservableProperty]
         private string _appVersion = appVersionO.Remove(appVersionO.LastIndexOf(".0"), 2);
@@ -32,7 +31,7 @@ namespace CMTool.ViewModels.Settings
         private string _updateVersion = "";
 
         [RelayCommand]
-        private async void OnCheckUpdate() 
+        private async Task OnCheckUpdate() 
         {
             UpdateButtonState = "正在检查更新";
             App.GetService<About>().UpdateStateRing.Visibility = Visibility.Visible;
