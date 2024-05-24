@@ -3,7 +3,6 @@ using CMTool.Resources;
 using CMTool.Services;
 using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
-using Octokit;
 using System.ComponentModel;
 using System.Net.Http.Headers;
 
@@ -11,7 +10,7 @@ using System.Net.Http.Headers;
 namespace CMTool.ViewModels.Windows
 {
     //[AddINotifyPropertyChangedInterface]
-    public partial class SubWindowViewModel : ObservableObject, INotifyPropertyChanged
+    public partial class SubWindowViewModel : ObservableObject
     {
         [ObservableProperty]
         private string _applicationTitle = "CMTool";

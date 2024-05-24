@@ -18,22 +18,8 @@ namespace CMTool.Module
 {
     internal class AutoUpdate
     {
-        //private static GitHubClient client = new(new ProductHeaderValue("CMTool"));
-        //private static Credentials tokenAuth = new("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");
         internal static string newVer = "";
         internal static string newUrl = "";
-
-        //Coding 令牌 token be8d9d53c53b86ed60df077bb0aadc66fe7a4b8f
-
-        //private static RestRequest Header()
-        //{
-        //    var request = new RestRequest();
-        //    request.Method = Method.Post;
-        //    request.AddHeader("Authorization", "token be8d9d53c53b86ed60df077bb0aadc66fe7a4b8f");
-        //    request.AddHeader("Content-Type", "application/json");
-        //    request.AddHeader("Accept", "application/json");
-        //    return request;
-        //}
 
         private static async Task<JObject> GetWebResponse(string url,string name,object value,ParameterType type)
         {
