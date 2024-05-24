@@ -1,7 +1,9 @@
 ﻿using CMTool.Models;
+using CMTool.Models.Data;
 using CMTool.Module;
 using CMTool.ViewModels.Windows;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -17,29 +19,29 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class ClassSettingsViewModel : ObservableObject
     {
-        private static JObject jObject = FileIO.GetData("Class");
+        //private static JObject jObject = FileIO.GetData("Class");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         [ObservableProperty]
-        private ObservableCollection<ClassList> _ClassTable = GenerateClassList(jObject);
+        private ObservableCollection<ClassList> _ClassTable = GenerateClassList(FileIO.ClassData);
 
-        private static ObservableCollection<ClassList> GenerateClassList(JObject jObject)
+        private static ObservableCollection<ClassList> GenerateClassList(DataClass dataClass)
         {
             var classList = new ObservableCollection<ClassList> { };
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 0; i < 9; i++)
             {
                 classList.Add(
                     new ClassList
                     {
                         ClassNum = i,
-                        Monday = jObject["Monday"][i - 1].ToString(),
-                        Tuesday = jObject["Tuesday"][i - 1].ToString(),
-                        Wednesday = jObject["Wednesday"][i - 1].ToString(),
-                        Thursday = jObject["Thursday"][i - 1].ToString(),
-                        Friday = jObject["Friday"][i - 1].ToString(),
-                        Saturday = jObject["Saturday"][i - 1].ToString(),
-                        Sunday = jObject["Sunday"][i - 1].ToString(),
+                        Monday = dataClass.Monday[i].ToString(),
+                        Tuesday = dataClass.Sunday[i].ToString(),
+                        Wednesday = dataClass.Wednesday[i].ToString(),
+                        Thursday = dataClass.Thursday[i].ToString(),
+                        Friday = dataClass.Friday[i].ToString(),
+                        Saturday = dataClass.Saturday[i].ToString(),
+                        Sunday = dataClass.Sunday[i].ToString(),
                     }
                 );
             }
@@ -48,7 +50,7 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnReread()
         {
-            ClassTable = GenerateClassList(jObject);
+            ClassTable = GenerateClassList(FileIO.ClassData);
         }
         [RelayCommand]
         private void OnSave()
@@ -59,19 +61,18 @@ namespace CMTool.ViewModels.Settings
                 int i = 0;
                 foreach (ClassList classList in ClassTable)
                 {
-                    jObject["Monday"][i] = classList.Monday;
-                    jObject["Tuesday"][i] = classList.Tuesday;
-                    jObject["Wednesday"][i] = classList.Wednesday;
-                    jObject["Thursday"][i] = classList.Thursday;
-                    jObject["Friday"][i] = classList.Friday;
-                    jObject["Saturday"][i] = classList.Saturday;
-                    jObject["Sunday"][i] = classList.Sunday;
+                    FileIO.ClassData.Monday[i] = classList.Monday;
+                    FileIO.ClassData.Tuesday[i] = classList.Tuesday;
+                    FileIO.ClassData.Wednesday[i] = classList.Wednesday;
+                    FileIO.ClassData.Thursday[i] = classList.Thursday;
+                    FileIO.ClassData.Friday[i] = classList.Friday;
+                    FileIO.ClassData.Saturday[i] = classList.Saturday;
+                    FileIO.ClassData.Sunday[i] = classList.Sunday;
 
                     i++;
                 }
-
-                FileIO.WriteJsonFile("Assets/Data/DataClass.json", jObject);
-                SubWindowViewModel.ClassJson = jObject;
+                FileIO.WriteJsonFile("Assets/Data/DataClass.json", JsonConvert.SerializeObject(FileIO.ClassData, Formatting.Indented));
+                //SubWindowViewModel.ClassJson = jObject;
                 App.GetService<SubWindowViewModel>().Refresh("Class");
 
                 _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));

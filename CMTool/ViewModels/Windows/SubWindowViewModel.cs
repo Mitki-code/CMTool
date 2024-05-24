@@ -1,10 +1,12 @@
-﻿using CMTool.Module;
+﻿using CMTool.Models.Data;
+using CMTool.Module;
 using CMTool.Resources;
 using CMTool.Services;
 using CMTool.Views.Windows;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Net.Http.Headers;
+using System.Reflection;
 
 
 namespace CMTool.ViewModels.Windows
@@ -76,6 +78,21 @@ namespace CMTool.ViewModels.Windows
             int OTWeek = Math.Abs(int.Parse(OTWeekString));
             int start = 0;
             int end = 0;
+
+            // 获取所有属性
+            PropertyInfo[] properties = typeof(DataWork).GetProperties();
+
+
+            foreach (var property in properties)
+            {
+                if (property.PropertyType != typeof(string[])) { continue; }
+                else
+                {
+
+                }
+                
+
+            }
 
 
             foreach (JValue property in jObject["Work"])

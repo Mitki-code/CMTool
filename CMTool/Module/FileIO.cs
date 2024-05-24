@@ -16,6 +16,9 @@ namespace CMTool.Module
         private static readonly string Version = OVersion.Remove(OVersion.LastIndexOf(".0"), 2);
 
         internal static DataTime TimeData = GetDataTime();
+        internal static DataClass ClassData = GetDataClass();
+        internal static DataWork WorkData = GetDataWork();
+        internal static DataSettings SettingsData = GetDataSettings();
 
         /// <summary>
         /// 从Json文件中获取JObject
@@ -134,7 +137,7 @@ namespace CMTool.Module
 
         internal static DataTime GetDataTime()
         {
-            DataTime data = new DataTime();
+            DataTime data = new();
             JObject jobject = new();
             try { jobject = ReadJsonFile("Assets/Data/DataTime.json"); }
             catch { }
@@ -143,20 +146,59 @@ namespace CMTool.Module
             data.Time = jobject.SelectToken("Time")?.ToString() ?? data.Time;
             data.Event = jobject.SelectToken("Event")?.ToString() ?? data.Event;
             data.WeekStart = jobject.SelectToken("WeekStart")?.ToString() ?? data.WeekStart;
-            //jobject = CheckDataVersion(, jobject);
 
             return data;
         }
 
         internal static DataClass GetDataClass()
         {
-            DataClass data = new DataClass();
+            DataClass data = new();
             JObject jobject = new();
-            try { jobject = ReadJsonFile("Assets/Data/DataTime.json"); }
+            try { jobject = ReadJsonFile("Assets/Data/DataClass.json"); }
             catch { }
 
             data.Version = jobject.SelectToken("Version")?.ToString() ?? Version;
+            data.Monday = jobject.SelectToken("Monday")?.ToObject<string[]>() ?? data.Monday;
+            data.Tuesday = jobject.SelectToken("Tuesday")?.ToObject<string[]>() ?? data.Tuesday;
+            data.Wednesday = jobject.SelectToken("Wednesday")?.ToObject<string[]>() ?? data.Wednesday;
+            data.Thursday = jobject.SelectToken("Thursday")?.ToObject<string[]>() ?? data.Thursday;
+            data.Friday = jobject.SelectToken("Friday")?.ToObject<string[]>() ?? data.Friday;
+            data.Saturday = jobject.SelectToken("Saturday")?.ToObject<string[]>() ?? data.Saturday;
+            data.Sunday = jobject.SelectToken("Sunday")?.ToObject<string[]>() ?? data.Sunday;
 
+            return data;
+        }
+
+        internal static DataWork GetDataWork()
+        {
+            DataWork data = new();
+            JObject jobject = new();
+            try { jobject = ReadJsonFile("Assets/Data/DataWork.json"); }
+            catch { }
+
+            data.Version = jobject.SelectToken("Version")?.ToString() ?? Version;
+            data.Work = jobject.SelectToken("Work")?.ToObject<string[]>() ?? data.Work;
+            data.Monday = jobject.SelectToken("Monday")?.ToObject<string[]>() ?? data.Monday;
+            data.Tuesday = jobject.SelectToken("Tuesday")?.ToObject<string[]>() ?? data.Tuesday;
+            data.Wednesday = jobject.SelectToken("Wednesday")?.ToObject<string[]>() ?? data.Wednesday;
+            data.Thursday = jobject.SelectToken("Thursday")?.ToObject<string[]>() ?? data.Thursday;
+            data.Friday = jobject.SelectToken("Friday")?.ToObject<string[]>() ?? data.Friday;
+            data.Saturday = jobject.SelectToken("Saturday")?.ToObject<string[]>() ?? data.Saturday;
+            data.Sunday = jobject.SelectToken("Sunday")?.ToObject<string[]>() ?? data.Sunday;
+
+            return data;
+        }
+
+        internal static DataSettings GetDataSettings()
+        {
+            DataSettings data = new();
+            JObject jobject = new();
+            try { jobject = ReadJsonFile("Assets/Data/DataSettings.json"); }
+            catch { }
+
+            data.Version = jobject.SelectToken("Version")?.ToString() ?? Version;
+            data.Safe = jobject.SelectToken("Safe")?.ToString() ?? data.Safe;
+            data.Theme = jobject.SelectToken("Theme")?.ToString() ?? data.Theme;
 
             return data;
         }
