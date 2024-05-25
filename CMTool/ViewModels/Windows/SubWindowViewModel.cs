@@ -1,4 +1,5 @@
-﻿using CMTool.Models.Data;
+﻿using CMTool.Models;
+using CMTool.Models.Data;
 using CMTool.Module;
 using CMTool.Resources;
 using CMTool.Services;
@@ -29,9 +30,9 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _ClassTable = ReadClassTable(ClassJson, FileIO.TimeData.WeekStart);
         [ObservableProperty]
-        private string _WorkTable = ReadWorkTable(WorkJson, FileIO.TimeData.WeekStart)[0];
+        private string _WorkTable = ReadWorkTable(FileIO.TimeData.WeekStart)[0];
         [ObservableProperty]
-        private string _NameTable = ReadWorkTable(WorkJson, FileIO.TimeData.WeekStart)[1];
+        private string _NameTable = ReadWorkTable(FileIO.TimeData.WeekStart)[1];
 
         [RelayCommand]
         private void OnOpenWindow()
@@ -68,64 +69,46 @@ namespace CMTool.ViewModels.Windows
             return ClassTable;
         }
 
-        private static string[] ReadWorkTable(JObject jObject, string WeekStart)
+        private static string[] ReadWorkTable(string WeekStart)
         {
-            string WorkTable = "";
-            string NameTable = "";
-            string Work = "0";
-            string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1).ToString();
-            int OTWeek = Math.Abs(int.Parse(OTWeekString));
+            string workTable = "";
+            string nameTable = "";
+            string lastWork = "0";
+            int week = (int)DateTime.Today.DayOfWeek;
+            int weekOT = (int)Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1);
             int start = 0;
             int end = 0;
 
-            // 获取所有属性
             PropertyInfo[] properties = typeof(DataWork).GetProperties();
+            var workData = FileIO.WorkData;
 
-
-            foreach (var property in properties)
+            foreach (string work in properties[1].GetValue(workData) as string[])
             {
-                if (property.PropertyType != typeof(string[])) { continue; }
-                else
-                {
-
-                }
-                
-
-            }
-
-
-            foreach (JValue property in jObject["Work"])
-            {
-                if (property.ToString() != Work && Work != "0")
+                if (work != lastWork && lastWork != "0")
                 {
                     for (int i = start; i < end; i++)
                     {
-                        JValue WorkValue = (JValue)jObject[Week][i];
-                        if (WorkValue.ToString() != "")
+                        string name = (properties[week + 1].GetValue(workData) as string[])[i];
+                        if (name != "")
                         {
-                            if (start - i == 0) { WorkTable = WorkTable + Work + "\n"; }
+                            if (start - i == 0)
+                                workTable += lastWork + "\n";
 
-                            NameTable = SearchList(NameTable, OTWeek, WorkValue);
+                            nameTable = SearchList(nameTable, weekOT, name);
 
                             if (i == end - 1)
-                            {
-                                while (WorkTable.Split("\n").Length < end + 1) { WorkTable += "\n"; }
-                                i++;
-                            }
+                                while (workTable.Split("\n").Length < end + 1) { workTable += "\n"; }; i++;
                         }
                     }
                     start = end;
                 }
                 end++;
-                Work = property.ToString();
+                lastWork = work;
             }
-
-            while (WorkTable.Split("\n").Length < 9) { WorkTable += "\n"; }
-            while (NameTable.Split("\n").Length < 9) { NameTable += "\n"; }
-            string[] WNList = { WorkTable, NameTable };
-
-            return WNList;
+            while (workTable.Split("\n").Length < 9) { workTable += "\n"; }
+            while (nameTable.Split("\n").Length < 9) { nameTable += "\n"; }
+            string[] table = { workTable, nameTable };
+            return table;
         }
 
         private static string SearchList(string Table, int OTWeek, JValue JsonValue)
@@ -141,6 +124,21 @@ namespace CMTool.ViewModels.Windows
                 Table = Table + JsonValue.ToString() + "\n";
             }
 
+            return Table;
+        }
+
+        private static string SearchList(string Table, int OTWeek, string Value)
+        {
+            if (Value.Contains('|'))
+            {
+                string[] TableWeek = Value.Split("|");
+                if (OTWeek % 2 == 0) { Table += TableWeek[1] + "\n"; }
+                else { Table += TableWeek[0] + "\n"; };
+            }
+            else
+            {
+                Table += Value + "\n";
+            }
 
             return Table;
         }
@@ -158,8 +156,8 @@ namespace CMTool.ViewModels.Windows
                     ClassTable = ReadClassTable(ClassJson, FileIO.TimeData.WeekStart);
                     break;
                 case "Work":
-                    WorkTable = ReadWorkTable(WorkJson, FileIO.TimeData.WeekStart)[0];
-                    NameTable = ReadWorkTable(WorkJson, FileIO.TimeData.WeekStart)[1];
+                    WorkTable = ReadWorkTable(FileIO.TimeData.WeekStart)[0];
+                    NameTable = ReadWorkTable(FileIO.TimeData.WeekStart)[1];
                     break;
             }
         }

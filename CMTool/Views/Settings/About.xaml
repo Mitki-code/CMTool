@@ -28,7 +28,7 @@
             <ui:TextBlock Grid.Column="1" FontTypography="Body" Text="CMTool" FontSize="24" VerticalAlignment="Center" Margin="0,0,0,32" />
             <ui:TextBlock Grid.Column="1" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="{Binding ViewModel.AppVersionCopyright}" VerticalAlignment="Center" Margin="0,24,0,0"/>
             <ui:ProgressRing x:Name="UpdateStateRing" Grid.Column="2" IsIndeterminate="True" Visibility="Hidden"  Width="20" Height="20" />
-            <ui:Button Grid.Column="3" Content="{Binding ViewModel.UpdateButtonState}" Appearance="Primary" Command="{Binding ViewModel.CheckUpdateCommand}" Margin="8,0,16,0"/>
+            <ui:Button Grid.Column="3" Content="{Binding ViewModel.UpdateButtonState}" Appearance="{Binding ViewModel.UpdateButtonAState}" Command="{Binding ViewModel.CheckUpdateCommand}" Margin="8,0,16,0"/>
         </Grid>
 
         <ui:InfoBar x:Name="UpdateStateBar" Title="{Binding ViewModel.UpdateState}" Message="{Binding ViewModel.UpdateVersion}" IsOpen="False"/>

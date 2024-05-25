@@ -25,20 +25,21 @@ namespace CMTool.ViewModels.Settings
         private bool updateStateBool = false;
         [ObservableProperty]
         private string _updateButtonState = "检查更新";
-        //[ObservableProperty]
-        //private UIElement _updateButtonAState;
+        [ObservableProperty]
+        private ControlAppearance _updateButtonAState = ControlAppearance.Primary;
         [ObservableProperty]
         private string _updateVersion = "";
 
         [RelayCommand]
         private async Task OnCheckUpdate() 
         {
-            UpdateButtonState = "正在检查更新";
+            UpdateButtonAState = ControlAppearance.Secondary;
             App.GetService<About>().UpdateStateBar.IsOpen = false;
             App.GetService<About>().UpdateStateRing.Visibility = Visibility.Visible;
-
+            
             if (!updateStateBool)
             {
+                UpdateButtonState = "正在检查更新";
                 try
                 {
                     if (await AutoUpdate.Check(AppVersion))
@@ -46,7 +47,7 @@ namespace CMTool.ViewModels.Settings
                         UpdateState = "检测到新版本";
                         UpdateVersion = AppVersion + " -> " + AutoUpdate.newVer;
                         updateStateBool = true;
-                        UpdateButtonState = "获取更新";
+                        UpdateButtonState = "下载并安装";
                     }
                     else
                     {
@@ -60,11 +61,13 @@ namespace CMTool.ViewModels.Settings
                 {
                     UpdateState = "发生错误";
                     UpdateVersion = "检查更新失败，请稍后重试";
+                    UpdateButtonState = "检查更新";
                     App.GetService<About>().UpdateStateBar.Severity = InfoBarSeverity.Error;
                 }
 
                 App.GetService<About>().UpdateStateRing.Visibility = Visibility.Hidden;
                 App.GetService<About>().UpdateStateBar.IsOpen = true;
+                
             }
             else
             {
@@ -72,7 +75,8 @@ namespace CMTool.ViewModels.Settings
                 Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"temp.exe");
                 Application.Current.Shutdown();
             }
-            
+
+            UpdateButtonAState = ControlAppearance.Primary;
         }
     }
 }
