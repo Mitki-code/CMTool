@@ -1,10 +1,12 @@
 ﻿using CMTool.Models;
+using CMTool.Models.Data;
 using CMTool.Module;
 using CMTool.Resources;
 using CMTool.Services;
 using CMTool.ViewModels.Windows;
 using CMTool.Views.Settings;
 using CMTool.Views.Windows;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -19,12 +21,12 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class WorkSettingsViewModel : ObservableObject
     {
-        private static JObject jObject = FileIO.GetData("Work");
+        //private static JObject jObject = FileIO.GetData("Work");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         //public SubWindowViewModel ViewModel { get; }
         [ObservableProperty]
-        private ObservableCollection<WorkList> _WorkTable = GenerateWorkList(jObject);
+        private ObservableCollection<WorkList> _WorkTable = GenerateWorkList(FileIO.WorkData);
 
         [ObservableProperty]
         private IList<string> _WorkMode = new ObservableCollection<string>
@@ -34,32 +36,32 @@ namespace CMTool.ViewModels.Settings
             "轮流(WIP)"
         };
 
-        private static ObservableCollection<WorkList> GenerateWorkList(JObject jObject)
+        private static ObservableCollection<WorkList> GenerateWorkList(DataWork dataWork)
         {
-            var worklist = new ObservableCollection<WorkList> { };
+            var workList = new ObservableCollection<WorkList> { };
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 0; i < 9; i++)
             {
-                worklist.Add(
+                workList.Add(
                     new WorkList
                     {
-                        Work = jObject["Work"][i - 1].ToString(),
-                        Monday = jObject["Monday"][i - 1].ToString(),
-                        Tuesday = jObject["Tuesday"][i - 1].ToString(),
-                        Wednesday = jObject["Wednesday"][i - 1].ToString(),
-                        Thursday = jObject["Thursday"][i - 1].ToString(),
-                        Friday = jObject["Friday"][i - 1].ToString(),
-                        Saturday = jObject["Saturday"][i - 1].ToString(),
-                        Sunday = jObject["Sunday"][i - 1].ToString(),
+                        Work = dataWork.Work[i].ToString(),
+                        Monday = dataWork.Monday[i].ToString(),
+                        Tuesday = dataWork.Tuesday[i].ToString(),
+                        Wednesday = dataWork.Wednesday[i].ToString(),
+                        Thursday = dataWork.Thursday[i].ToString(),
+                        Friday = dataWork.Friday[i].ToString(),
+                        Saturday = dataWork.Saturday[i].ToString(),
+                        Sunday = dataWork.Sunday[i].ToString(),
                     }
                 );
             }
-            return worklist;
+            return workList;
         }
         [RelayCommand]
         private void OnReread()
         {
-            WorkTable = GenerateWorkList(jObject);
+            WorkTable = GenerateWorkList(FileIO.WorkData);
         }
         [RelayCommand]
         private void OnSave()
@@ -70,20 +72,19 @@ namespace CMTool.ViewModels.Settings
                 int i = 0;
                 foreach (WorkList workList in WorkTable)
                 {
-                    jObject["Work"][i] = workList.Work;
-                    jObject["Monday"][i] = workList.Monday;
-                    jObject["Tuesday"][i] = workList.Tuesday;
-                    jObject["Wednesday"][i] = workList.Wednesday;
-                    jObject["Thursday"][i] = workList.Thursday;
-                    jObject["Friday"][i] = workList.Friday;
-                    jObject["Saturday"][i] = workList.Saturday;
-                    jObject["Sunday"][i] = workList.Sunday;
+                    FileIO.WorkData.Work[i] = workList.Work;
+                    FileIO.WorkData.Monday[i] = workList.Monday;
+                    FileIO.WorkData.Tuesday[i] = workList.Tuesday;
+                    FileIO.WorkData.Wednesday[i] = workList.Wednesday;
+                    FileIO.WorkData.Thursday[i] = workList.Thursday;
+                    FileIO.WorkData.Friday[i] = workList.Friday;
+                    FileIO.WorkData.Saturday[i] = workList.Saturday;
+                    FileIO.WorkData.Sunday[i] = workList.Sunday;
 
                     i++;
                 }
 
-                FileIO.WriteJsonFile("Assets/Data/DataWork.json", jObject);
-                SubWindowViewModel.WorkJson = jObject;
+                FileIO.WriteJsonFile("Assets/Data/DataWork.json", JsonConvert.SerializeObject(FileIO.WorkData, Formatting.Indented));
                 App.GetService<SubWindowViewModel>().Refresh("Work");
 
                 _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
