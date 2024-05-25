@@ -10,27 +10,27 @@ namespace CMTool.Models.Data
     internal class DataClass
     {
         [JsonProperty("Version")]
-        internal string? Version { get; set; } = "";
+        public string? Version { get; set; } = "";
 
         [JsonProperty("Monday")]
-        internal string[]? Monday { get; set; } = new string[9];
+        public string[]? Monday { get; set; } = new string[9];
 
         [JsonProperty("Tuesday")]
-        internal string[]? Tuesday { get; set; } = new string[9];
+        public string[]? Tuesday { get; set; } = new string[9];
 
         [JsonProperty("Wednesday")]
-        internal string[]? Wednesday { get; set; } = new string[9];
+        public string[]? Wednesday { get; set; } = new string[9];
 
         [JsonProperty("Thursday")]
-        internal string[]? Thursday { get; set; } = new string[9];
+        public string[]? Thursday { get; set; } = new string[9];
 
         [JsonProperty("Friday")]
-        internal string[]? Friday { get; set; } = new string[9];
+        public string[]? Friday { get; set; } = new string[9];
 
         [JsonProperty("Saturday")]
-        internal string[]? Saturday { get; set; } = new string[9];
+        public string[]? Saturday { get; set; } = new string[9];
 
         [JsonProperty("Sunday")]
-        internal string[]? Sunday { get; set; } = new string[9];
+        public string[]? Sunday { get; set; } = new string[9];
     }
 }

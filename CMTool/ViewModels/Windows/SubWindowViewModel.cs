@@ -28,7 +28,7 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _EventDateTime = Time.GetTimeDifference("D", ETime) + "天";
         [ObservableProperty]
-        private string _ClassTable = ReadClassTable(ClassJson, FileIO.TimeData.WeekStart);
+        private string _ClassTable = ReadClassTable(FileIO.TimeData.WeekStart);
         [ObservableProperty]
         private string _WorkTable = ReadWorkTable(FileIO.TimeData.WeekStart)[0];
         [ObservableProperty]
@@ -55,18 +55,20 @@ namespace CMTool.ViewModels.Windows
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://sr.mihoyo.com/cloud/?from_channel=adbdsem#/") { UseShellExecute = true });
         }
 
-        private static string ReadClassTable(JObject jObject, string WeekStart)
+        private static string ReadClassTable(string WeekStart)
         {
-            string ClassTable = "";
-            string Week = DateTime.Today.DayOfWeek.ToString();
-            string OTWeekString = Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1).ToString();
-            int OTWeek = Math.Abs(int.Parse(OTWeekString));
+            string classTable = "";
+            int week = (int)DateTime.Today.DayOfWeek;
+            int weekOT = (int)Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1);
 
-            foreach (JValue property in jObject[Week])
+            PropertyInfo[] properties = typeof(DataClass).GetProperties();
+            var classData = FileIO.ClassData;
+
+            foreach (string property in (properties[week].GetValue(classData) as string[]))
             {
-                ClassTable = SearchList(ClassTable, OTWeek, property);
+                classTable = SearchList(classTable, weekOT, property);
             }
-            return ClassTable;
+            return classTable;
         }
 
         private static string[] ReadWorkTable(string WeekStart)
@@ -111,22 +113,6 @@ namespace CMTool.ViewModels.Windows
             return table;
         }
 
-        private static string SearchList(string Table, int OTWeek, JValue JsonValue)
-        {
-            if (JsonValue.ToString().Contains('|'))
-            {
-                string[] TableWeek = JsonValue.ToString().Split("|");
-                if (OTWeek % 2 == 0) { Table = Table + TableWeek[1] + "\n"; }
-                else { Table = Table + TableWeek[0] + "\n"; };
-            }
-            else
-            {
-                Table = Table + JsonValue.ToString() + "\n";
-            }
-
-            return Table;
-        }
-
         private static string SearchList(string Table, int OTWeek, string Value)
         {
             if (Value.Contains('|'))
@@ -153,7 +139,7 @@ namespace CMTool.ViewModels.Windows
                     EventDateTime = Time.GetTimeDifference("D", ETime) + "天";
                     break;
                 case "Class":
-                    ClassTable = ReadClassTable(ClassJson, FileIO.TimeData.WeekStart);
+                    ClassTable = ReadClassTable(FileIO.TimeData.WeekStart);
                     break;
                 case "Work":
                     WorkTable = ReadWorkTable(FileIO.TimeData.WeekStart)[0];

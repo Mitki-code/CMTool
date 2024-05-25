@@ -34,7 +34,7 @@ namespace CMTool.ViewModels.Settings
                 classList.Add(
                     new ClassList
                     {
-                        ClassNum = i,
+                        ClassNum = i+1,
                         Monday = dataClass.Monday[i].ToString(),
                         Tuesday = dataClass.Sunday[i].ToString(),
                         Wednesday = dataClass.Wednesday[i].ToString(),
@@ -72,7 +72,6 @@ namespace CMTool.ViewModels.Settings
                     i++;
                 }
                 FileIO.WriteJsonFile("Assets/Data/DataClass.json", JsonConvert.SerializeObject(FileIO.ClassData, Formatting.Indented));
-                //SubWindowViewModel.ClassJson = jObject;
                 App.GetService<SubWindowViewModel>().Refresh("Class");
 
                 _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
