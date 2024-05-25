@@ -18,9 +18,6 @@ namespace CMTool.ViewModels.Windows
         [ObservableProperty]
         private string _applicationTitle = "CMTool";
 
-        //public static JObject TimeJson = FileIO.GetData("Time");
-        public static JObject ClassJson = FileIO.GetData("Class");
-        public static JObject WorkJson = FileIO.GetData("Work");
         private static DateTime ETime = Convert.ToDateTime(FileIO.TimeData.Time);
 
         [ObservableProperty]
