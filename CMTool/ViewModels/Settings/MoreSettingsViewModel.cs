@@ -1,13 +1,7 @@
 ﻿using CMTool.Module;
 using CMTool.ViewModels.Windows;
-using CMTool.Views.Settings;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -16,7 +10,6 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class MoreSettingsViewModel : ObservableObject, INavigationAware
     {
-        private static JObject jObject = FileIO.GetData("Time");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         private bool _isInitialized = false;
@@ -37,7 +30,7 @@ namespace CMTool.ViewModels.Settings
         }
 
         [ObservableProperty]
-        private DateTime _WeekStart = Convert.ToDateTime(jObject["WeekStart"].ToString());
+        private DateTime _WeekStart = Convert.ToDateTime(FileIO.TimeData.WeekStart);
         [ObservableProperty]
         private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
 
@@ -85,10 +78,9 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         private void OnSave()
         {
-            jObject["WeekStart"] = WeekStart.ToString();
+            FileIO.TimeData.WeekStart = WeekStart.ToString();
 
-            FileIO.WriteJsonFile("Assets/Data/DataTime.json", jObject);
-            //SubWindowViewModel.TimeJson = jObject;
+            FileIO.WriteJsonFile("Assets/Data/DataTime.json", JsonConvert.SerializeObject(FileIO.TimeData, Formatting.Indented));
             App.GetService<SubWindowViewModel>().Refresh("Time");
 
             _snackbarService.Show("保存成功", "更改已应用", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
@@ -105,6 +97,8 @@ namespace CMTool.ViewModels.Settings
 
                     ApplicationThemeManager.Apply(ApplicationTheme.Light);
                     CurrentTheme = ApplicationTheme.Light;
+                    FileIO.SettingsData.Theme = "true";
+                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", JsonConvert.SerializeObject(FileIO.SettingsData, Formatting.Indented));
                     _snackbarService.Show("切换成功", "已切换到日间模式", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
                     break;
 
@@ -114,6 +108,8 @@ namespace CMTool.ViewModels.Settings
 
                     ApplicationThemeManager.Apply(ApplicationTheme.Dark);
                     CurrentTheme = ApplicationTheme.Dark;
+                    FileIO.SettingsData.Theme = "false";
+                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", JsonConvert.SerializeObject(FileIO.SettingsData, Formatting.Indented));
                     _snackbarService.Show("切换成功", "已切换到夜间模式", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
                     break;
             }
@@ -122,20 +118,19 @@ namespace CMTool.ViewModels.Settings
         [RelayCommand]
         public void OnChangeProtect(object state)
         {
-            JObject jobject = FileIO.GetData("Settings");
             switch (state)
             {
                 case true:
                     ProtectionControl.Start();
-                    jobject["Safe"] = "true";
-                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", jobject);
+                    FileIO.SettingsData.Safe = "true";
+                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", JsonConvert.SerializeObject(FileIO.SettingsData, Formatting.Indented));
                     _snackbarService.Show("启用成功", "安全保护已启用，将拦截不友好的恶意程序", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle16), TimeSpan.FromSeconds(2));
                     break;
 
                 default:
                     ProtectionControl.Stop();
-                    jobject["Safe"] = "false";
-                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", jobject);
+                    FileIO.SettingsData.Safe = "false";
+                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", JsonConvert.SerializeObject(FileIO.SettingsData, Formatting.Indented));
                     _snackbarService.Show("禁用成功", "安全保护已关闭，将不会再拦截不友好的恶意程序", ControlAppearance.Danger, new SymbolIcon(SymbolRegular.DismissCircle16), TimeSpan.FromSeconds(2));
                     break;
             }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using CMTool.Models.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using CMTool.Models.Data;
-using System.Xml.Linq;
+using System.IO;
 
 namespace CMTool.Module
 {
@@ -28,7 +23,7 @@ namespace CMTool.Module
         internal static JObject ReadJsonFile(string path)
         {
             StreamReader file = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + @path);
-            JsonTextReader reader = new JsonTextReader(file);
+            JsonTextReader reader = new(file);
 
             JObject jObject = (JObject)JToken.ReadFrom(reader);
             reader.Close();
@@ -52,7 +47,7 @@ namespace CMTool.Module
         {
             try
             {
-                StreamWriter file = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @path);
+                StreamWriter file = new(AppDomain.CurrentDomain.BaseDirectory + @path);
                 file.Write(json);
                 file.Close();
             }
@@ -112,36 +107,13 @@ namespace CMTool.Module
             return true;
         }
 
-        /// <summary>
-        /// 获取各类数据
-        /// </summary>
-        /// <param name="name">数据名称(Time/Class/Work/Settings)</param>
-        /// <returns></returns>
-        internal static JObject GetData(string name)
-        {
-            JObject jobject;
-            try
-            {
-                jobject = ReadJsonFile("Assets/Data/Data" + name + ".json");
-                jobject = CheckDataVersion(name, jobject);
-
-                return jobject;
-            }
-            catch
-            {
-                ReData(name);
-                jobject = ReadJsonFile("Assets/Data/Data" + name + ".json");
-                return jobject;
-            }
-        }
-
         internal static DataTime GetDataTime()
         {
             DataTime data = new();
-            JObject jobject = new();
+            JObject jobject = [];
             try { jobject = ReadJsonFile("Assets/Data/DataTime.json"); }
             catch { }
-            
+
             data.Version = jobject.SelectToken("Version")?.ToString() ?? Version;
             data.Time = jobject.SelectToken("Time")?.ToString() ?? data.Time;
             data.Event = jobject.SelectToken("Event")?.ToString() ?? data.Event;
@@ -153,7 +125,7 @@ namespace CMTool.Module
         internal static DataClass GetDataClass()
         {
             DataClass data = new();
-            JObject jobject = new();
+            JObject jobject = [];
             try { jobject = ReadJsonFile("Assets/Data/DataClass.json"); }
             catch { }
 
@@ -172,7 +144,7 @@ namespace CMTool.Module
         internal static DataWork GetDataWork()
         {
             DataWork data = new();
-            JObject jobject = new();
+            JObject jobject = [];
             try { jobject = ReadJsonFile("Assets/Data/DataWork.json"); }
             catch { }
 
@@ -192,7 +164,7 @@ namespace CMTool.Module
         internal static DataSettings GetDataSettings()
         {
             DataSettings data = new();
-            JObject jobject = new();
+            JObject jobject = [];
             try { jobject = ReadJsonFile("Assets/Data/DataSettings.json"); }
             catch { }
 

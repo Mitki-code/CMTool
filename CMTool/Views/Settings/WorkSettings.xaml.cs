@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CMTool.ViewModels.Settings;
 using System.ComponentModel;
-using System.Windows.Controls;
-using CMTool.ViewModels.Settings;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Windows.Controls;
 
 namespace CMTool.Views.Settings
 {

@@ -1,5 +1,6 @@
 ﻿using CMTool.Module;
 using CMTool.ViewModels.Windows;
+using Wpf.Ui.Appearance;
 
 namespace CMTool.Views.Windows
 {
@@ -12,18 +13,19 @@ namespace CMTool.Views.Windows
             ViewModel = viewModel;
 
             InitializeComponent();
-            RunProtect();
+            Run();
 
             ShowInTaskbar = false;
             Left = SystemParameters.WorkArea.Width - Width;
             Top = 0;
         }
 
-        private void RunProtect()
+        private void Run()
         {
-            if (FileIO.GetData("Settings")["Safe"].ToString() == "true")
+            if (FileIO.SettingsData.Safe == "true")
                 ProtectionControl.Start();
-
+            if (FileIO.SettingsData.Theme == "true")
+                ApplicationThemeManager.Apply(ApplicationTheme.Light);
         }
     }
 }

@@ -1,19 +1,9 @@
 ﻿using CMTool.Models;
 using CMTool.Models.Data;
 using CMTool.Module;
-using CMTool.Resources;
-using CMTool.Services;
 using CMTool.ViewModels.Windows;
-using CMTool.Views.Settings;
-using CMTool.Views.Windows;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
@@ -21,10 +11,8 @@ namespace CMTool.ViewModels.Settings
 {
     public partial class WorkSettingsViewModel : ObservableObject
     {
-        //private static JObject jObject = FileIO.GetData("Work");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
-        //public SubWindowViewModel ViewModel { get; }
         [ObservableProperty]
         private ObservableCollection<WorkList> _WorkTable = GenerateWorkList(FileIO.WorkData);
 

@@ -1,13 +1,6 @@
 ﻿using CMTool.Module;
 using CMTool.Views.Settings;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wpf.Ui;
-using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
 namespace CMTool.ViewModels.Settings
@@ -31,12 +24,12 @@ namespace CMTool.ViewModels.Settings
         private string _updateVersion = "";
 
         [RelayCommand]
-        private async Task OnCheckUpdate() 
+        private async Task OnCheckUpdate()
         {
             UpdateButtonAState = ControlAppearance.Secondary;
             App.GetService<About>().UpdateStateBar.IsOpen = false;
             App.GetService<About>().UpdateStateRing.Visibility = Visibility.Visible;
-            
+
             if (!updateStateBool)
             {
                 UpdateButtonState = "正在检查更新";
@@ -48,14 +41,15 @@ namespace CMTool.ViewModels.Settings
                         UpdateVersion = AppVersion + " -> " + AutoUpdate.newVer;
                         updateStateBool = true;
                         UpdateButtonState = "下载并安装";
+                        App.GetService<About>().UpdateStateBar.Severity = InfoBarSeverity.Informational;
                     }
                     else
                     {
                         UpdateState = "当前已是最新版本";
                         UpdateVersion = "";
                         UpdateButtonState = "检查更新";
+                        App.GetService<About>().UpdateStateBar.Severity = InfoBarSeverity.Success;
                     }
-                    App.GetService<About>().UpdateStateBar.Severity = InfoBarSeverity.Informational;
                 }
                 catch
                 {
@@ -67,7 +61,7 @@ namespace CMTool.ViewModels.Settings
 
                 App.GetService<About>().UpdateStateRing.Visibility = Visibility.Hidden;
                 App.GetService<About>().UpdateStateBar.IsOpen = true;
-                
+
             }
             else
             {

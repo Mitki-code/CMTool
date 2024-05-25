@@ -1,12 +1,7 @@
-﻿using CMTool.Models;
-using CMTool.Models.Data;
+﻿using CMTool.Models.Data;
 using CMTool.Module;
-using CMTool.Resources;
 using CMTool.Services;
 using CMTool.Views.Windows;
-using Newtonsoft.Json.Linq;
-using System.ComponentModel;
-using System.Net.Http.Headers;
 using System.Reflection;
 
 
@@ -32,20 +27,20 @@ namespace CMTool.ViewModels.Windows
         private string _NameTable = ReadWorkTable(FileIO.TimeData.WeekStart)[1];
 
         [RelayCommand]
-        private void OnOpenWindow()
+        private static void OnOpenWindow()
         {
             WindowsProviderService _windowsProviderService = App.GetService<WindowsProviderService>();
             _windowsProviderService.Show<MainWindow>();
         }
         [RelayCommand]
-        private void OnGenshin()
+        private static void OnGenshin()
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/GFX/OPGo.wav");
+            System.Media.SoundPlayer player = new(AppDomain.CurrentDomain.BaseDirectory + @"Assets/GFX/OPGo.wav");
             player.Play();
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://ys.mihoyo.com/cloud/?autobegin=1#/") { UseShellExecute = true });
         }
         [RelayCommand]
-        private void OnStarRail()
+        private static void OnStarRail()
         {
             //System.Media.SoundPlayer player = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"Assets/GFX/OPGo.wav");
             //player.Play();
@@ -106,7 +101,7 @@ namespace CMTool.ViewModels.Windows
             }
             while (workTable.Split("\n").Length < 9) { workTable += "\n"; }
             while (nameTable.Split("\n").Length < 9) { nameTable += "\n"; }
-            string[] table = { workTable, nameTable };
+            string[] table = [workTable, nameTable];
             return table;
         }
 

@@ -1,7 +1,5 @@
-﻿using CMTool.Views.Pages;
-using CMTool.Views.Settings;
+﻿using CMTool.Views.Settings;
 using System.Collections.ObjectModel;
-using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
 namespace CMTool.ViewModels.Pages

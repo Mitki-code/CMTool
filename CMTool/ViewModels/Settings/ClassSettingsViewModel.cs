@@ -2,24 +2,15 @@
 using CMTool.Models.Data;
 using CMTool.Module;
 using CMTool.ViewModels.Windows;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CMTool.ViewModels.Settings
 {
     public partial class ClassSettingsViewModel : ObservableObject
     {
-        //private static JObject jObject = FileIO.GetData("Class");
         private static readonly ISnackbarService _snackbarService = App.GetService<ISnackbarService>();
 
         [ObservableProperty]
@@ -34,7 +25,7 @@ namespace CMTool.ViewModels.Settings
                 classList.Add(
                     new ClassList
                     {
-                        ClassNum = i+1,
+                        ClassNum = i + 1,
                         Monday = dataClass.Monday[i].ToString(),
                         Tuesday = dataClass.Sunday[i].ToString(),
                         Wednesday = dataClass.Wednesday[i].ToString(),

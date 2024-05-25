@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CMTool.Module
+﻿namespace CMTool.Module
 {
     internal class Time
     {
-        internal static bool IsTimeQuantum(DateTime startTime,DateTime endTime,DateTime time)
+        internal static bool IsTimeQuantum(DateTime startTime, DateTime endTime, DateTime time)
         {
             if (startTime < time && time < endTime)
                 return true;

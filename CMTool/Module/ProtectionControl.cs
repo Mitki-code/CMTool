@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Timers;
-using System.Windows.Controls;
-using Wpf.Ui.Controls;
 
 namespace CMTool.Module
 {
@@ -40,11 +33,11 @@ namespace CMTool.Module
             if (!runState)
             {
                 runState = true;
-                if (!controlState&& Time.IsTimeQuantum("12:20","14:10"))
+                if (!controlState && Time.IsTimeQuantum("12:20", "14:10"))
                     Control();
-                else if (!controlState&&Time.IsTimeQuantum("20:00", "23:59"))
+                else if (!controlState && Time.IsTimeQuantum("20:00", "23:59"))
                     Control();
-                else if (controlState&&Time.IsTimeQuantum("14:10", "14:20"))
+                else if (controlState && Time.IsTimeQuantum("14:10", "14:20"))
                     UnControl();
                 else
                     runState = false;
