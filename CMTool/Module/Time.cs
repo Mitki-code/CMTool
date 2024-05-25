@@ -2,12 +2,26 @@
 {
     internal class Time
     {
+        /// <summary>
+        /// 检查指定时间点是否处于指定时间段内
+        /// </summary>
+        /// <param name="startTime">起始时间点</param>
+        /// <param name="endTime">结束时间点</param>
+        /// <param name="time">时间点</param>
+        /// <returns></returns>
         internal static bool IsTimeQuantum(DateTime startTime, DateTime endTime, DateTime time)
         {
             if (startTime < time && time < endTime)
                 return true;
             return false;
         }
+        /// <summary>
+        /// 检查指定时间点是否处于指定时间段内
+        /// </summary>
+        /// <param name="startTime">起始时间点</param>
+        /// <param name="endTime">结束时间点</param>
+        /// <param name="time">时间点</param>
+        /// <returns></returns>
         internal static bool IsTimeQuantum(string startTime, string endTime, string time)
         {
             if (IsTimeQuantum(Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + startTime),
@@ -16,6 +30,12 @@
                 return true;
             return false;
         }
+        /// <summary>
+        /// 检查当前时间点是否处于指定时间段内
+        /// </summary>
+        /// <param name="startTime">起始时间点</param>
+        /// <param name="endTime">结束时间点</param>
+        /// <returns></returns>
         internal static bool IsTimeQuantum(string startTime, string endTime)
         {
             if (IsTimeQuantum(Convert.ToDateTime(DateTime.Now.ToShortDateString() + " " + startTime),
@@ -66,5 +86,12 @@
             return timeDifference;
         }
 
+        internal static int GetWeek(DateTime time)
+        {
+            int week = (int)time.DayOfWeek;
+            if (week == 0)
+                week = 7;
+            return week;
+        }
     }
 }

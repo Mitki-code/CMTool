@@ -50,7 +50,7 @@ namespace CMTool.ViewModels.Windows
         private static string ReadClassTable(string WeekStart)
         {
             string classTable = "";
-            int week = (int)DateTime.Today.DayOfWeek;
+            int week = Time.GetWeek(DateTime.Today);
             int weekOT = (int)Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1);
 
             PropertyInfo[] properties = typeof(DataClass).GetProperties();
@@ -68,7 +68,7 @@ namespace CMTool.ViewModels.Windows
             string workTable = "";
             string nameTable = "";
             string lastWork = "0";
-            int week = (int)DateTime.Today.DayOfWeek;
+            int week = Time.GetWeek(DateTime.Today);
             int weekOT = (int)Math.Abs(Time.GetTimeDifference("W", Convert.ToDateTime(WeekStart)) - 1);
             int start = 0;
             int end = 0;
