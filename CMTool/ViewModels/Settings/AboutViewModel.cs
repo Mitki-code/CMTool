@@ -9,7 +9,7 @@ namespace CMTool.ViewModels.Settings
     public partial class AboutViewModel : ObservableObject
     {
         private static string appVersionO = Application.ResourceAssembly.GetName().Version.ToString();
-        private static string appRing = "正式版";
+        private static string appRing = "预览版";
 
         [ObservableProperty]
         private string _appVersion = appVersionO.Remove(appVersionO.LastIndexOf(".0"), 2);
@@ -37,7 +37,7 @@ namespace CMTool.ViewModels.Settings
                 UpdateButtonState = "正在检查更新";
                 try
                 {
-                    if (await Update.Check(AppVersion))
+                    if (await Update.Check(appVersionO))
                     {
                         UpdateState = "检测到新版本";
                         UpdateVersion = AppVersion + " -> " + Update.newVer;

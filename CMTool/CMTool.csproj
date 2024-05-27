@@ -8,7 +8,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>2.3.0</AssemblyVersion>
+    <AssemblyVersion>2.3.0.0527</AssemblyVersion>
     <FileVersion>2.3.0</FileVersion>
     <NeutralLanguage>zh-CN</NeutralLanguage>
     <UseWindowsForms>False</UseWindowsForms>

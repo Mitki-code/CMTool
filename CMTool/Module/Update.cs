@@ -26,7 +26,7 @@ namespace CMTool.Module
             // 获取最新版本
             Version version = new(appVersion);
 
-            // 判断更新圈
+            // 判断更新通道
             if (FileIO.SettingsData.UpdateRing == "release")
             {
                 var postFileList = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactRepositoryFileList&action=DescribeArtifactRepositoryFileList",
