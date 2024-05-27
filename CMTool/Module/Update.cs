@@ -37,7 +37,7 @@ namespace CMTool.Module
                     if (postVersion > version)
                     {
                         var postFileUrl = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactFileDownloadUrl&action=DescribeArtifactFileDownloadUrl",
-                        "application/json", "{\n  \"ProjectId\": \"13081751\",\n  \"Repository\": \"release\",\n  \"Package\": \"CMTool.exe\",\n  \"PackageVersion\": " + postFile["VersionName"] + ",\n  \"FileName\": \"CMTool.exe\",\n  \"Timeout\\\"\": \"600\"\n}", ParameterType.RequestBody);
+                        "application/json", "{\n  \"ProjectId\": \"13081751\",\n  \"Repository\": \"release\",\n  \"Package\": \"CMTool.msi\",\n  \"PackageVersion\": " + postFile["VersionName"] + ",\n  \"FileName\": \"CMTool.msi\",\n  \"Timeout\\\"\": \"600\"\n}", ParameterType.RequestBody);
 
                         newVer = postVersion.ToString();
                         newUrl = postFileUrl["Response"]["Url"].ToString();
@@ -55,7 +55,7 @@ namespace CMTool.Module
                     if (postVersion > version)
                     {
                         var postFileUrl = await GetWebResponse("https://e.coding.net/open-api/?Action=DescribeArtifactFileDownloadUrl&action=DescribeArtifactFileDownloadUrl",
-                        "application/json", "{\n  \"ProjectId\": \"13081751\",\n  \"Repository\": \"dev\",\n  \"Package\": \"CMTool.exe\",\n  \"PackageVersion\": " + postFile["VersionName"] + ",\n  \"FileName\": \"CMTool.exe\",\n  \"Timeout\\\"\": \"600\"\n}", ParameterType.RequestBody);
+                        "application/json", "{\n  \"ProjectId\": \"13081751\",\n  \"Repository\": \"dev\",\n  \"Package\": \"CMTool.msi\",\n  \"PackageVersion\": " + postFile["VersionName"] + ",\n  \"FileName\": \"CMTool.msi\",\n  \"Timeout\\\"\": \"600\"\n}", ParameterType.RequestBody);
 
                         newVer = postVersion.ToString();
                         newUrl = postFileUrl["Response"]["Url"].ToString();
