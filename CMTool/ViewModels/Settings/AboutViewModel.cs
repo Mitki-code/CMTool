@@ -9,11 +9,12 @@ namespace CMTool.ViewModels.Settings
     public partial class AboutViewModel : ObservableObject
     {
         private static string appVersionO = Application.ResourceAssembly.GetName().Version.ToString();
+        private static string appRing = "正式版";
 
         [ObservableProperty]
         private string _appVersion = appVersionO.Remove(appVersionO.LastIndexOf(".0"), 2);
         [ObservableProperty]
-        private string _appVersionCopyright = "版本 " + appVersionO.Remove(appVersionO.LastIndexOf(".0"), 2) + "  |  © 2023~2024 米缇";
+        private string _appVersionCopyright = "版本 " + appVersionO.Remove(appVersionO.LastIndexOf(".0"), 2) + "  |  "+ appRing + "  |  © 2023~2024 米缇";
         [ObservableProperty]
         private string _updateState = "";
         private bool updateStateBool = false;
