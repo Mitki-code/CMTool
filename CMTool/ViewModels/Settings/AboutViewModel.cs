@@ -1,5 +1,6 @@
 ﻿using CMTool.Module;
 using CMTool.Views.Settings;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using Wpf.Ui.Controls;
 
@@ -35,10 +36,10 @@ namespace CMTool.ViewModels.Settings
                 UpdateButtonState = "正在检查更新";
                 try
                 {
-                    if (await AutoUpdate.Check(AppVersion))
+                    if (await Update.Check(AppVersion))
                     {
                         UpdateState = "检测到新版本";
-                        UpdateVersion = AppVersion + " -> " + AutoUpdate.newVer;
+                        UpdateVersion = AppVersion + " -> " + Update.newVer;
                         updateStateBool = true;
                         UpdateButtonState = "下载并安装";
                         App.GetService<About>().UpdateStateBar.Severity = InfoBarSeverity.Informational;
@@ -65,12 +66,28 @@ namespace CMTool.ViewModels.Settings
             }
             else
             {
-                await AutoUpdate.Down();
+                await Update.Down();
                 Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"temp.exe");
                 Application.Current.Shutdown();
             }
 
             UpdateButtonAState = ControlAppearance.Primary;
+        }
+
+        [RelayCommand]
+        private void OnChangeUpdateRing(object state)
+        {
+            switch (state)
+            {
+                case true:
+                    FileIO.SettingsData.UpdateRing = "dev";
+                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", JsonConvert.SerializeObject(FileIO.SettingsData, Formatting.Indented));
+                    break;
+                case false:
+                    FileIO.SettingsData.UpdateRing = "release";
+                    FileIO.WriteJsonFile("Assets/Data/DataSettings.json", JsonConvert.SerializeObject(FileIO.SettingsData, Formatting.Indented));
+                    break;
+            }
         }
     }
 }

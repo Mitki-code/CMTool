@@ -1,4 +1,5 @@
-﻿using CMTool.ViewModels.Settings;
+﻿using CMTool.Module;
+using CMTool.ViewModels.Settings;
 
 namespace CMTool.Views.Settings
 {
@@ -10,6 +11,12 @@ namespace CMTool.Views.Settings
             ViewModel = viewModel;
             DataContext = this;
             InitializeComponent();
+            Check();
+        }
+        private void Check()
+        {
+            if (FileIO.SettingsData.UpdateRing == "dev")
+                UpdateRing.IsChecked = true;
         }
     }
 }

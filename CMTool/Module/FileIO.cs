@@ -171,6 +171,7 @@ namespace CMTool.Module
             data.Version = jobject.SelectToken("Version")?.ToString() ?? Version;
             data.Safe = jobject.SelectToken("Safe")?.ToString() ?? data.Safe;
             data.Theme = jobject.SelectToken("Theme")?.ToString() ?? data.Theme;
+            data.UpdateRing = jobject.SelectToken("UpdateRing")?.ToString() ?? data.UpdateRing;
 
             return data;
         }

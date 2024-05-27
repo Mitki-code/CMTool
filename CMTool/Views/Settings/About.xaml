@@ -41,7 +41,7 @@
         </ui:CardControl>
         <ui:CardControl Icon="{ui:SymbolIcon Sparkle20}" Header="获取预览版本更新" Margin="0,4,0,0">
             <Grid>
-                <ui:ToggleSwitch Command="{Binding ViewModel.ChangeUpdateRingCommand}"  CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0"/>
+                <ui:ToggleSwitch x:Name="UpdateRing" Command="{Binding ViewModel.ChangeUpdateRingCommand}"  CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}" Margin="0,0,4,0"/>
             </Grid>
         </ui:CardControl>
 
