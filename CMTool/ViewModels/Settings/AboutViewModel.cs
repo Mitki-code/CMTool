@@ -68,7 +68,7 @@ namespace CMTool.ViewModels.Settings
             else
             {
                 await Update.Down();
-                Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"temp.exe");
+                Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"UpdatePack.msi");
                 Application.Current.Shutdown();
             }
 
