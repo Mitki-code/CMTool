@@ -70,7 +70,7 @@ namespace CMTool.Module
         {
             var downloader = new DownloadService();
 
-            await downloader.DownloadFileTaskAsync(newUrl, AppDomain.CurrentDomain.BaseDirectory + @"temp.exe");
+            await downloader.DownloadFileTaskAsync(newUrl, AppDomain.CurrentDomain.BaseDirectory + @"UpdatePack.msi");
         }
     }
 }
