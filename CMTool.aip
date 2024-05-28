@@ -135,9 +135,7 @@
     <ROW Component="Microsoft.Extensions.Primitives.dll" ComponentId="{1B42F988-DF41-4822-9C43-FA9C0E7C5B31}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Primitives.dll"/>
     <ROW Component="Newtonsoft.Json.dll" ComponentId="{FAD93DE0-4909-47B6-B777-A2F92415C192}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
     <ROW Component="OPGo.wav" ComponentId="{DFCB23CB-9457-4C26-B077-B45EA3A78945}" Directory_="GFX_Dir" Attributes="0" KeyPath="OPGo.wav" Type="0"/>
-    <ROW Component="Octokit.dll" ComponentId="{F2AD0F6C-D273-4EF7-B2FF-CE4E445B6906}" Directory_="APPDIR" Attributes="0" KeyPath="Octokit.dll"/>
     <ROW Component="ProductInformation" ComponentId="{16D9932F-14DA-45CE-B1DA-148149C9D97E}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
-    <ROW Component="PropertyChanged.dll" ComponentId="{295EFE9D-EED7-47D3-9EB6-5B3B3DA43F6F}" Directory_="APPDIR" Attributes="0" KeyPath="PropertyChanged.dll"/>
     <ROW Component="RestSharp.dll" ComponentId="{957CFB75-AEA7-470A-9601-DAC1B2AA1009}" Directory_="APPDIR" Attributes="0" KeyPath="RestSharp.dll"/>
     <ROW Component="SQLitePCLRaw.batteries_v2.dll" ComponentId="{24F6F79D-BCC7-49FB-BF88-8E3AEA3EA74B}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.batteries_v2.dll"/>
     <ROW Component="SQLitePCLRaw.core.dll" ComponentId="{8C749C7E-2D4B-4033-A4D5-B3DD5DDDD2FF}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.core.dll"/>
@@ -238,8 +236,6 @@
     <ROW File="Microsoft.Extensions.Options.dll" Component_="Microsoft.Extensions.Options.dll" FileName="MICRO~27.DLL|Microsoft.Extensions.Options.dll" Attributes="0" SourcePath="CMTool\bin\Release\net7.0-windows\publish\Microsoft.Extensions.Options.dll" SelfReg="false"/>
     <ROW File="Microsoft.Extensions.Primitives.dll" Component_="Microsoft.Extensions.Primitives.dll" FileName="MICRO~28.DLL|Microsoft.Extensions.Primitives.dll" Attributes="0" SourcePath="CMTool\bin\Release\net7.0-windows\publish\Microsoft.Extensions.Primitives.dll" SelfReg="false"/>
     <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="CMTool\bin\Release\net7.0-windows\publish\Newtonsoft.Json.dll" SelfReg="false"/>
-    <ROW File="Octokit.dll" Component_="Octokit.dll" FileName="Octokit.dll" Attributes="0" SourcePath="CMTool\bin\Release\net7.0-windows\publish\Octokit.dll" SelfReg="false"/>
-    <ROW File="PropertyChanged.dll" Component_="PropertyChanged.dll" FileName="PROPER~1.DLL|PropertyChanged.dll" Attributes="0" SourcePath="CMTool\bin\Release\net7.0-windows\publish\PropertyChanged.dll" SelfReg="false"/>
     <ROW File="RestSharp.dll" Component_="RestSharp.dll" FileName="RESTSH~1.DLL|RestSharp.dll" Attributes="0" SourcePath="CMTool\bin\Release\net7.0-windows\publish\RestSharp.dll" SelfReg="false"/>
     <ROW File="SQLitePCLRaw.batteries_v2.dll" Component_="SQLitePCLRaw.batteries_v2.dll" FileName="SQLITE~1.DLL|SQLitePCLRaw.batteries_v2.dll" Attributes="0" SourcePath="CMTool\bin\Release\net7.0-windows\publish\SQLitePCLRaw.batteries_v2.dll" SelfReg="false"/>
     <ROW File="SQLitePCLRaw.core.dll" Component_="SQLitePCLRaw.core.dll" FileName="SQLITE~2.DLL|SQLitePCLRaw.core.dll" Attributes="0" SourcePath="CMTool\bin\Release\net7.0-windows\publish\SQLitePCLRaw.core.dll" SelfReg="false"/>
@@ -315,6 +311,7 @@
     <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
     <ROW Name="ape7ke5723001.ico" SourcePath="CMTool\ape7k-e5723-001.ico"/>
+    <ROW Name="file_deleter.ps1" SourcePath="&lt;AI_SCRIPTS&gt;file_deleter.ps1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
     <ROW Dialog_="MaintenanceWelcomeDlg" Control="MaintenanceWelcomeDlgDialogInitializer" Type="DialogInitializer" X="0" Y="0" Width="0" Height="0" Attributes="0" Order="-1" TextLocId="-" HelpLocId="-" ExtDataLocId="-"/>
@@ -475,10 +472,8 @@
     <ROW Feature_="MainFeature" Component_="Microsoft.Extensions.Options.dll"/>
     <ROW Feature_="MainFeature" Component_="Microsoft.Extensions.Primitives.dll"/>
     <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
-    <ROW Feature_="MainFeature" Component_="Octokit.dll"/>
     <ROW Feature_="DDFCD917B9449CBCE7F783A2FC7AF0" Component_="DDFCD917B9449CBCE7F783A2FC7AF0"/>
     <ROW Feature_="A0BFC224E0E9125ADE0B2DBF343" Component_="A0BFC224E0E9125ADE0B2DBF343"/>
-    <ROW Feature_="MainFeature" Component_="PropertyChanged.dll"/>
     <ROW Feature_="MainFeature" Component_="RestSharp.dll"/>
     <ROW Feature_="MainFeature" Component_="SQLitePCLRaw.batteries_v2.dll"/>
     <ROW Feature_="MainFeature" Component_="SQLitePCLRaw.core.dll"/>
