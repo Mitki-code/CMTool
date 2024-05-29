@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="21.6" version="21.6" PreviousModules="professional" Modules="enterprise" RootPath="." Language="zh" Id="{4977E25F-0669-4CE7-9574-7C9191683BF3}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="21.6" version="21.6" Modules="professional" RootPath="." Language="zh" Id="{4977E25F-0669-4CE7-9574-7C9191683BF3}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
-    <ROW Name="HiddenItems" Value="SccmComponent;ActSyncAppComponent;CPLAppletComponent;AppXAppDetailsComponent;FixupComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;MsiXDiffComponent;MsixManifestEditorComponent;ActSyncAppComponent;CPLAppletComponent;AutorunComponent;GameUxComponent;SilverlightSlnComponent;SharePointSlnComponent"/>
+    <ROW Name="HiddenItems" Value="MsiDriverPackagesComponent;UserAccountsComponent;ScheduledTasksComponent;SqlConnectionComponent;AutorunComponent;FirewallExceptionComponent;GameUxComponent;MsiDirectEditorComponent;SharePointSlnComponent;SilverlightSlnComponent;MultipleInstancesComponent;SccmComponent;ActSyncAppComponent;CPLAppletComponent;AppXAppDetailsComponent;FixupComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;MsiXDiffComponent;MsixManifestEditorComponent"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
@@ -18,7 +18,7 @@
     <ROW Property="AppLogoIconDark" Value="applogodark.png" MultiBuildValue="DefaultBuild:ape7ke5723001.ico" Type="1" MsiKey="AppLogoIconDark"/>
     <ROW Property="Manufacturer" Value="米缇"/>
     <ROW Property="ProductCode" Value="2052:{CBB632FA-D942-4603-BDFB-C2D26DA9065D} " Type="16"/>
-    <ROW Property="ProductLanguage" Value="2052"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="CMTool"/>
     <ROW Property="ProductVersion" Value="2.3.0.527" Options="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
@@ -40,7 +40,6 @@
     <ROW Directory="Data_Dir" Directory_Parent="Assets_Dir" DefaultDir="Data"/>
     <ROW Directory="GFX_Dir" Directory_Parent="Assets_Dir" DefaultDir="GFX"/>
     <ROW Directory="ReData_Dir" Directory_Parent="Assets_Dir" DefaultDir="ReData"/>
-    <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
     <ROW Directory="alpinearm64_Dir" Directory_Parent="runtimes_Dir" DefaultDir="ALPINE~2|alpine-arm64"/>
     <ROW Directory="alpinearm_Dir" Directory_Parent="runtimes_Dir" DefaultDir="ALPINE~1|alpine-arm"/>
@@ -139,7 +138,6 @@
     <ROW Component="OPGo.wav" ComponentId="{DFCB23CB-9457-4C26-B077-B45EA3A78945}" Directory_="GFX_Dir" Attributes="0" KeyPath="OPGo.wav" Type="0"/>
     <ROW Component="ProductInformation" ComponentId="{16D9932F-14DA-45CE-B1DA-148149C9D97E}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="RestSharp.dll" ComponentId="{957CFB75-AEA7-470A-9601-DAC1B2AA1009}" Directory_="APPDIR" Attributes="0" KeyPath="RestSharp.dll"/>
-    <ROW Component="SHORTCUTDIR" ComponentId="{93495B1F-4DB0-4615-842C-3DD74C6619B4}" Directory_="SHORTCUTDIR" Attributes="0"/>
     <ROW Component="SQLitePCLRaw.batteries_v2.dll" ComponentId="{24F6F79D-BCC7-49FB-BF88-8E3AEA3EA74B}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.batteries_v2.dll"/>
     <ROW Component="SQLitePCLRaw.core.dll" ComponentId="{8C749C7E-2D4B-4033-A4D5-B3DD5DDDD2FF}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.core.dll"/>
     <ROW Component="SQLitePCLRaw.provider.e_sqlite3.dll" ComponentId="{B8F6C6A9-028B-490C-9EB2-D3D0A08FC465}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.provider.e_sqlite3.dll"/>
@@ -287,7 +285,6 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
-    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;appinstaller\fragments\FolderDlg.aip"/>
     <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;appinstaller\fragments\MaintenanceWelcomeDlg.aip"/>
     <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;appinstaller\fragments\SequenceDialogs.aip"/>
     <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
@@ -304,7 +301,6 @@
     <ROW Action="AI_AiRestoreDeferred" Description="执行还原操作" DescriptionLocId="ActionText.Description.AI_AiRestoreDeferred" Template="路径: [1]" TemplateLocId="ActionText.Template.AI_AiRestoreDeferred"/>
     <ROW Action="AI_AiRestoreDeferredImpersonate" Description="执行还原操作" DescriptionLocId="ActionText.Description.AI_AiRestoreDeferred" Template="路径: [1]" TemplateLocId="ActionText.Template.AI_AiRestoreDeferred"/>
     <ROW Action="AI_AiRestoreRollback" Description="回滚还原" DescriptionLocId="ActionText.Description.AI_AiRestoreRollback" Template="路径: [1]" TemplateLocId="ActionText.Template.AI_AiRestoreRollback"/>
-    <ROW Action="AI_ConfigureChainer" Description="配置先决条件启动器" DescriptionLocId="ActionText.Description.AI_ConfigureChainer" Template="配置启动器" TemplateLocId="ActionText.Template.AI_ConfigureChainer"/>
     <ROW Action="AI_DownloadPrereq" Description="正在下载运行环境软件" DescriptionLocId="ActionText.Description.AI_DownloadPrereq" Template="[1]" TemplateLocId="ActionText.Template.AI_DownloadPrereq"/>
     <ROW Action="AI_ExtractPrereq" Description="正在提取运行环境软件" DescriptionLocId="ActionText.Description.AI_ExtractPrereq" Template="[1]" TemplateLocId="ActionText.Template.AI_ExtractPrereq"/>
     <ROW Action="AI_InstallPostPrerequisite" Description="Configuring prerequisite software" DescriptionLocId="ActionText.Description.AI_InstallPrerequisite" Template="[1]" TemplateLocId="ActionText.Template.AI_InstallPrerequisite"/>
@@ -318,12 +314,10 @@
     <ROW Name="ResourceCleaner.dll" SourcePath="&lt;AI_CUSTACTS&gt;ResourceCleaner.dll"/>
     <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
-    <ROW Name="aipackagechainer.exe" SourcePath="&lt;AI_CUSTACTS&gt;aipackagechainer.exe" DigSign="true"/>
     <ROW Name="ape7ke5723001.ico" SourcePath="CMTool\ape7k-e5723-001.ico"/>
     <ROW Name="file_deleter.ps1" SourcePath="&lt;AI_SCRIPTS&gt;file_deleter.ps1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
-    <ROW Dialog_="FolderDlg" Control="FolderDlgDialogInitializer" Type="DialogInitializer" X="0" Y="0" Width="0" Height="0" Attributes="0" Order="-1" TextLocId="-" HelpLocId="-" ExtDataLocId="-"/>
     <ROW Dialog_="MaintenanceWelcomeDlg" Control="MaintenanceWelcomeDlgDialogInitializer" Type="DialogInitializer" X="0" Y="0" Width="0" Height="0" Attributes="0" Order="-1" TextLocId="-" HelpLocId="-" ExtDataLocId="-"/>
     <ROW Dialog_="OutOfRbDiskDlg" Control="Description" Type="Text" X="16" Y="94" Width="458" Height="57" Attributes="196611" Text="突出显示的卷没有足够的磁盘空间用于当前选择的功能。您可以从突出显示的卷中删除一些文件，也可以选择不同的目标驱动器。或者，您可以选择禁用安装程序&apos;s的回滚功能。如果要冒险禁用回滚，请单击“是”." TextStyle="[DescriptionFont]" Order="400" TextLocId="AppInstaller.Control.Text.OutOfRbDiskDlg#Description" MsiKey="OutOfRbDiskDlg#Description"/>
     <ROW Dialog_="OutOfRbDiskDlg" Control="VolumeList" Type="VolumeCostList" X="16" Y="151" Width="458" Height="54" Attributes="393223" Text="{120}{70}{70}{70}{70}" TextStyle="ListFontDark" Order="500" TextLocId="Control.Text.OutOfDiskDlg#VolumeList" MsiKey="OutOfRbDiskDlg#VolumeList"/>
@@ -333,16 +327,28 @@
     <ROW Dialog_="OutOfRbDiskDlg" Control="ProducVersionText" Type="Text" X="16" Y="60" Width="362" Height="15" Attributes="196611" Text="版本: [ProductVersion]" TextStyle="[ManufacturerFont]" Order="900" TextLocId="AppInstaller.Control.Text.ProductVersion" MsiKey="OutOfRbDiskDlg#ProducVersionText"/>
     <ROW Dialog_="OutOfRbDiskDlg" Control="AboutBtn" Type="ImageButton" X="5" Y="269" Width="18" Height="18" Attributes="4718595" Text="[AboutBtnIcon]" TextStyle="[ManufacturerFont]" Order="1000" MsiKey="OutOfRbDiskDlg#AboutBtn" Options="1" ExtType="ImageButton" ExtData="[InfoIconMsi]"/>
     <ROW Dialog_="PatchWelcomeDlg" Control="PatchWelcomeDlgDialogInitializer" Type="DialogInitializer" X="0" Y="0" Width="0" Height="0" Attributes="0" Order="-1" TextLocId="-" HelpLocId="-" ExtDataLocId="-"/>
-    <ATTRIBUTE name="DeletedRows" value="AboutDlg#Hyperlink@AboutDlg#LicenseAgreementLink"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlConditionComponent">
-    <ATTRIBUTE name="DeletedRows" value="AboutDlg#Hyperlink#Hide#((NOT AI_INSTALL) AND (NOT AI_PATCH)) OR NOT AiReadmeLink"/>
+    <ROW Dialog_="WelcomeDlg" Control="WelcomeDlgDialogInitializer" Type="DialogInitializer" X="0" Y="0" Width="0" Height="0" Attributes="0" Order="-1" TextLocId="-" HelpLocId="-" ExtDataLocId="-"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
-    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_INSTALL AND CustomInstallation" Ordering="2"/>
     <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="1"/>
     <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="201"/>
     <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="99"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="SpawnDialog" Argument="OutOfRbDiskDlg" Condition="AI_INSTALL AND OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND (PROMPTROLLBACKCOST=&quot;P&quot; OR NOT PROMPTROLLBACKCOST)" Ordering="3" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="EnableRollback" Argument="False" Condition="AI_INSTALL AND OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST=&quot;D&quot;" Ordering="4" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="SpawnDialog" Argument="OutOfDiskDlg" Condition="AI_INSTALL AND ( (OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST=&quot;F&quot;) )" Ordering="5" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="WelcomeDlgDialogInitializer" Event="[AI_ButtonText_Next_Orig]" Argument="[ButtonText_Next]" Condition="AI_INSTALL" Ordering="0" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="WelcomeDlgDialogInitializer" Event="[ButtonText_Next]" Argument="[[AI_CommitButton]]" Condition="AI_INSTALL" Ordering="1" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="WelcomeDlgDialogInitializer" Event="[AI_Text_Next_Orig]" Argument="[Text_Next]" Condition="AI_INSTALL" Ordering="2" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="WelcomeDlgDialogInitializer" Event="[Text_Next]" Argument="[Text_Install]" Condition="AI_INSTALL" Ordering="3" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="[ButtonText_Next]" Argument="[AI_ButtonText_Next_Orig]" Condition="AI_INSTALL" Ordering="6" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="[Text_Next]" Argument="[AI_Text_Next_Orig]" Condition="AI_INSTALL" Ordering="7" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Back" Event="[ButtonText_Next]" Argument="[AI_ButtonText_Next_Orig]" Condition="AI_INSTALL" Ordering="0" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Back" Event="[Text_Next]" Argument="[AI_Text_Next_Orig]" Condition="AI_INSTALL" Ordering="1" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="SpawnDialog" Argument="OutOfRbDiskDlg" Condition="AI_INSTALL AND CustomInstallation AND OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND (PROMPTROLLBACKCOST=&quot;P&quot; OR NOT PROMPTROLLBACKCOST)" Ordering="8" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="EnableRollback" Argument="False" Condition="AI_INSTALL AND CustomInstallation AND OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST=&quot;D&quot;" Ordering="9" Options="2"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="SpawnDialog" Argument="OutOfDiskDlg" Condition="AI_INSTALL AND CustomInstallation AND ( (OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST=&quot;F&quot;) )" Ordering="10" Options="2"/>
     <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="SpawnDialog" Argument="OutOfRbDiskDlg" Condition="AI_MAINT AND OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND (PROMPTROLLBACKCOST=&quot;P&quot; OR NOT PROMPTROLLBACKCOST)" Ordering="2" Options="2"/>
     <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="EnableRollback" Argument="False" Condition="AI_MAINT AND OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST=&quot;D&quot;" Ordering="3" Options="2"/>
     <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="SpawnDialog" Argument="OutOfDiskDlg" Condition="AI_MAINT AND ( (OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST=&quot;F&quot;) )" Ordering="4" Options="2"/>
@@ -369,21 +375,9 @@
     <ROW Dialog_="ExitDialog" Control_="Finish" Event="DoAction" Argument="AI_CleanPrePrereq" Condition="1" Ordering="202"/>
     <ROW Dialog_="FatalError" Control_="Finish" Event="DoAction" Argument="AI_CleanPrePrereq" Condition="1" Ordering="205"/>
     <ROW Dialog_="UserExit" Control_="Finish" Event="DoAction" Argument="AI_CleanPrePrereq" Condition="1" Ordering="103"/>
-    <ROW Dialog_="FolderDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="101"/>
-    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
-    <ROW Dialog_="FolderDlg" Control_="Next" Event="SpawnDialog" Argument="OutOfRbDiskDlg" Condition="AI_INSTALL AND OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND (PROMPTROLLBACKCOST=&quot;P&quot; OR NOT PROMPTROLLBACKCOST)" Ordering="102" Options="2"/>
-    <ROW Dialog_="FolderDlg" Control_="Next" Event="EnableRollback" Argument="False" Condition="AI_INSTALL AND OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST=&quot;D&quot;" Ordering="103" Options="2"/>
-    <ROW Dialog_="FolderDlg" Control_="Next" Event="SpawnDialog" Argument="OutOfDiskDlg" Condition="AI_INSTALL AND ( (OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST=&quot;F&quot;) )" Ordering="104" Options="2"/>
-    <ROW Dialog_="FolderDlg" Control_="FolderDlgDialogInitializer" Event="[AI_ButtonText_Next_Orig]" Argument="[ButtonText_Next]" Condition="AI_INSTALL" Ordering="0" Options="2"/>
-    <ROW Dialog_="FolderDlg" Control_="FolderDlgDialogInitializer" Event="[ButtonText_Next]" Argument="[[AI_CommitButton]]" Condition="AI_INSTALL" Ordering="1" Options="2"/>
-    <ROW Dialog_="FolderDlg" Control_="FolderDlgDialogInitializer" Event="[AI_Text_Next_Orig]" Argument="[Text_Next]" Condition="AI_INSTALL" Ordering="2" Options="2"/>
-    <ROW Dialog_="FolderDlg" Control_="FolderDlgDialogInitializer" Event="[Text_Next]" Argument="[Text_Install]" Condition="AI_INSTALL" Ordering="3" Options="2"/>
-    <ROW Dialog_="FolderDlg" Control_="Back" Event="[ButtonText_Next]" Argument="[AI_ButtonText_Next_Orig]" Condition="AI_INSTALL" Ordering="2" Options="2"/>
-    <ROW Dialog_="FolderDlg" Control_="Back" Event="[Text_Next]" Argument="[AI_Text_Next_Orig]" Condition="AI_INSTALL" Ordering="3" Options="2"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
-    <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_AiBackupCleanup" Type="1" Source="ResourceCleaner.dll" Target="OnAiBackupCleanup" WithoutSeq="true"/>
@@ -398,7 +392,6 @@
     <ROW Action="AI_ChooseTextStyles" Type="1" Source="aicustact.dll" Target="ChooseTextStyles"/>
     <ROW Action="AI_CleanPrePrereq" Type="65" Source="Prereq.dll" Target="CleanPrereq" WithoutSeq="true"/>
     <ROW Action="AI_CleanPrereq" Type="65" Source="Prereq.dll" Target="CleanPrereq" WithoutSeq="true"/>
-    <ROW Action="AI_ConfigureChainer" Type="1" Source="Prereq.dll" Target="ConfigurePrereqLauncher"/>
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
     <ROW Action="AI_DetectSoftware" Type="257" Source="SoftwareDetector.dll" Target="OnDetectSoftware"/>
     <ROW Action="AI_DownloadPrereq" Type="1" Source="Prereq.dll" Target="DownloadPrereq"/>
@@ -409,7 +402,6 @@
     <ROW Action="AI_InstallPostPrerequisite" Type="1" Source="Prereq.dll" Target="InstallPostPrereq"/>
     <ROW Action="AI_InstallPrePrerequisite" Type="65" Source="Prereq.dll" Target="InstallPrePrereq"/>
     <ROW Action="AI_InstallPrerequisite" Type="1" Source="Prereq.dll" Target="InstallPrereq"/>
-    <ROW Action="AI_LaunchChainer" Type="3314" Source="AI_PREREQ_CHAINER"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
     <ROW Action="AI_PRESERVE_INSTALL_TYPE" Type="65" Source="aicustact.dll" Target="PreserveInstallType"/>
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
@@ -499,7 +491,6 @@
     <ROW Feature_="MainFeature" Component_="Downloader.dll"/>
     <ROW Feature_="MainFeature" Component_="Microsoft.AppCenter.Analytics.dll"/>
     <ROW Feature_="MainFeature" Component_="Microsoft.AppCenter.Crashes.dll"/>
-    <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="ape7ke5723001.exe" SourcePath="CMTool\ape7k-e5723-001.ico" Index="0"/>
@@ -514,13 +505,11 @@
     <ROW Action="AI_AiBackupImmediate" Sequence="1401"/>
     <ROW Action="AI_AiBackupRollback" Sequence="1502"/>
     <ROW Action="AI_AiBackupRollbackImpersonate" Sequence="1501"/>
-    <ROW Action="AI_AiRestoreDeferredImpersonate" Sequence="6596"/>
-    <ROW Action="AI_AiRestoreDeferred" Sequence="6597"/>
+    <ROW Action="AI_AiRestoreDeferredImpersonate" Sequence="6597"/>
+    <ROW Action="AI_AiRestoreDeferred" Sequence="6598"/>
     <ROW Action="AI_VerifyPrereq" Sequence="1101"/>
     <ROW Action="AI_AppSearchEx" Sequence="102"/>
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
-    <ROW Action="AI_ConfigureChainer" Condition="(NOT SETUPEXEDIR) AND ((UILevel = 2) OR (UILevel = 3)) AND (NOT UPGRADINGPRODUCTCODE)" Sequence="6598"/>
-    <ROW Action="AI_LaunchChainer" Condition="AI_PREREQ_CHAINER AND (NOT UPGRADINGPRODUCTCODE)" Sequence="6599"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_PRESERVE_INSTALL_TYPE" Sequence="199"/>
@@ -562,9 +551,6 @@
     <ROW Registry="Software" Root="-1" Key="Software" Name="\"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="ProductName" Directory_="SHORTCUTDIR" Name="[|ProductName]" Component_="CMTool.exe" Target="[#CMTool.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="appinstaller"/>
   </COMPONENT>
@@ -578,7 +564,7 @@
     <ATTRIBUTE name="PrereqsOrder" value="DDFCD917B9449CBCE7F783A2FC7AF0 A0BFC224E0E9125ADE0B2DBF343"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
-    <ROW SearchKey="A0BFC224E0E9125ADE0B2DBF343SystemFo" Prereq="A0BFC224E0E9125ADE0B2DBF343" SearchType="14" SearchString="[ProgramFiles64Folder]dotnet\shared\Microsoft.WindowsDesktop.App" VerMin="8.0.3" Order="1" Property="PreReqSearch_A0BFC224E0E9125ADE0B2D" Platform="1"/>
+    <ROW SearchKey="A0BFC224E0E9125ADE0B2DBF343SystemFo" Prereq="A0BFC224E0E9125ADE0B2DBF343" SearchType="14" SearchString="[ProgramFiles64Folder]dotnet\shared\Microsoft.WindowsDesktop.App" VerMin="8.0.3" Order="1" Property="PreReqSearch_A0BFC224E0E9125ADE0B2D"/>
     <ROW SearchKey="DDFCD917B9449CBCE7F783A2FC7AF0Syste" Prereq="DDFCD917B9449CBCE7F783A2FC7AF0" SearchType="14" SearchString="[ProgramFilesFolder]dotnet\shared\Microsoft.WindowsDesktop.App" VerMin="8.0.3" Order="1" Property="PreReqSearch_DDFCD917B9449CBCE7F783"/>
   </COMPONENT>
 </DOCUMENT>
