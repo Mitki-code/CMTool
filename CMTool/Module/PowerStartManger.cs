@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Diagnostics;
+using System.Security.AccessControl;
 
 namespace CMTool.Module
 {
@@ -56,8 +57,8 @@ namespace CMTool.Module
             try
             {
                 bool _exist = false;
-                RegistryKey local = Registry.CurrentUser;
-                RegistryKey runs = local.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+                RegistryKey local = Registry.LocalMachine;
+                RegistryKey runs = local.OpenSubKey(@"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run", RegistryKeyPermissionCheck.ReadWriteSubTree, RegistryRights.FullControl);
                 if (runs == null)
                 {
                     RegistryKey key2 = local.CreateSubKey("SOFTWARE");
@@ -96,8 +97,8 @@ namespace CMTool.Module
         {
             try
             {
-                RegistryKey local = Registry.CurrentUser;
-                RegistryKey key = local.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+                RegistryKey local = Registry.LocalMachine;
+                RegistryKey key = local.OpenSubKey(@"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run", RegistryKeyPermissionCheck.ReadWriteSubTree, RegistryRights.FullControl);
                 if (key == null)
                 {
                     local.CreateSubKey("SOFTWARE//Microsoft//Windows//CurrentVersion//Run");

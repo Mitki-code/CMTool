@@ -60,7 +60,7 @@ namespace CMTool.Module
                 {
                     if (p.ProcessName == "SeewoAbility") { abilityid = p.Id; p.Kill(); }
                     if (p.ProcessName == "SeewoCore") { coreid = p.Id; p.Kill(); }
-                    //if (p.ProcessName == "Notepad") { p.Kill(); }
+                    if (p.ProcessName == "SeewoServiceAssistant") { p.Kill(); }
                 }
 
                 while (pstate)
@@ -97,6 +97,7 @@ namespace CMTool.Module
                     if (p.ProcessName == "SeewoCore") { ProcessMgr.ResumeProcess(p.Id); }
                     //if (p.ProcessName == "Notepad") { ProcessMgr.ResumeProcess(p.Id); }
                 }
+                Process.Start(@"C:\Program Files (x86)\Seewo\SeewoService\SeewoHugoLauncher\SeewoHugoLauncher.exe");
             }
             catch (Exception)
             {
