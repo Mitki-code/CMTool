@@ -73,7 +73,6 @@ namespace CMTool.Module
                         //if (p.ProcessName == "Notepad") { ProcessMgr.SuspendProcess(p.Id); }
                     }
                     if ((ability && corestate) || whilenum > 400) { pstate = false; }
-                    Console.WriteLine("111");
                     whilenum++;
                     await Task.Delay(1000);
                 }
@@ -93,6 +92,7 @@ namespace CMTool.Module
                 Process[] processes = Process.GetProcesses();
                 foreach (Process p in processes)
                 {
+                    if (p.ProcessName == "SeewoAbility") { p.Kill(); }
                     if (p.ProcessName == "SeewoAbility") { ProcessMgr.ResumeProcess(p.Id); }
                     if (p.ProcessName == "SeewoCore") { ProcessMgr.ResumeProcess(p.Id); }
                     //if (p.ProcessName == "Notepad") { ProcessMgr.ResumeProcess(p.Id); }
