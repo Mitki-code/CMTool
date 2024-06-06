@@ -69,7 +69,6 @@ namespace CMTool.Module
         internal static async Task Down()
         {
             var downloader = new DownloadService();
-
             await downloader.DownloadFileTaskAsync(newUrl, AppDomain.CurrentDomain.BaseDirectory + @"UpdatePack.msi");
         }
     }
