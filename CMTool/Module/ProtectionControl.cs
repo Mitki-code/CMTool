@@ -37,11 +37,10 @@ namespace CMTool.Module
                     Control();
                 else if (!controlState && Time.IsTimeQuantum("20:00", "23:59"))
                     Control();
-                else if (controlState && Time.IsTimeQuantum("14:10", "14:20"))
-                    UnControl();
                 else
-                    runState = false;
+                    UnControl();
                 //Control();
+                runState = false;
             }
         }
 

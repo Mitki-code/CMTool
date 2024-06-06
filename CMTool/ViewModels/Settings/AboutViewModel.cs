@@ -68,10 +68,13 @@ namespace CMTool.ViewModels.Settings
             else
             {
                 await Update.Down();
-                Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"UpdatePack.msi");
+                Process process = new()
+                {
+                    StartInfo = new ProcessStartInfo(AppDomain.CurrentDomain.BaseDirectory + @"UpdatePack.msi") { UseShellExecute = true }
+                };
+                process.Start();
                 Application.Current.Shutdown();
             }
-
             UpdateButtonAState = ControlAppearance.Primary;
         }
 
