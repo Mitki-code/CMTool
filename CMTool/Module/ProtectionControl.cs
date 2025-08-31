@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net.NetworkInformation;
 using System.Timers;
 
 namespace CMTool.Module
@@ -8,6 +9,9 @@ namespace CMTool.Module
         private static bool runState = false;
         private static bool controlState = false;
         private static System.Timers.Timer timer = new();
+        private static bool networkState = true;
+        
+        private static NetworkConnectionMonitor _networkMonitor = new NetworkConnectionMonitor();
 
         //internal static string state = "";
         internal static void Start()
@@ -16,12 +20,22 @@ namespace CMTool.Module
             timer.Interval = 6000;
             timer.Start();
             timer.Elapsed += new ElapsedEventHandler(TimeManger);
+            _networkMonitor.NetworkStatusChanged += OnNetworkStatusChanged;
+            _networkMonitor.Start(15);
         }
+        
+        private static void OnNetworkStatusChanged(object sender, bool isConnected)
+        {
+            networkState = isConnected;
+        }
+
         internal static void Stop()
         {
             try
             {
                 timer.Stop();
+                _networkMonitor.Stop();
+                _networkMonitor.NetworkStatusChanged -= OnNetworkStatusChanged;
             }
             catch (Exception)
             {
@@ -33,9 +47,9 @@ namespace CMTool.Module
             if (!runState)
             {
                 runState = true;
-                if (!controlState && Time.IsTimeQuantum("12:20", "14:10"))
+                if (!controlState && Time.IsTimeQuantum("12:00", "14:10") && !networkState)
                     Control();
-                else if (!controlState && Time.IsTimeQuantum("20:00", "23:59"))
+                else if (!controlState && Time.IsTimeQuantum("20:00", "23:59") && !networkState)
                     Control();
                 else if (controlState && Time.IsTimeQuantum("14:10", "14:20"))
                     UnControl();

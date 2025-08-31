@@ -44,14 +44,20 @@ namespace CMTool.Module
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CloseHandle([In] IntPtr handle);
 
-        public static void SuspendProcess(int processId)
+        public static bool SuspendProcess(int processId)
         {
+            if (processId <= 0) 
+                throw new ArgumentException("Invalid process ID", nameof(processId));
+                
             IntPtr hProc = IntPtr.Zero;
             try
             {
                 hProc = OpenProcess(ProcessAccess.SuspendResume, false, processId);
-                if (hProc != IntPtr.Zero)
-                    NtSuspendProcess(hProc);
+                if (hProc == IntPtr.Zero)
+                    return false;
+                    
+                uint result = NtSuspendProcess(hProc);
+                return result == 0;
             }
             finally
             {

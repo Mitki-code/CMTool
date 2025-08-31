@@ -56,7 +56,7 @@ namespace CMTool.Module
             try
             {
                 bool _exist = false;
-                RegistryKey local = Registry.CurrentUser;
+                RegistryKey local = Registry.LocalMachine;
                 RegistryKey runs = local.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
                 if (runs == null)
                 {
@@ -96,7 +96,7 @@ namespace CMTool.Module
         {
             try
             {
-                RegistryKey local = Registry.CurrentUser;
+                RegistryKey local = Registry.LocalMachine;
                 RegistryKey key = local.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
                 if (key == null)
                 {
