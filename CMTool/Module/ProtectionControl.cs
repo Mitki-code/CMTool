@@ -51,7 +51,7 @@ namespace CMTool.Module
                     Control();
                 else if (!controlState && Time.IsTimeQuantum("17:00", "19:00") && !networkState)
                     Control();
-                else if (!controlState && Time.IsTimeQuantum("20:00", "23:59") && networkState)
+                else if (!controlState && Time.IsTimeQuantum("20:00", "23:59") && !networkState)
                     Control();
                 else if (controlState && Time.IsTimeQuantum("14:10", "14:20"))
                     UnControl();
