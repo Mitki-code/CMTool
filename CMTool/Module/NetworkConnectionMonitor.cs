@@ -31,7 +31,7 @@ public class NetworkConnectionMonitor
 
     private async Task CheckNetworkStatus()
     {
-        bool currentStatus = await CheckInternetConnectionAsync();
+        bool currentStatus = CheckInternetConnectionAsync();
         
         // 只有当状态改变时才触发事件
         if (currentStatus != _lastNetworkStatus)
@@ -42,26 +42,9 @@ public class NetworkConnectionMonitor
         }
     }
 
-    // 检测网络连接的方法（可以使用前面提到的任何一种方法）
-    private async Task<bool> CheckInternetConnectionAsync()
+    // 检测网络连接的方法
+    private bool CheckInternetConnectionAsync()
     {
-        try
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                // 设置超时时间
-                client.Timeout = TimeSpan.FromSeconds(5);
-            
-                // 发送请求到可靠的服务
-                HttpResponseMessage response = await client.GetAsync("https://www.baidu.com");
-            
-                return response.IsSuccessStatusCode;
-            }
-        }
-        catch
-        {
-            return false;
-        }
-
+        return NetworkInterface.GetIsNetworkAvailable();
     }
 }

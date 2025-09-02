@@ -49,7 +49,9 @@ namespace CMTool.Module
                 runState = true;
                 if (!controlState && Time.IsTimeQuantum("12:00", "14:10") && !networkState)
                     Control();
-                else if (!controlState && Time.IsTimeQuantum("20:00", "23:59") && !networkState)
+                else if (!controlState && Time.IsTimeQuantum("17:00", "19:00") && !networkState)
+                    Control();
+                else if (!controlState && Time.IsTimeQuantum("20:00", "23:59") && networkState)
                     Control();
                 else if (controlState && Time.IsTimeQuantum("14:10", "14:20"))
                     UnControl();
@@ -64,32 +66,63 @@ namespace CMTool.Module
             try
             {
                 Process[] processes = Process.GetProcesses();
-                int coreid = 0;
-                int abilityid = 0;
+                Dictionary<string, int> killedProcessIds = new Dictionary<string, int>();
+                Dictionary<string, bool> processStates = new Dictionary<string, bool>();
+                
+                //int coreid = 0;
+                //int abilityid = 0;
                 int whilenum = 0;
                 bool pstate = true;
-                bool corestate = false;
-                bool ability = false;
+                //bool corestate = false;
+                //bool ability = false;
+                // foreach (Process p in processes)
+                // {
+                //     if (p.ProcessName == "SeewoAbility") { abilityid = p.Id; p.Kill(); }
+                //     if (p.ProcessName == "SeewoCore") { coreid = p.Id; p.Kill(); }
+                //     //if (p.ProcessName == "Notepad") { p.Kill(); }
+                // }
+                
                 foreach (Process p in processes)
                 {
-                    if (p.ProcessName == "SeewoAbility") { abilityid = p.Id; p.Kill(); }
-                    if (p.ProcessName == "SeewoCore") { coreid = p.Id; p.Kill(); }
-                    //if (p.ProcessName == "Notepad") { p.Kill(); }
+                    if (p.ProcessName.StartsWith("Seewo", StringComparison.OrdinalIgnoreCase))
+                    {
+                        killedProcessIds[p.ProcessName] = p.Id;
+                        p.Kill();
+                    }
                 }
+
 
                 while (pstate)
                 {
                     processes = Process.GetProcesses();
+                    // foreach (Process p in processes)
+                    // {
+                    //     //if (p.ProcessName == "SeewoAbility" && p.Id != abilityid) { ProcessMgr.SuspendProcess(p.Id); ability = true; }
+                    //     //if (p.ProcessName == "SeewoCore" && p.Id != coreid) { ProcessMgr.SuspendProcess(p.Id); corestate = true; }
+                    //     //if (p.ProcessName == "Notepad") { ProcessMgr.SuspendProcess(p.Id); }
+                    // }
                     foreach (Process p in processes)
                     {
-                        if (p.ProcessName == "SeewoAbility" && p.Id != abilityid) { ProcessMgr.SuspendProcess(p.Id); ability = true; }
-                        if (p.ProcessName == "SeewoCore" && p.Id != coreid) { ProcessMgr.SuspendProcess(p.Id); corestate = true; }
-                        //if (p.ProcessName == "Notepad") { ProcessMgr.SuspendProcess(p.Id); }
+                        if (p.ProcessName.StartsWith("Seewo", StringComparison.OrdinalIgnoreCase))
+                        {
+                            if (!killedProcessIds.ContainsKey(p.ProcessName) || p.Id != killedProcessIds[p.ProcessName])
+                            {
+                                ProcessMgr.SuspendProcess(p.Id);
+                                processStates[p.ProcessName] = true;
+                            }
+                        }
                     }
-                    if ((ability && corestate) || whilenum > 400) { pstate = false; }
-                    Console.WriteLine("111");
+
+                    // if ((ability && corestate) || whilenum > 400) { pstate = false; }
+                    
+                    if ((processStates.Count > 0 && whilenum > 400) || whilenum > 1000)
+                    {
+                        pstate = false;
+                    }
+
+
                     whilenum++;
-                    await Task.Delay(1000);
+                    await Task.Delay(100);
                 }
             }
             catch (Exception)
